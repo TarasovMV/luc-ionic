@@ -18,6 +18,6 @@
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameterslet options = {\n  x: 0,\n  y: 0,\n  width: window.screen.width,\n  height: window.screen.height,\n  camera: CameraPreview.CAMERA_DIRECTION.BACK,\n  toBack: false,\n  tapPhoto: true,\n  tapFocus: false,\n  previewDrag: false,\n  storeToFile: false,\n  disableExifHeaderStripping: false\n};\n\nCameraPreview.startCamera(options);": true
   }
 }

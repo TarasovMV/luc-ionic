@@ -1,0 +1,20 @@
+<ng-template #cameraPreview>
+  <div class="camera-preview" id="camera-preview"></div>
+</ng-template>
+<div class="img-preview" *ngIf="!!(imgSrcObservable | async); else cameraPreview">
+  <ion-img alt="" [src]="imgSrc"></ion-img>
+</div>
+
+<div class="container">
+  <div class="buttons-container" *ngIf="!!(imgSrcObservable | async); else buttonsGallery">
+    <ion-button (click)="cancelPhoto()">close</ion-button>
+    <ion-button>ok</ion-button>
+  </div>
+  <ng-template #buttonsGallery>
+    <div class="buttons-container">
+      <ion-button (click)="switchCamera()">switch</ion-button>
+      <ion-button (click)="takePhoto()">take photo</ion-button>
+      <ion-button (click)="openGallery()">open gallery</ion-button>
+    </div>
+  </ng-template>
+</div>
