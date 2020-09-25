@@ -5,7 +5,11 @@ import {AppComponent} from './app.component';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: () => import('./main/main.module').then(m => m.MainModule)
+        loadChildren: () => import('./pages/page-preview/page-preview.module').then(m => m.PagePreviewModule)
+    },
+    {
+        path: 'main',
+        loadChildren: () => import('./main/main.module').then(m => m.MainModule),
     }
 ];
 

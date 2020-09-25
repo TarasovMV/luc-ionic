@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="logo-wrapper">
+    <div class="logo"></div>
+  </div>
+  <div style="flex-grow: 1"></div>
+  <div class="slides-container">
+    <ion-slides (ionSlidesDidLoad)="slideDetectChange()" (ionSlideDidChange)="slideDetectChange()" #ionSlides>
+      <ng-container *ngFor="let card of cards | async">
+        <ion-slide>
+          <app-page-preview-card [data]="card"></app-page-preview-card>
+        </ion-slide>
+      </ng-container>
+    </ion-slides>
+  </div>
+  <app-page-preview-pager [data]="cards | async"></app-page-preview-pager>
+  <div style="flex-grow: 1"></div>
+  <ion-button (click)="slideNext()"
+    *ngIf="!((cards | async)[(cards | async).length - 1]).isActive; else buttonLast"
+  > Далее </ion-button>
+  <ng-template #buttonLast>
+    <ion-button href="/main"> Начать </ion-button>
+  </ng-template>
+</div>

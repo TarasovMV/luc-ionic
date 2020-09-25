@@ -3,18 +3,18 @@ import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
     {
-        path: 'main',
+        path: '',
         children: [
             {
                 path: 'camera',
-                loadChildren: () => import('../pages/page-camera/page-camera.module').then(m => m.PageCameraModule)
-            }
+                loadChildren: () => import('../pages/page-camera/page-camera.module').then(m => m.PageCameraModule),
+            },
+            {
+                path: '**',
+                redirectTo: 'camera',
+                pathMatch: 'full',
+            },
         ],
-    },
-    {
-        path: '**',
-        redirectTo: '/main/camera',
-        pathMatch: 'full'
     },
 ];
 
