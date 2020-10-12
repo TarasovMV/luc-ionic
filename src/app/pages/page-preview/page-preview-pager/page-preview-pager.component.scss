@@ -9,9 +9,11 @@
     height: 1.1vh;
     border-radius: 50%;
     background: #EAEDF5;
+    transition: .3s;
 
     &__active {
       background: #6B7683;
+      transition: .3s;
     }
   }
 }

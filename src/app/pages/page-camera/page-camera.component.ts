@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {Location} from '@angular/common';
 import {Plugins} from '@capacitor/core';
 import {CameraPreviewOptions} from '@capacitor-community/camera-preview';
 import {CameraResultType, CameraSource} from '@capacitor/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-
+import {BehaviorSubject, interval, Observable, Subscription} from 'rxjs';
 const {CameraPreview, Camera} = Plugins;
 
 @Component({
@@ -35,7 +35,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
         className: 'camera-preview',
     };
 
-    constructor() {}
+    constructor(private location: Location) {}
 
     public ngAfterViewInit(): void {
         this.subscriptions.push(
@@ -43,14 +43,15 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
                 if (!!ref) {
                     CameraPreview.stop();
                 } else {
-                    setTimeout(() => CameraPreview.start(this.options));
+                    queueMicrotask(() => CameraPreview.start(this.options));
                 }
             })
         );
     }
 
-    public ngOnDestroy(): void {
+    public async ngOnDestroy(): Promise<void> {
         this.subscriptions.forEach((s) => s.unsubscribe());
+        this.imgSrc = null;
         CameraPreview.stop();
     }
 
@@ -62,7 +63,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
         const capturedPhoto = await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
             source: CameraSource.Photos,
-            quality: 95,
+            quality: 70,
         });
 
         this.imgSrc = capturedPhoto.dataUrl;
@@ -70,12 +71,31 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
 
     public async takePhoto(): Promise<void> {
         const capturedPhoto = await CameraPreview.capture({
-            quality: 95,
+            quality: 70,
         });
         this.imgSrc = `data:image/png;base64, ${capturedPhoto.value}`;
     }
 
-    public cancelPhoto(): void {
+    public clickClose(): void {
+        if (!!this.imgSrc) {
+            this.cancelPhoto();
+        } else {
+            this.goToPreviousRoute();
+        }
+    }
+
+    // TODO add photo request and route to next screen
+    public findPhoto(): void {
+        console.log('find photo');
+    }
+
+    private cancelPhoto(): void {
         this.imgSrc = null;
+    }
+
+    private goToPreviousRoute = (): void => {
+        CameraPreview.stop();
+        // for camera stop fix
+        queueMicrotask(() => this.location.back());
     }
 }

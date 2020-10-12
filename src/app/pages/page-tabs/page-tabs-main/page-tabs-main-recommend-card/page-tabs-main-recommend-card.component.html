@@ -1,0 +1,16 @@
+<ng-container *ngIf="!!data; else skeleton">
+  <div class="container">
+    <div class="image"></div>
+    <div class="label label__title"> Title </div>
+    <div class="label label__subtitle"> Subtitle </div>
+  </div>
+</ng-container>
+
+<ng-template #skeleton>
+  <div class="container">
+    <div class="image"></div>
+    <ion-skeleton-text class="label label__title" animated style="width:40%; height: 1.23vh"></ion-skeleton-text>
+    <ion-skeleton-text class="label label__subtitle" animated style="width:60%; height: 1.23vh"></ion-skeleton-text>
+  </div>
+</ng-template>
+

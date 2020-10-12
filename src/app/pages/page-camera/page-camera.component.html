@@ -6,15 +6,44 @@
 </div>
 
 <div class="container">
+  <div class="buttons-container">
+    <svg-icon
+      class="button-icon button-icon__close"
+      (click)="clickClose()"
+      src="assets/icon/svg/close.svg">
+    </svg-icon>
+  </div>
+
+  <div class="flex-free-space"></div>
+
   <div class="buttons-container" *ngIf="!!(imgSrcObservable | async); else buttonsGallery">
-    <ion-button (click)="cancelPhoto()">close</ion-button>
-    <ion-button>ok</ion-button>
+    <div (click)="findPhoto()" class="button-photo ion-activatable ripple-parent">
+      <ion-ripple-effect></ion-ripple-effect>
+      <svg-icon
+        class="button-icon button-icon__search"
+        src="assets/icon/svg/search.svg">
+      </svg-icon>
+    </div>
   </div>
   <ng-template #buttonsGallery>
     <div class="buttons-container">
-      <ion-button (click)="switchCamera()">switch</ion-button>
-      <ion-button (click)="takePhoto()">take photo</ion-button>
-      <ion-button (click)="openGallery()">open gallery</ion-button>
+      <svg-icon
+        class="button-icon button-icon__gallery"
+        (click)="openGallery()"
+        src="assets/icon/svg/gallery.svg">
+      </svg-icon>
+      <div (click)="takePhoto()" class="button-photo ion-activatable ripple-parent">
+        <ion-ripple-effect></ion-ripple-effect>
+        <svg-icon
+          class="button-icon button-icon__photo"
+          src="assets/icon/svg/photo.svg">
+        </svg-icon>
+      </div>
+      <svg-icon
+        class="button-icon button-icon__flash"
+        (click)="switchCamera()"
+        src="assets/icon/svg/flash-on.svg">
+      </svg-icon>
     </div>
   </ng-template>
 </div>

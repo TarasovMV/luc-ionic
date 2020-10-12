@@ -28,3 +28,23 @@
 html, body, .ion-app, .ion-content {
   background: transparent !important;
 }
+
+// for mat ripple effect
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+// scroll hide
+::-webkit-scrollbar {
+  width: 0;
+}
+
+// skeleton loader
+ion-skeleton-text {
+  --background-rgb: 57,67,96;
+}
+
+.flex-free-space {
+  flex-grow: 1;
+}

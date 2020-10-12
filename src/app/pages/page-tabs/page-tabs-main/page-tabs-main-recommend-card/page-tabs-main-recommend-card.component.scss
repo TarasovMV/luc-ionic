@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-flow: column;
+}
+
+.image {
+  width: 17.24vh;
+  height: 23.15vh;
+  border-radius: 1.48vh;
+  background: #DCE0EB;
+  margin-bottom: 1.7vh;
+}
+
+.label {
+  width: 17vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &__title {
+    margin-bottom: 0.5vh;
+    margin-left: 0.1vh;
+    color: #202D3D;
+    font-size: 1.62vh;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__subtitle {
+    margin-left: 0.1vh;
+    color: #6E7782;
+    font-size: 1.42vh;
+    font-weight: 400;
+  }
+}

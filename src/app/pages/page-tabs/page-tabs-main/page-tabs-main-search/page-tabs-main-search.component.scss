@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  gap: 1.23vh;
+  width: inherit;
+  height: 5.91vh;
+  padding: 0 1.85vh;
+  border-radius: 4.43vh;
+  background: #F3F7FA;
+}
+
+.icon {
+  width: 2.22vh;
+  height: 2.22vh;
+  margin: auto 0;
+  color: #41485D;
+}
+
+.label {
+  margin: auto 0;
+  color: #6B7683;
+  font-size: 1.48vh;
+  font-weight: 400;
+}

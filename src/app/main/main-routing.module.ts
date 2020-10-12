@@ -10,8 +10,12 @@ const routes: Routes = [
                 loadChildren: () => import('../pages/page-camera/page-camera.module').then(m => m.PageCameraModule),
             },
             {
+                path: 'tabs',
+                loadChildren: () => import('../pages/page-tabs/page-tabs.module').then(m => m.PageTabsModule),
+            },
+            {
                 path: '**',
-                redirectTo: 'camera',
+                redirectTo: 'tabs',
                 pathMatch: 'full',
             },
         ],

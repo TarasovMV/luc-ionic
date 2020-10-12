@@ -1,0 +1,23 @@
+.content {
+  display: flex;
+  height: 12.07vh;
+  width: 100%;
+  gap: 2.59vh;
+}
+
+.image {
+  width: 12.07vh;
+  height: 12.07vh;
+  border-radius: 1.48vh;
+  background: #DCE0EB;
+}
+
+.label {
+  height: 100%;
+  flex-grow: 1;
+}
+
+ion-skeleton-text {
+  height: 1.7vh;
+  margin-bottom: 0.7vh;
+}

@@ -1,16 +1,24 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {AppComponent} from './app.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'preview',
         loadChildren: () => import('./pages/page-preview/page-preview.module').then(m => m.PagePreviewModule)
+    },
+    {
+        path: 'user_init',
+        loadChildren: () => import('./pages/page-user-init/page-user-init.module').then(m => m.PageUserInitModule)
     },
     {
         path: 'main',
         loadChildren: () => import('./main/main.module').then(m => m.MainModule),
-    }
+    },
+    {
+        path: '**',
+        redirectTo: 'preview',
+        pathMatch: 'full',
+    },
 ];
 
 @NgModule({

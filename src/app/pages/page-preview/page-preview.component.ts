@@ -3,6 +3,7 @@ import {IPagePreviewCard} from '../../models/page-preview.model';
 import {CARDS_SOURCE} from './page-preview.data';
 import {IonSlides} from '@ionic/angular';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-page-preview',
@@ -13,19 +14,13 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class PagePreviewComponent implements OnInit {
 
     @ViewChild('ionSlides') ionSlide: IonSlides;
-
-    // public cards: IPagePreviewCard[] = CARDS_SOURCE;
-
     private cards$: BehaviorSubject<IPagePreviewCard[]> = new BehaviorSubject<IPagePreviewCard[]>(CARDS_SOURCE);
     public cards: Observable<IPagePreviewCard[]> = this.cards$.asObservable();
+    public readonly nextRouteUrl: string = '/user_init';
 
-    constructor() {}
+    constructor(private router: Router) {}
 
     ngOnInit(): void {}
-
-    public async slideNext(): Promise<void> {
-        await this.ionSlide.slideNext();
-    }
 
     public async slideDetectChange(): Promise<void> {
         const currentIdx = await this.ionSlide.getActiveIndex();
@@ -38,5 +33,21 @@ export class PagePreviewComponent implements OnInit {
             el.isActive = false;
         });
         this.cards$.next(tmpCards);
+    }
+
+    public async clickNext(): Promise<void> {
+        if (this.cards$.getValue()?.slice(-1)[0]?.isActive) {
+            await this.routeNext();
+        } else {
+            await this.slideNext();
+        }
+    }
+
+    private async slideNext(): Promise<void> {
+        await this.ionSlide.slideNext();
+    }
+
+    private async routeNext(): Promise<void> {
+        await this.router.navigateByUrl(this.nextRouteUrl);
     }
 }

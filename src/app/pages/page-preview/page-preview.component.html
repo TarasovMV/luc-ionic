@@ -1,6 +1,8 @@
 <div class="container">
   <div class="logo-wrapper">
-    <div class="logo"></div>
+    <div class="logo">
+      <svg-icon class="logo__icon" src="assets/icon/svg/luc-logo.svg"></svg-icon>
+    </div>
   </div>
   <div style="flex-grow: 1"></div>
   <div class="slides-container">
@@ -14,10 +16,7 @@
   </div>
   <app-page-preview-pager [data]="cards | async"></app-page-preview-pager>
   <div style="flex-grow: 1"></div>
-  <ion-button (click)="slideNext()"
-    *ngIf="!((cards | async)[(cards | async).length - 1]).isActive; else buttonLast"
-  > Далее </ion-button>
-  <ng-template #buttonLast>
-    <ion-button href="/main"> Начать </ion-button>
-  </ng-template>
+  <ion-button (click)="clickNext()"
+  > {{ !((cards | async)[(cards | async).length - 1]).isActive ? 'Далее' : 'Начать' }}
+  </ion-button>
 </div>

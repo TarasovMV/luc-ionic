@@ -1,0 +1,11 @@
+<div class="container">
+  <ion-router-outlet class="page-wrapper"></ion-router-outlet>
+  <div class="footer">
+    <svg-icon *ngFor="let tab of tabs"
+              class="tab-icon"
+              [class.tab-icon__active]="tab === currentTab"
+              (click)="selectTab(tab)"
+              src="assets/icon/svg/tabs/{{tab}}.svg">
+    </svg-icon>
+  </div>
+</div>
