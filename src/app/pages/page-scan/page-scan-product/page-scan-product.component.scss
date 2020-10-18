@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5vh;
+
+  .price {
+
+    &__normal {
+      font-weight: bold;
+      font-size: 1.72vh;
+      line-height: 1.97vh;
+      color: #202D3D;
+    }
+
+    &__old {
+      font-weight: 500;
+      font-size: 1.48vh;
+      line-height: 1.72vh;
+      text-decoration-line: line-through;
+      color: #6B7683;
+    }
+
+    &__sale {
+      font-weight: bold;
+      font-size: 1.72vh;
+      line-height: 1.97vh;
+      color: #3A83F1;
+    }
+  }
+
+  .label {
+
+    &__brand {
+      font-size: 1.48vh;
+      line-height: 1.72vh;
+      color: #2F3441
+    }
+
+    &__category {
+      font-size: 1.48vh;
+      line-height: 1.72vh;
+      color: #6B7683;
+    }
+  }
+
+  .photo {
+    width: 18.95vh;
+    height: 25.52vh;
+    border-radius: 1.45vh;
+    margin-bottom: 1vh;
+    background: #DCE0EB;
+  }
+}

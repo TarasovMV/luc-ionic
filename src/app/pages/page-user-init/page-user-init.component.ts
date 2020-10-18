@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
 })
 export class PageUserInitComponent implements OnInit {
 
+    private readonly nextRouteUrl: string = '/main';
+
     constructor(private router: Router) {
     }
 
@@ -15,6 +17,6 @@ export class PageUserInitComponent implements OnInit {
     }
 
     public async chooseCategory(gender: 'male' | 'female'): Promise<void> {
-        await this.router.navigateByUrl('/main');
+        await this.router.navigateByUrl(this.nextRouteUrl);
     }
 }

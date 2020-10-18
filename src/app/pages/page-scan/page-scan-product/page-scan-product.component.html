@@ -1,0 +1,28 @@
+<ng-container *ngIf="!!(dataSourceShared | async); else pageScanProductSkeleton">
+  <div class="container">
+    <div class="photo">
+    </div>
+    <div class="price">
+      <ng-container *ngIf="isSaleMode | async; else normalPriceMode">
+        <span class="price__old"> {{ ((dataSourceShared | async)?.oldPrice | number:'':'fr-FR') || 0 }} </span>
+        <span class="price__sale"> {{ ((dataSourceShared | async)?.currentPrice | number:'':'fr-FR') || 0 }} </span>
+      </ng-container>
+      <ng-template #normalPriceMode>
+        <span class="price__normal"> {{ ((dataSourceShared | async)?.currentPrice | number:'':'fr-FR') || 0}} </span>
+      </ng-template>
+    </div>
+    <div class="label">
+      <span class="label__brand"> {{ (dataSourceShared | async)?.brand || 'Brand' }} / </span>
+      <span class="label__category"> {{ (dataSourceShared | async)?.category  || 'Category' }} </span>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #pageScanProductSkeleton>
+  <div class="container">
+    <div class="photo">
+    </div>
+    <ion-skeleton-text animated style="width:40%; height: 1.23vh"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width:60%; height: 1.23vh"></ion-skeleton-text>
+  </div>
+</ng-template>

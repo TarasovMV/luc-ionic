@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header">
+    <svg-icon (click)="closePage()" class="icon icon__back" src="assets/icon/svg/back.svg"></svg-icon>
+    <svg-icon class="icon icon__filter" src="assets/icon/svg/filter-list.svg"></svg-icon>
+  </div>
+  <div class="scroll-wrapper">
+    <div class="product-container">
+      <ng-container *ngIf="!(isProductEmpty | async); else productContainerEmpty">
+        <app-page-scan-product *ngFor="let product of (productsShared | async)"></app-page-scan-product>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #productContainerEmpty>
+  <span class="text-empty"> К сожалению, поиск не дал результатов </span>
+</ng-template>

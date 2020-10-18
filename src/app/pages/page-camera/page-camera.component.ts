@@ -3,7 +3,8 @@ import {Location} from '@angular/common';
 import {Plugins} from '@capacitor/core';
 import {CameraPreviewOptions} from '@capacitor-community/camera-preview';
 import {CameraResultType, CameraSource} from '@capacitor/core';
-import {BehaviorSubject, interval, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {NavController} from '@ionic/angular';
 const {CameraPreview, Camera} = Plugins;
 
 @Component({
@@ -13,6 +14,7 @@ const {CameraPreview, Camera} = Plugins;
 })
 export class PageCameraComponent implements AfterViewInit, OnDestroy {
 
+    public readonly nextRouteUrl: string = '/main/scan';
     private imgSrc$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     public imgSrcObservable: Observable<string> = this.imgSrc$.asObservable();
     get imgSrc(): string {
@@ -35,7 +37,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
         className: 'camera-preview',
     };
 
-    constructor(private location: Location) {}
+    constructor(private location: Location, private navCtrl: NavController) {}
 
     public ngAfterViewInit(): void {
         this.subscriptions.push(
@@ -50,6 +52,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
     }
 
     public async ngOnDestroy(): Promise<void> {
+        console.log('destroy camera');
         this.subscriptions.forEach((s) => s.unsubscribe());
         this.imgSrc = null;
         CameraPreview.stop();
@@ -84,9 +87,10 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
         }
     }
 
-    // TODO add photo request and route to next screen
-    public findPhoto(): void {
+    // TODO add photo request
+    public async findPhoto(): Promise<void> {
         console.log('find photo');
+        await this.navCtrl.navigateRoot(this.nextRouteUrl);
     }
 
     private cancelPhoto(): void {
@@ -95,7 +99,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
 
     private goToPreviousRoute = (): void => {
         CameraPreview.stop();
-        // for camera stop fix
+        // queueMicrotask for camera stop fix
         queueMicrotask(() => this.location.back());
     }
 }
