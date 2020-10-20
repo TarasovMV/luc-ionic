@@ -1,0 +1,26 @@
+<ng-container *ngIf="data?.length; else skeletonProductInfo">
+  <div class="container">
+    <span class="label"> О товаре </span>
+    <p class="list">
+      <ng-container *ngFor="let li of data">
+        {{ li?.title || '-' }}: <b>{{ li?.value || '-' }}</b> <br>
+      </ng-container>
+    </p>
+  </div>
+</ng-container>
+
+<ng-template #skeletonProductInfo>
+  <div class="container">
+    <span class="label">
+      <ion-skeleton-text animated style="width:40%; height: 2.9vh"></ion-skeleton-text>
+    </span>
+    <p class="list">
+      <ion-skeleton-text animated style="width:80%; height: 1.97vh"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:90%; height: 1.97vh"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:70%; height: 1.97vh"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:80%; height: 1.97vh"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:60%; height: 1.97vh"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width:70%; height: 1.97vh"></ion-skeleton-text>
+    </p>
+  </div>
+</ng-template>

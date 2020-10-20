@@ -40,7 +40,8 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     row-gap: 3vh;
-    padding: 2vh 0;
+    column-gap: 3vw;
+    padding: 2vh 3vw;
 
     .text-empty {
       color: #6B7683;

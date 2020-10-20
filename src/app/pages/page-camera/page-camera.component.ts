@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Plugins} from '@capacitor/core';
 import {CameraPreviewOptions} from '@capacitor-community/camera-preview';
 import {CameraResultType, CameraSource} from '@capacitor/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {NavController} from '@ionic/angular';
+import {StatusBarService} from '../../@core/services/status-bar.service';
 const {CameraPreview, Camera} = Plugins;
 
 @Component({
@@ -12,7 +13,7 @@ const {CameraPreview, Camera} = Plugins;
     templateUrl: './page-camera.component.html',
     styleUrls: ['./page-camera.component.scss'],
 })
-export class PageCameraComponent implements AfterViewInit, OnDestroy {
+export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
 
     public readonly nextRouteUrl: string = '/main/scan';
     private imgSrc$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
@@ -37,7 +38,15 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
         className: 'camera-preview',
     };
 
-    constructor(private location: Location, private navCtrl: NavController) {}
+    constructor(
+        private location: Location,
+        private navCtrl: NavController,
+        private statusBarService: StatusBarService,
+    ) {}
+
+    public ngOnInit(): void {
+        this.statusBarService.hide();
+    }
 
     public ngAfterViewInit(): void {
         this.subscriptions.push(
@@ -52,10 +61,10 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy {
     }
 
     public async ngOnDestroy(): Promise<void> {
-        console.log('destroy camera');
         this.subscriptions.forEach((s) => s.unsubscribe());
         this.imgSrc = null;
         CameraPreview.stop();
+        this.statusBarService.setDefault();
     }
 
     public switchCamera(): void {

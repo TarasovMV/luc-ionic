@@ -10,11 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- android:windowSoftInputMode="adjustPan" for set keyboard resize none -->
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="io.ionic.starter.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask">
 
             <intent-filter>

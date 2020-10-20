@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="search-container">
+    <svg-icon class="icon icon__back" src="assets/icon/svg/back.svg" (click)="close()"></svg-icon>
+    <ion-input
+      #searchInput
+      class="input"
+      placeholder="Введите поисковый запрос..."
+      type="search"
+      (search)="search()">
+    </ion-input>
+  </div>
+
+  <p style="color: black"> {{ this.tempStr }} </p>
+</div>

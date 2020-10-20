@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-page-user-init',
@@ -10,13 +11,13 @@ export class PageUserInitComponent implements OnInit {
 
     private readonly nextRouteUrl: string = '/main';
 
-    constructor(private router: Router) {
+    constructor(private navCtrl: NavController) {
     }
 
     ngOnInit(): void {
     }
 
     public async chooseCategory(gender: 'male' | 'female'): Promise<void> {
-        await this.router.navigateByUrl(this.nextRouteUrl);
+        await this.navCtrl.navigateRoot(this.nextRouteUrl);
     }
 }

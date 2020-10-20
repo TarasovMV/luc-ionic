@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  padding: 3.7vh 0 0 0;
+  box-sizing: border-box;
+  background: white;
+  overflow: hidden;
+  gap: 2.37vh;
+
+  .header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 2.2vh;
+    box-sizing: border-box;
+
+    .icon {
+      width: 2.43vh;
+      height: 2.43vh;
+
+      &__back {
+        color: #3A83F1;
+      }
+    }
+
+    .title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-weight: 600;
+      font-size: 2.1vh;
+      color: #222222;
+    }
+
+    .reset-button {
+      font-size: 1.97vh;
+      color: #3A83F1;
+    }
+  }
+
+  .scroll-wrapper {
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  .footer {
+
+  }
+}

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  gap: 2.95vh;
+
+  .sub-container {
+    display: flex;
+    flex-flow: row;
+    gap: 1.85vh;
+  }
+}

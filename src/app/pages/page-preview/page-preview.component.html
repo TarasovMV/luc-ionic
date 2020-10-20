@@ -16,7 +16,7 @@
   </div>
   <app-page-preview-pager [data]="cards | async"></app-page-preview-pager>
   <div style="flex-grow: 1"></div>
-  <app-shared-button-main style="width: 100%" (click)="clickNext()">
+  <app-shared-button type="main" style="width: 100%" (click)="clickNext()">
     {{ !((cards | async)[(cards | async).length - 1]).isActive ? 'Далее' : 'Начать' }}
-  </app-shared-button-main>
+  </app-shared-button>
 </div>

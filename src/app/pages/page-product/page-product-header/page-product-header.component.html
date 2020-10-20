@@ -1,0 +1,9 @@
+<div class="header">
+  <svg-icon (click)="backClick()" class="icon icon__back" src="assets/icon/svg/back.svg"></svg-icon>
+  <span *ngIf="label else skeletonProductHeader" class="header__brand flex-free-space"> {{ label }} </span>
+  <span class="header__spacer"></span>
+</div>
+
+<ng-template #skeletonProductHeader>
+  <ion-skeleton-text animated style="width:40%; height: 2.1vh"></ion-skeleton-text>
+</ng-template>

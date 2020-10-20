@@ -1,0 +1,25 @@
+<ng-container *ngIf="shopUrl; else skeletonPageButtons">
+  <div class="container">
+    <app-shared-button type="main" style="width: 100%">
+      Перейти в магазин
+    </app-shared-button>
+    <div class="sub-container">
+      <app-shared-button type="sub" style="width: 100%">
+        В избранное
+      </app-shared-button>
+      <app-shared-button type="sub" style="width: 100%">
+        Поделиться
+      </app-shared-button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #skeletonPageButtons>
+  <div class="container">
+    <app-shared-button type="skeleton" style="width: 100%"></app-shared-button>
+    <div class="sub-container">
+      <app-shared-button type="skeleton" style="width: 100%"></app-shared-button>
+      <app-shared-button type="skeleton" style="width: 100%"></app-shared-button>
+    </div>
+  </div>
+</ng-template>

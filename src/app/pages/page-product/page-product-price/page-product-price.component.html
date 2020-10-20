@@ -1,0 +1,25 @@
+<div class="titles-container" *ngIf="data; else skeletonProductPrice">
+  <div class="title__brand"> {{ data?.brand || 'Brand' }} </div>
+  <div class="title__type"> {{ data?.type || '---' }} </div>
+  <div class="title__price">
+    <ng-container *ngIf="data?.oldPrice; else productPriceNormal">
+      <span class="title__price__old"> {{ (data?.oldPrice || 0) | number : '' : 'fr' }} ₽ </span>
+      <span class="title__price__sale"> {{ (data?.price || 0) | number : '' : 'fr' }} ₽ </span>
+    </ng-container>
+    <ng-template #productPriceNormal>
+      <span class="title__price__normal"> {{ (data?.price || 0) | number : '' : 'fr' }} ₽ </span>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #skeletonProductPrice>
+  <div class="titles-container">
+    <div class="title__brand">
+      <ion-skeleton-text animated style="width:40%; height: 3vh"></ion-skeleton-text>
+    </div>
+    <ion-skeleton-text animated style="width:60%; height: 1.97vh"></ion-skeleton-text>
+    <div class="title__price">
+      <ion-skeleton-text animated style="width:70%; height: 2.9vh"></ion-skeleton-text>
+    </div>
+  </div>
+</ng-template>

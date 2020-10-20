@@ -1,9 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {IPagePreviewCard} from '../../models/page-preview.model';
 import {CARDS_SOURCE} from './page-preview.data';
-import {IonSlides} from '@ionic/angular';
+import {IonSlides, NavController} from '@ionic/angular';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-page-preview',
@@ -18,7 +17,7 @@ export class PagePreviewComponent implements OnInit {
     public cards: Observable<IPagePreviewCard[]> = this.cards$.asObservable();
     public readonly nextRouteUrl: string = '/user_init';
 
-    constructor(private router: Router) {}
+    constructor(private navCtrl: NavController) {}
 
     ngOnInit(): void {}
 
@@ -48,6 +47,6 @@ export class PagePreviewComponent implements OnInit {
     }
 
     private async routeNext(): Promise<void> {
-        await this.router.navigateByUrl(this.nextRouteUrl);
+        await this.navCtrl.navigateRoot(this.nextRouteUrl);
     }
 }

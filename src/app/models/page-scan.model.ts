@@ -1,10 +1,10 @@
 export interface IPageScanModel {
-    id: number;
+    products: IPageScanProductModel[];
 }
 
 export interface IPageScanProductModel {
     id?: number;
-    currentPrice: number;
+    price: number;
     oldPrice?: number;
     brand: string;
     category: string;

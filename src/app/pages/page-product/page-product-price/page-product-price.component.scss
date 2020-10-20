@@ -1,0 +1,42 @@
+.titles-container {
+  margin: 2.95vh 0 4.92vh 0;
+  display: flex;
+  flex-flow: column;
+
+  .title {
+
+    &__brand {
+      font-size: 2.96vh;
+      font-weight: 700;
+      color: #2F3441;
+      margin-bottom: 0.62vh;
+    }
+
+    &__type {
+      font-size: 1.97vh;
+      font-weight: 400;
+      color: #6B7683;
+      margin-bottom: 1.72vh;
+    }
+
+    &__price {
+      font-size: 2.96vh;
+      font-weight: 700;
+
+      &__old {
+        font-size: 1.97vh;
+        font-weight: 500;
+        color: #6B7683;
+        text-decoration-line: line-through;
+      }
+
+      &__sale {
+        color: #3A83F1;
+      }
+
+      &__normal {
+        color: #202D3D;
+      }
+    }
+  }
+}

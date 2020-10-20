@@ -1,0 +1,25 @@
+$padding-w: 2.46vh;
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  padding: 3.7vh 0 0 0;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  overflow: hidden;
+  gap: 2.37vh;
+
+  .scroll-wrapper {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 0 $padding-w;
+  }
+
+  .img-container {
+    height: 55.54vh;
+    margin: 0 (-$padding-w);
+    background: #DCE0EB;
+  }
+}

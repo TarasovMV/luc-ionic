@@ -23,10 +23,7 @@ export class PageScanProductComponent implements OnInit {
     public isSaleMode: Observable<boolean> =
         this.dataSource$.pipe(map(x => !!x?.oldPrice));
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit() {
-    }
-
+    ngOnInit(): void {}
 }

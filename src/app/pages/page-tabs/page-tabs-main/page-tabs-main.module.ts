@@ -7,6 +7,7 @@ import {PageTabsMainCameraComponent} from './page-tabs-main-camera/page-tabs-mai
 import {PageTabsMainSearchComponent} from './page-tabs-main-search/page-tabs-main-search.component';
 import {PageTabsMainTrendCardComponent} from './page-tabs-main-trend-card/page-tabs-main-trend-card.component';
 import {PageTabsMainRecommendCardComponent} from './page-tabs-main-recommend-card/page-tabs-main-recommend-card.component';
+import {PageTabsMainSearchModalComponent} from './page-tabs-main-search-modal/page-tabs-main-search-modal.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {PageTabsMainRecommendCardComponent} from './page-tabs-main-recommend-car
         PageTabsMainCameraComponent,
         PageTabsMainSearchComponent,
         PageTabsMainTrendCardComponent,
-        PageTabsMainRecommendCardComponent
+        PageTabsMainRecommendCardComponent,
+        PageTabsMainSearchModalComponent,
     ],
     imports: [
         CommonModule,

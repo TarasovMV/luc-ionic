@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-page-tabs-main-camera',
@@ -8,14 +8,14 @@ import {Router} from '@angular/router';
 })
 export class PageTabsMainCameraComponent implements OnInit {
 
-    constructor(private router: Router) {
+    constructor(private navCtrl: NavController) {
     }
 
     ngOnInit() {
     }
 
     public async clickCamera(): Promise<void> {
-        await this.router.navigateByUrl('/main/camera');
+        await this.navCtrl.navigateRoot('/main/camera');
     }
 
 }

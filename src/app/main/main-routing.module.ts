@@ -14,6 +14,10 @@ const routes: Routes = [
                 loadChildren: () => import('../pages/page-scan/page-scan.module').then(m => m.PageScanModule),
             },
             {
+                path: 'product',
+                loadChildren: () => import('../pages/page-product/page-product.module').then(m => m.PageProductModule),
+            },
+            {
                 path: 'tabs',
                 loadChildren: () => import('../pages/page-tabs/page-tabs.module').then(m => m.PageTabsModule),
             },

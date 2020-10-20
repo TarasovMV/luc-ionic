@@ -5,10 +5,10 @@
     <div class="price">
       <ng-container *ngIf="isSaleMode | async; else normalPriceMode">
         <span class="price__old"> {{ ((dataSourceShared | async)?.oldPrice | number:'':'fr-FR') || 0 }} </span>
-        <span class="price__sale"> {{ ((dataSourceShared | async)?.currentPrice | number:'':'fr-FR') || 0 }} </span>
+        <span class="price__sale"> {{ ((dataSourceShared | async)?.price | number:'':'fr-FR') || 0 }} </span>
       </ng-container>
       <ng-template #normalPriceMode>
-        <span class="price__normal"> {{ ((dataSourceShared | async)?.currentPrice | number:'':'fr-FR') || 0}} </span>
+        <span class="price__normal"> {{ ((dataSourceShared | async)?.price | number:'':'fr-FR') || 0}} </span>
       </ng-template>
     </div>
     <div class="label">

@@ -6,16 +6,15 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import {SharedButtonMainComponent} from './components/shared-button-main/shared-button-main.component';
-import {SharedButtonSubComponent} from './components/shared-button-sub/shared-button-sub.component';
+import {SharedButtonComponent} from './components/shared-button/shared-button.component';
+import {SharedFilterModule} from './components/shared-filter/shared-filter.module';
 registerLocaleData(localeFr);
 
 
 @NgModule({
     declarations: [
         SafeUrlPipe,
-        SharedButtonMainComponent,
-        SharedButtonSubComponent
+        SharedButtonComponent,
     ],
     imports: [
         CommonModule,
@@ -26,7 +25,8 @@ registerLocaleData(localeFr);
         IonicModule,
         AngularSvgIconModule,
         HttpClientModule,
-        SharedButtonMainComponent,
+        SharedButtonComponent,
+        SharedFilterModule,
     ]
 })
 export class SharedModule {
