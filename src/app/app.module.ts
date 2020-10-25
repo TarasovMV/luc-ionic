@@ -10,12 +10,20 @@ import {AppComponent} from './app.component';
 
 import {CoreModule} from './@core/core.module';
 import {SharedModule} from './@shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // import {LocationStrategy} from '@angular/common';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CoreModule, SharedModule],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        CoreModule,
+        SharedModule,
+    ],
     providers: [
         StatusBar,
         SplashScreen,

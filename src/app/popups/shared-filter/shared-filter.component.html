@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="header">
+    <svg-icon (click)="close()" class="icon icon__back" src="assets/icon/svg/back.svg"></svg-icon>
+    <span class="title"> Фильтр </span>
+    <span (click)="clearFilter()" class="reset-button"> Сбросить </span>
+  </div>
+  <div class="scroll-wrapper">
+    <div class="content">
+      <ng-container [ngSwitch]="type$ | async">
+        <div *ngSwitchCase="SharedFilterTypes.Main" [@enterTrigger]="'fadeIn'">
+          <app-shared-filter-menu-item
+            *ngFor="let item of (main$ | async)"
+            [data]="item"
+            (click)="selectMenu(item.type)"
+          ></app-shared-filter-menu-item>
+        </div>
+        <div *ngSwitchCase="SharedFilterTypes.Color" [@enterTrigger]="'fadeIn'">
+          <app-shared-filter-color-item
+            *ngFor="let item of colors$ | async"
+            [data]="item"
+            [isActive]="isActiveFilter(item.id, SharedFilterTypes.Color) | async"
+            (click)="selectFilter(item, SharedFilterTypes.Color)"
+          ></app-shared-filter-color-item>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="footer">
+    <app-shared-button type="main" style="width: 100%">
+      Готово
+    </app-shared-button>
+  </div>
+</div>

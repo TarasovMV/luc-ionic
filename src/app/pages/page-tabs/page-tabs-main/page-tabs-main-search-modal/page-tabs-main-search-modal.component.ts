@@ -23,7 +23,7 @@ export class PageTabsMainSearchModalComponent implements AfterViewInit {
         this.tempStr += this.searchInput.value.toString();
     }
 
-    public close(): void {
-        this.modalCtrl.dismiss();
+    public async close(): Promise<void> {
+        await this.modalCtrl.dismiss();
     }
 }

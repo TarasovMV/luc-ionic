@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import {map} from 'rxjs/operators';
 import {DATA_SOURCE} from './page-scan.mock';
 import {ModalController, NavController} from '@ionic/angular';
-import {SharedFilterComponent} from '../../@shared/components/shared-filter/shared-filter.component';
+import {SharedFilterComponent} from '../../popups/shared-filter/shared-filter.component';
 
 @Component({
     selector: 'app-page-scan',

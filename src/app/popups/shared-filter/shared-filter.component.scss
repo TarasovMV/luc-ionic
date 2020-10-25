@@ -19,6 +19,7 @@
     .icon {
       width: 2.43vh;
       height: 2.43vh;
+      z-index: 1;
 
       &__back {
         color: #3A83F1;
@@ -38,6 +39,7 @@
     .reset-button {
       font-size: 1.97vh;
       color: #3A83F1;
+      z-index: 1;
     }
   }
 
@@ -58,6 +60,7 @@
   }
 
   .footer {
-
+    padding: 0 5.3vw 5.3vw 5.3vw;
+    box-sizing: border-box;
   }
 }

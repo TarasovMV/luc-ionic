@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {SharedButtonComponent} from './components/shared-button/shared-button.component';
-import {SharedFilterModule} from './components/shared-filter/shared-filter.module';
+import {SharedFilterModule} from '../popups/shared-filter/shared-filter.module';
 registerLocaleData(localeFr);
 
 
@@ -26,7 +26,6 @@ registerLocaleData(localeFr);
         AngularSvgIconModule,
         HttpClientModule,
         SharedButtonComponent,
-        SharedFilterModule,
     ]
 })
 export class SharedModule {

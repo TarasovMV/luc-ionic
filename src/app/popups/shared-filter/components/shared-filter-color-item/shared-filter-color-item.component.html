@@ -1,0 +1,11 @@
+<div class="container ion-activatable ripple-parent">
+  <ion-ripple-effect class="ion-ripple-color"></ion-ripple-effect>
+  <div [style.background]="data.color" class="color"></div>
+  <div class="titles">
+    <div class="titles__main"> {{data.label}} </div>
+    <div class="titles__sub"> {{data.count}} {{isActive ? 'active' : ''}}</div>
+  </div>
+  <div class="icon-wrapper">
+    <svg-icon class="icon" src="assets/icon/svg/back.svg"></svg-icon>
+  </div>
+</div>

@@ -1,26 +1,38 @@
 .container {
   display: flex;
-  gap: 1vh;
+  gap: 7vw;
   width: inherit;
   height: inherit;
-  padding: 5vw;
+  padding: 5.3vw;
   box-sizing: border-box;
+
+  & > * {
+    margin: auto 0;
+  }
+
+  .ion-ripple-color {
+    color: lightgray;
+  }
+
+  .color {
+    width: 2.46vh;
+    height: 2.46vh;
+    border-radius: 50%;
+  }
 
   .titles {
     flex-grow: 1;
     display: flex;
-    flex-flow: column;
-    justify-content: center;
-    gap: 0.5vh;
+    justify-content: left;
+    gap: 4vw;
+    font-size: 2vh;
 
     &__main {
-      font-size: 1.97vh;
       font-weight: 500;
       color: #222222;
     }
 
     &__sub {
-      font-size: 1.72vh;
       font-weight: 400;
       color: #99A0AB;
     }
@@ -29,7 +41,6 @@
   .icon-wrapper {
     width: 1.43vh;
     height: 1.43vh;
-    margin: auto 0;
     transform: scaleX(-1);
 
     .icon {

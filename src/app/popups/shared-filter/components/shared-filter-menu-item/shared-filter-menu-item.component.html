@@ -1,0 +1,10 @@
+<div class="container ion-activatable ripple-parent">
+  <ion-ripple-effect class="ion-ripple-color"></ion-ripple-effect>
+  <div class="titles">
+    <div class="titles__main"> {{(data$ | async)?.label}} </div>
+    <div *ngIf="!!(subValueObserver | async)" class="titles__sub"> {{ subValueObserver | async }} </div>
+  </div>
+  <div class="icon-wrapper">
+    <svg-icon class="icon" src="assets/icon/svg/back.svg"></svg-icon>
+  </div>
+</div>
