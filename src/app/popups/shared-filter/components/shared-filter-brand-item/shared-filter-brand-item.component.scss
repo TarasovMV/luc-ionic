@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  gap: 1vh;
+  width: inherit;
+  height: inherit;
+  padding: 5.3vw;
+  box-sizing: border-box;
+
+  .ion-ripple-color {
+    color: lightgray;
+  }
+
+  .titles {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    gap: 0.5vh;
+
+    &__main {
+      font-size: 1.97vh;
+      font-weight: 500;
+      color: #222222;
+    }
+  }
+
+  .icon-wrapper {
+    width: 1.43vh;
+    height: 1.43vh;
+    margin: auto 0;
+    transform: scaleX(-1);
+
+    .icon {
+      color: #6B7683;
+    }
+  }
+}

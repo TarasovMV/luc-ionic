@@ -1,0 +1,26 @@
+.container {
+  width: inherit;
+
+  .label {
+    width: 100%;
+    margin-bottom: 1.97vh;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: #9198A0;
+  }
+
+  .icon-container {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    background: #9198A0;
+    border-radius: 50%;
+  }
+}

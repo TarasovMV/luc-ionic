@@ -1,3 +1,9 @@
-<p>
-  shared-filter-search works!
-</p>
+<div class="container">
+  <svg-icon [svgStyle]="{'position': 'absolute'}" class="icon icon__search" src="assets/icon/svg/search.svg"></svg-icon>
+  <ion-input
+    #searchInput
+    class="input"
+    placeholder="Введите поисковый запрос..."
+    type="search">
+  </ion-input>
+</div>

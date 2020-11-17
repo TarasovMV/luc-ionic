@@ -22,6 +22,24 @@
             (click)="selectFilter(item, SharedFilterTypes.Color)"
           ></app-shared-filter-color-item>
         </div>
+        <div *ngSwitchCase="SharedFilterTypes.Brand" [@enterTrigger]="'fadeIn'">
+          <div class="search-container">
+            <app-shared-filter-search></app-shared-filter-search>
+          </div>
+          <app-shared-filter-brand-item
+            *ngFor="let item of brands$ | async"
+            [data]="item"
+            (click)="selectFilter(item, SharedFilterTypes.Brand)"
+          ></app-shared-filter-brand-item>
+        </div>
+        <div *ngSwitchCase="SharedFilterTypes.Price" [@enterTrigger]="'fadeIn'">
+          <app-shared-filter-price-item
+            *ngFor="let item of prices$ | async"
+            [data]="item"
+            [isActive]="isActiveFilter(item.id, SharedFilterTypes.Price) | async"
+            (click)="selectFilter(item, SharedFilterTypes.Price)"
+          ></app-shared-filter-price-item>
+        </div>
       </ng-container>
     </div>
   </div>

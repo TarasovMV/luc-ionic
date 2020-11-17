@@ -1,0 +1,22 @@
+<div class="container">
+  <img class="image" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4cXilLqWd8tskKFoG040zVnSymkScPPq_OQ&usqp=CAU">
+  <div class="ui-wrapper">
+    <div class="buttons-container">
+      <div class="circle-button"></div>
+      <div class="circle-button"></div>
+    </div>
+    <div class="buttons-container">
+      <ng-container *ngTemplateOutlet="circleButton"></ng-container>
+      <ng-container *ngTemplateOutlet="circleButton"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #circleButton>
+  <div class="circle-button ion-activatable ripple-parent">
+    <ion-ripple-effect></ion-ripple-effect>
+    <div class="icon-container">
+      <svg-icon class="icon" src="assets/icon/svg/search.svg"></svg-icon>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,19 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PageTabsFavoritesComponent} from './page-tabs-favorites.component';
+import {RouterModule} from '@angular/router';
+import {PageTabsFavouritesItemComponent} from './page-tabs-favourites-item/page-tabs-favourites-item.component';
+import {SharedModule} from '../../../@shared/shared.module';
+import {PageTabsFavoritesPopupComponent} from './page-tabs-favorites-popup/page-tabs-favorites-popup.component';
+
+
+@NgModule({
+    declarations: [PageTabsFavoritesComponent, PageTabsFavouritesItemComponent, PageTabsFavoritesPopupComponent],
+    imports: [
+        CommonModule,
+        RouterModule.forChild([{path: '', component: PageTabsFavoritesComponent}]),
+        SharedModule,
+    ]
+})
+export class PageTabsFavoritesModule {
+}

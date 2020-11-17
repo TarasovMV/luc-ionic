@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  gap: 1vh;
+  width: inherit;
+  height: inherit;
+  padding: 5.3vw;
+  box-sizing: border-box;
+
+  .ion-ripple-color {
+    color: lightgray;
+  }
+
+  .titles {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    gap: 0.5vh;
+
+    &__main {
+      font-size: 1.97vh;
+      font-weight: 500;
+      color: #222222;
+    }
+  }
+
+  .checker {
+    display: flex;
+    width: 2.43vh;
+    height: 2.43vh;
+    border: solid 0.25vh #2F3441;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    &__internal {
+      margin: auto;
+      width: 65%;
+      height: 65%;
+      border-radius: 50%;
+      background: transparent;
+      transition: .3s;
+
+      &__active {
+        background: #2F3441;
+        transition: .3s;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  overflow: hidden;
+  background: #DCE0EB;
+  border-radius: 3.2vw;
+
+  .image {
+    object-fit: cover;
+
+    &__active {
+      opacity: 1;
+      transition:.5s;
+    }
+
+    &__disable {
+      opacity: 0;
+      transition: .5s;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  height: 64px;
+  width: 100%;
+  padding: 0 6.93vw;
+  box-sizing: border-box;
+
+  & > * {
+    margin: auto 0;
+  }
+
+  .ion-ripple-color {
+    color: lightgray;
+  }
+
+  .title {
+    flex-grow: 1;
+    font-size: 1.97vh;
+    font-weight: 500;
+    color: #222222;
+  }
+
+  .main-icon {
+    width: 2.46vh;
+    height: 2.46vh;
+    color: #99A0AB;
+    margin-right: 7.5vw;
+  }
+
+  .icon-wrapper {
+    width: 1.43vh;
+    height: 1.43vh;
+    transform: scaleX(-1);
+
+    .icon {
+      color: #6B7683;
+    }
+  }
+}

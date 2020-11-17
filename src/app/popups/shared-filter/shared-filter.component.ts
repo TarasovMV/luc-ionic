@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -10,7 +10,7 @@ import {
     SharedFilterTypes,
     SharedFilterUnion
 } from '../../models/shared-filter.model';
-import {DATA_SOURCE_COLORS, DATA_SOURCE_MAIN} from './data/shared-filter.mock';
+import {DATA_SOURCE_BRANDS, DATA_SOURCE_COLORS, DATA_SOURCE_MAIN, DATA_SOURCE_PRICES} from './data/shared-filter.mock';
 import {map} from 'rxjs/operators';
 import {deepCopy} from '../../@shared/functions/deep-copy.function';
 
@@ -44,12 +44,19 @@ export class SharedFilterComponent implements OnInit {
     public colors$: BehaviorSubject<ISharedFilterColor[]> =
         new BehaviorSubject<ISharedFilterColor[]>([]);
 
-    constructor(private modalCtrl: ModalController) {
-    }
+    public brands$: BehaviorSubject<ISharedFilterBrand[]> =
+        new BehaviorSubject<ISharedFilterBrand[]>([]);
+
+    public prices$: BehaviorSubject<ISharedFilterPrice[]> =
+        new BehaviorSubject<ISharedFilterPrice[]>([]);
+
+    constructor(private modalCtrl: ModalController) {}
 
     ngOnInit(): void {
         this.main$.next(deepCopy(DATA_SOURCE_MAIN));
         setTimeout(() => this.colors$.next(deepCopy(DATA_SOURCE_COLORS)), 0);
+        setTimeout(() => this.brands$.next(deepCopy(DATA_SOURCE_BRANDS)), 0);
+        setTimeout(() => this.prices$.next(deepCopy(DATA_SOURCE_PRICES)), 0);
     }
 
     public async close(): Promise<void> {
@@ -72,6 +79,10 @@ export class SharedFilterComponent implements OnInit {
             case SharedFilterTypes.Main:
                 main.forEach(x => x.value = null);
                 break;
+            case SharedFilterTypes.Brand:
+                main.find(x => x.type === type).value = null;
+                this.close().then();
+                break;
             default:
                 main.find(x => x.type === type).value = null;
                 break;
@@ -84,6 +95,9 @@ export class SharedFilterComponent implements OnInit {
         let mainValue = main.find(x => x.type === type).value;
         switch (type) {
             case SharedFilterTypes.Brand:
+                mainValue = item;
+                this.close().then();
+                break;
             case SharedFilterTypes.Price:
                 mainValue = item;
                 break;

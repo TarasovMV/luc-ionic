@@ -1,7 +1,8 @@
 <div class="container ion-activatable ripple-parent">
   <ion-ripple-effect class="ion-ripple-color"></ion-ripple-effect>
-  <div class="titles">
-    <div class="titles__main"> {{ data.label }} </div>
+  <svg-icon class="main-icon" src="assets/icon/svg/{{icon}}.svg"></svg-icon>
+  <div class="title">
+    <ng-content></ng-content>
   </div>
   <div class="icon-wrapper">
     <svg-icon class="icon" src="assets/icon/svg/back.svg"></svg-icon>

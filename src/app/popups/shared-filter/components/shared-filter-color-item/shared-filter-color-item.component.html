@@ -3,9 +3,9 @@
   <div [style.background]="data.color" class="color"></div>
   <div class="titles">
     <div class="titles__main"> {{data.label}} </div>
-    <div class="titles__sub"> {{data.count}} {{isActive ? 'active' : ''}}</div>
+    <div class="titles__sub"> {{data.count}}</div>
   </div>
-  <div class="icon-wrapper">
-    <svg-icon class="icon" src="assets/icon/svg/back.svg"></svg-icon>
+  <div class="checker" [class.checker__active]="isActive">
+    <svg-icon class="checker__icon" src="assets/icon/svg/check.svg"></svg-icon>
   </div>
 </div>
