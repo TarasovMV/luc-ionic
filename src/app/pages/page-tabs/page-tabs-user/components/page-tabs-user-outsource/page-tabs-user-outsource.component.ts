@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GoogleAuthService} from '../../../../../@core/services/outsource-auth/google-auth.service';
 import {ActivatedRoute} from '@angular/router';
+import {VkAuthService} from "../../../../../@core/services/outsource-auth/vk-auth.service";
 
 @Component({
     selector: 'app-page-tabs-user-outsource',
@@ -9,7 +10,11 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class PageTabsUserOutsourceComponent implements OnInit {
 
-    constructor(private googleAuthService: GoogleAuthService, private route: ActivatedRoute) {
+    constructor(
+        private googleAuthService: GoogleAuthService,
+        private vkAuthService: VkAuthService,
+        private route: ActivatedRoute
+    ) {
     }
 
     ngOnInit(): void {
@@ -18,6 +23,10 @@ export class PageTabsUserOutsourceComponent implements OnInit {
 
     public googleAuth(): void {
         this.googleAuthService.authRequest();
+    }
+
+    public vkAuth(): void {
+        this.vkAuthService.authRequest();
     }
 
     private snapshotMapping(): void {
