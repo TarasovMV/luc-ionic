@@ -1,0 +1,12 @@
+<div class="container">
+  <svg-icon (click)="close()" class="icon icon__back" src="assets/icon/svg/back.svg"></svg-icon>
+  <div class="header"> Обратная связь </div>
+  <div class="subheader"> Если у вас возникли пожелания или проблемы с приложением, то напишите нам об этом </div>
+  <app-shared-input label="Ваш email" type="email"></app-shared-input>
+  <app-shared-select></app-shared-select>
+  <app-shared-textarea label="Ваше сообщение"></app-shared-textarea>
+  <div class="flex-free-space"></div>
+  <app-shared-button (click)="send()" type="main" style="width: 100%">
+    Отправить сообщение
+  </app-shared-button>
+</div>

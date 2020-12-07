@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GoogleAuthService} from '../../../../../@core/services/outsource-auth/google-auth.service';
 import {ActivatedRoute} from '@angular/router';
-import {VkAuthService} from "../../../../../@core/services/outsource-auth/vk-auth.service";
+import {VkAuthService} from '../../../../../@core/services/outsource-auth/vk-auth.service';
 
 @Component({
     selector: 'app-page-tabs-user-outsource',

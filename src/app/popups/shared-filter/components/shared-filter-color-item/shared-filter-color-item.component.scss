@@ -37,26 +37,4 @@
       color: #99A0AB;
     }
   }
-
-  .checker {
-    display: flex;
-    width: 2.43vh;
-    height: 2.43vh;
-    border: solid 0.25vh #6B7683;
-    border-radius: 0.25vh;
-    transition: .3s;
-
-    &__active {
-      background: #3A83F1;
-      border-color: #3A83F1;
-      transition: .3s;
-    }
-
-    &__icon {
-      width: 60%;
-      height: 100%;
-      margin: auto;
-      color: #ffffff;
-    }
-  }
 }

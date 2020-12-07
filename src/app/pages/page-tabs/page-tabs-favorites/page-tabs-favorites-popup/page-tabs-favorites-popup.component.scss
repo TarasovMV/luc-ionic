@@ -17,11 +17,26 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 11vw;
+    padding: 4.9vh 5vw;
+    transition: 1s;
+
+    &__disabled {
+      visibility: hidden;
+      transition: 1s;
+    }
 
     .buttons-container {
       display: flex;
       justify-content: space-between;
+
+      &__big {
+        padding: 0 5vw;
+      }
+
+      .small-icon-container {
+        width: 2.2vh;
+        height: 2.2vh;
+      }
     }
 
     .circle-button {

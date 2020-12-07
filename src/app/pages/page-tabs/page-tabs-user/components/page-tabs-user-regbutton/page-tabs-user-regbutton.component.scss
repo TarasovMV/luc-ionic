@@ -12,15 +12,14 @@
     font-weight: 600;
     text-align: center;
     line-height: 3.7vh;
+    color: #6B7683;
+    transition: .2s;
 
-    &__login {
+    &__active {
       border-radius: 0.98vh;
       color: #EAEDF5;
       background: #2F3441;
-    }
-
-    &__reg {
-      color: #6B7683;
+      transition: .2s;
     }
   }
 }

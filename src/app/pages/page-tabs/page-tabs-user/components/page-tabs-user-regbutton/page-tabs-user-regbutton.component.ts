@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {PageTypeAuthenticate} from '../../../../../models/page-tabs-login.model';
 
 @Component({
     selector: 'app-page-tabs-user-regbutton',
@@ -7,10 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PageTabsUserRegbuttonComponent implements OnInit {
 
+    @Input() pageType: PageTypeAuthenticate;
+    @Output() changePage: EventEmitter<PageTypeAuthenticate> = new EventEmitter<PageTypeAuthenticate>();
+
     constructor() {
     }
 
     ngOnInit(): void {
     }
 
+    public buttonClick(type: PageTypeAuthenticate): void {
+        this.changePage.emit(type);
+    }
 }

@@ -5,7 +5,5 @@
     <div class="titles__main"> {{data.label}} </div>
     <div class="titles__sub"> {{data.count}}</div>
   </div>
-  <div class="checker" [class.checker__active]="isActive">
-    <svg-icon class="checker__icon" src="assets/icon/svg/check.svg"></svg-icon>
-  </div>
+  <app-shared-multiply-checker [isActive]="isActive"></app-shared-multiply-checker>
 </div>

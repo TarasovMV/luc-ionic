@@ -1,0 +1,15 @@
+<app-shared-input label="Имя" type="text"></app-shared-input>
+<app-shared-input label="Электронная почта" type="email"></app-shared-input>
+<app-shared-input label="Пароль" type="password"></app-shared-input>
+<app-shared-input label="Повторите пароль" type="password"></app-shared-input>
+
+<div class="agree-container" (click)="agreeClick()">
+  <app-shared-multiply-checker [isActive]="isPersonalDataAgree$ | async"></app-shared-multiply-checker>
+  <div class="label"> Я подтверждаю свое согласие на <a> обработку персональных данных </a> приложением </div>
+</div>
+
+<div class="flex-free-space"></div>
+
+<app-shared-button class="button" type="main">
+  Создать
+</app-shared-button>

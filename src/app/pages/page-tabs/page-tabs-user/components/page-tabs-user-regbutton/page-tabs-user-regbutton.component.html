@@ -1,6 +1,19 @@
 <div class="container">
-  <div class="button button__login ion-activatable ripple-parent">
+  <div
+    class="button button ion-activatable ripple-parent"
+    (click)="buttonClick('login')"
+    [class.button__active]="pageType === 'login'"
+  >
     <ion-ripple-effect></ion-ripple-effect>
-    Войти </div>
-  <div class="button button__reg"> Создать аккаунт </div>
+    Войти
+  </div>
+
+  <div
+    class="button button ion-activatable ripple-parent"
+    (click)="buttonClick('reg')"
+    [class.button__active]="pageType === 'reg'"
+  >
+    <ion-ripple-effect></ion-ripple-effect>
+    Создать аккаунт
+  </div>
 </div>

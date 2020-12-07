@@ -1,0 +1,21 @@
+:host {
+  height: 100%;
+  display: inherit;
+  flex-flow: inherit;
+  gap: inherit;
+}
+
+app-shared-input:nth-last-of-type(1) {
+  margin-bottom: 2vh;
+}
+
+.agree-container {
+  display: flex;
+  gap: 4.27vw;
+  font-size: 1.72vh;
+}
+
+.button {
+  width: 100%;
+  margin-bottom: 3vh;
+}

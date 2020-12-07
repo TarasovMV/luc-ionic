@@ -1,0 +1,13 @@
+<app-shared-input label="Электронная почта" type="email"></app-shared-input>
+<app-shared-input label="Пароль" type="password"></app-shared-input>
+
+<a class="forget-password"> Забыли пароль? </a>
+
+<app-page-tabs-user-outsource></app-page-tabs-user-outsource>
+
+<div class="menu-container">
+  <div class="flex-free-space"></div>
+  <app-page-tabs-user-menu icon="star"> Оценить приложение </app-page-tabs-user-menu>
+  <app-page-tabs-user-menu icon="crowd"> Поделиться с друзьями </app-page-tabs-user-menu>
+  <app-page-tabs-user-menu (click)="openFeedback()" icon="fire"> Обратная связь </app-page-tabs-user-menu>
+</div>

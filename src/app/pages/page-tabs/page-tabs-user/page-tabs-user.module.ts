@@ -6,6 +6,10 @@ import {PageTabsUserRegbuttonComponent} from './components/page-tabs-user-regbut
 import {SharedModule} from '../../../@shared/shared.module';
 import {PageTabsUserOutsourceComponent} from './components/page-tabs-user-outsource/page-tabs-user-outsource.component';
 import {PageTabsUserMenuComponent} from './components/page-tabs-user-menu/page-tabs-user-menu.component';
+import {PageTabsUserScreenLoginComponent} from "./pages/page-tabs-user-screen-login/page-tabs-user-screen-login.component";
+import {PageTabsUserScreenRegComponent} from "./pages/page-tabs-user-screen-reg/page-tabs-user-screen-reg.component";
+import {PopupFeedbackModule} from "../../../popups/popup-feedback/popup-feedback.module";
+import {PageTabsUserScreenAuthComponent} from "./pages/page-tabs-user-screen-auth/page-tabs-user-screen-auth.component";
 
 
 @NgModule({
@@ -14,10 +18,14 @@ import {PageTabsUserMenuComponent} from './components/page-tabs-user-menu/page-t
         PageTabsUserRegbuttonComponent,
         PageTabsUserOutsourceComponent,
         PageTabsUserMenuComponent,
+        PageTabsUserScreenLoginComponent,
+        PageTabsUserScreenRegComponent,
+        PageTabsUserScreenAuthComponent,
     ],
     imports: [
         CommonModule,
         SharedModule,
+        PopupFeedbackModule,
         RouterModule.forChild([{path: '', component: PageTabsUserComponent}]),
     ]
 })

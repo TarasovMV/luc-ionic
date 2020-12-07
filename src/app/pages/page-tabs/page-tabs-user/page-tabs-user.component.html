@@ -1,24 +1,24 @@
 <div class="container">
-  <div class="header"> Профиль </div>
-  <div class="subheader"> Войдите или создайте аккаунт </div>
-  <app-page-tabs-user-regbutton></app-page-tabs-user-regbutton>
+  <ng-container [ngSwitch]="pageType$ | async">
+    <ng-container *ngSwitchCase="'auth'">
+      <div class="header"> Евгений </div>
+      <div class="subheader"> username@mail.ru </div>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <div class="header"> Профиль </div>
+      <div class="subheader"> Войдите или создайте аккаунт </div>
+      <app-page-tabs-user-regbutton
+        [pageType]="pageType$ | async"
+        (changePage)="switchPage($event)"
+      ></app-page-tabs-user-regbutton>
+    </ng-container>
+  </ng-container>
 
-  <ion-item class="input-container">
-    <ion-label class="label" position="floating"> Электронная почта </ion-label>
-    <ion-input class="input" type="email"></ion-input>
-  </ion-item>
-  <ion-item class="input-container">
-    <ion-label class="label" position="floating"> Пароль </ion-label>
-    <ion-input class="input" type="password"></ion-input>
-  </ion-item>
-  <a class="forget-password"> Забыли пароль? </a>
+  <ng-container [ngSwitch]="pageType$ | async">
+    <app-page-tabs-user-screen-login *ngSwitchCase="'login'"></app-page-tabs-user-screen-login>
+    <app-page-tabs-user-screen-reg *ngSwitchCase="'reg'"></app-page-tabs-user-screen-reg>
+    <app-page-tabs-user-screen-auth *ngSwitchCase="'auth'"></app-page-tabs-user-screen-auth>
+  </ng-container>
 
-  <app-page-tabs-user-outsource></app-page-tabs-user-outsource>
 
-  <div class="menu-container">
-    <div class="flex-free-space"></div>
-    <app-page-tabs-user-menu icon="star"> Оценить приложение </app-page-tabs-user-menu>
-    <app-page-tabs-user-menu icon="crowd"> Поделиться с друзьями </app-page-tabs-user-menu>
-    <app-page-tabs-user-menu icon="fire"> Обратная связь </app-page-tabs-user-menu>
-  </div>
 </div>

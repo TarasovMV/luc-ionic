@@ -1,13 +1,23 @@
 .container {
-  display: flex;
-  flex-flow: column;
   width: 100%;
   height: 100%;
-  gap: 1.97vh;
-  padding: 0 4.27vw;
+  display: flex;
+  flex-flow: column;
+  padding: 3vh 4.27vw;
   box-sizing: border-box;
-  overflow: hidden;
   background: white;
+  overflow: hidden;
+  gap: 2.37vh;
+
+  .icon {
+    width: 2.43vh;
+    height: 2.43vh;
+    z-index: 1;
+
+    &__back {
+      color: #3A83F1;
+    }
+  }
 
   .header {
     font-size: 2.71vh;
@@ -23,5 +33,3 @@
     color: #222222;
   }
 }
-
-

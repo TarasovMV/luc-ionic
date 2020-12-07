@@ -1,0 +1,18 @@
+.input-container {
+  --min-height: 7.5vh;
+  --padding-start: 0;
+
+  .label {
+    margin: 0;
+    font-size: 1.97vh;
+    font-weight: 500;
+    color: #99A0AB;
+  }
+
+  .input {
+    --padding-top: 0;
+    --padding-bottom: 0;
+    font-size: 1.97vh;
+    color: #222222;
+  }
+}
