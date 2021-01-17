@@ -15,9 +15,9 @@
   </ng-container>
 
   <ng-container [ngSwitch]="pageType$ | async">
-    <app-page-tabs-user-screen-login *ngSwitchCase="'login'"></app-page-tabs-user-screen-login>
-    <app-page-tabs-user-screen-reg *ngSwitchCase="'reg'"></app-page-tabs-user-screen-reg>
-    <app-page-tabs-user-screen-auth *ngSwitchCase="'auth'"></app-page-tabs-user-screen-auth>
+    <app-page-tabs-user-screen-login style="overflow: auto" *ngSwitchCase="'login'"></app-page-tabs-user-screen-login>
+    <app-page-tabs-user-screen-reg style="overflow: auto" *ngSwitchCase="'reg'"></app-page-tabs-user-screen-reg>
+    <app-page-tabs-user-screen-auth style="overflow: auto" *ngSwitchCase="'auth'"></app-page-tabs-user-screen-auth>
   </ng-container>
 
 
