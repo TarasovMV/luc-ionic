@@ -1,5 +1,11 @@
 <div class="container">
-  <div class="header"> <span>Лукич</span> <span style="float: right">Ф</span> </div>
+  <div class="header">
+    <span>Лукич</span>
+    <span class="filter-icon"><svg-icon src="assets/icon/svg/filter-list.svg"></svg-icon></span>
+  </div>
   <div class="subheader"> Выбирай лучшее, то что тебе нравится, а LUC найдет для тебя это </div>
-  <app-page-tabs-tinder-card class="card"></app-page-tabs-tinder-card>
+  <div class="card-container">
+    <div class="card" #tinderCard><app-page-tabs-tinder-card [imgSrc]="currentImg$ | async"></app-page-tabs-tinder-card></div>
+    <div class="card card__pseudo"> <div class="shadow"></div> <img alt="" [src]="nextImg$ | async" /> </div>
+  </div>
 </div>

@@ -11,7 +11,7 @@ import {ModalController} from "@ionic/angular";
 })
 export class PageTabsUserComponent implements OnInit {
 
-    public pageType$: BehaviorSubject<PageTypeAuthenticate> = new BehaviorSubject<PageTypeAuthenticate>('auth');
+    public pageType$: BehaviorSubject<PageTypeAuthenticate> = new BehaviorSubject<PageTypeAuthenticate>('reg');
 
     constructor() {}
 

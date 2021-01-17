@@ -8,13 +8,13 @@ import {HttpClient} from '@angular/common/http';
 export class VkAuthService {
 
     private readonly vkAuthEndpoint: string = 'https://oauth.vk.com/authorize';
-    private readonly vkAuthParams: {[key: string]: string} = {
+    public readonly vkAuthParams: {[key: string]: string} = {
         client_id: '7669704',
         redirect_uri: `${this.appConfigService.locationOrigin}/main/tabs/user`,
         // redirect_uri: `https://oauth.vk.com/blank.html`,
         response_type: 'token',
         display: 'mobile',
-        scope: '111111111111111111111111111', // TODO check
+        scope: '1', // TODO check
         state: 'vk',
     };
 
