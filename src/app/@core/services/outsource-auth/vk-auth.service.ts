@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AppConfigService} from '../app-config.service';
 import {HttpClient} from '@angular/common/http';
+import {Browser} from '@capacitor/core';
+import {VKAuth} from 'capacitor-plugin-vk-auth';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +27,26 @@ export class VkAuthService {
         let uri = `${this.vkAuthEndpoint}?`;
         uri += Object.keys(this.vkAuthParams).map(x => `${x}=${this.vkAuthParams[x]}`).join('&');
         // location.href = uri;
-        window.open(uri, 'self');
+        // window.open(uri, 'self');
+        await Browser.open({url: uri, presentationStyle: 'popover'});
     }
+
+    public async authRequestPlugin(): Promise<void> {
+        console.log('auth');
+        // VkSdk.init('123456');
+
+        VKAuth.initWithId({ id: '7731427' });
+        VKAuth.auth({ scope: ['offline'] });
+        VKAuth.addListener('vkAuthFinished', (info) => {
+            console.log('vkAuthFinished was fired', JSON.stringify(info, null, 2));
+        });
+    }
+
+//     VKAuth.initWithId({ id: '7569443' })
+//     VKAuth.auth({ scope: ['offline'] });
+//     VKAuth.addListener("vkAuthFinished", (info) => {
+//     console.log("vkAuthFinished was fired", JSON.stringify(info, null, 2));
+// });
+//
+//     public async authRe
 }

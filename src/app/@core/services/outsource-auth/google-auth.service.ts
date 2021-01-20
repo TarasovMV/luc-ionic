@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConfigService} from '../app-config.service';
+import '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core';
 
 @Injectable({
     providedIn: 'root'
@@ -32,9 +34,12 @@ export class GoogleAuthService {
     }
 
     public async authRequest(): Promise<void> {
-        const form = this.createForm();
-        document.body.appendChild(form);
-        form.submit();
+        const googleUser = await Plugins.GoogleAuth.signIn(null);
+        console.log('user', googleUser);
+
+        // const form = this.createForm();
+        // document.body.appendChild(form);
+        // form.submit();
 
         // TODO: cors block short variant
         // let uri = this.oauth2Endpoint;

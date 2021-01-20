@@ -4,8 +4,8 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBarService} from './@core/services/status-bar.service';
 import {KeyboardService} from './@core/services/keyboard.service';
 import {Observable} from 'rxjs';
-import {AppConfigService} from './@core/services/app-config.service';
 import {VkAuthService} from './@core/services/outsource-auth/vk-auth.service';
+import {UserAgentService} from './@core/services/outsource-auth/user-agent.service';
 
 @Component({
     selector: 'app-root',
@@ -21,6 +21,7 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBarService: StatusBarService,
         private keyboardService: KeyboardService,
+        private userAgentService: UserAgentService,
         public appConfigService: VkAuthService,
     ) {
         this.initializeApp();
@@ -31,6 +32,7 @@ export class AppComponent {
             this.splashScreen.hide();
             this.statusBarService.setDefault();
             this.keyboardService.setInitSettings(this.platform, this.appWindow);
+            this.userAgentService.setUserAgent();
         });
     }
 }

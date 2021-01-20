@@ -26,7 +26,8 @@ export class PageTabsUserOutsourceComponent implements OnInit {
     }
 
     public vkAuth(): void {
-        this.vkAuthService.authRequest();
+        // this.vkAuthService.authRequest();
+        this.vkAuthService.authRequestPlugin();
     }
 
     private snapshotMapping(): void {

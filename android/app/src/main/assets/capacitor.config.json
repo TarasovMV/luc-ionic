@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.luc.app",
   "appName": "luc-ionic",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -7,6 +7,14 @@
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
+    },
+    "GoogleAuth": {
+      "scopes": [
+        "profile",
+        "email"
+      ],
+      "serverClientId": "345754396950-9ie0u4sfo1h1q1c0bl7rgep9tkjau18l.apps.googleusercontent.com ",
+      "forceCodeForRefreshToken": true
     }
   },
   "cordova": {}

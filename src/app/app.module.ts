@@ -11,6 +11,8 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './@core/core.module';
 import {SharedModule} from './@shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UserAgent} from '@ionic-native/user-agent/ngx';
+import {VKAuthWeb} from 'capacitor-plugin-vk-auth';
 // import {LocationStrategy} from '@angular/common';
 
 @NgModule({
@@ -27,6 +29,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     providers: [
         StatusBar,
         SplashScreen,
+        UserAgent,
+        VKAuthWeb,
         // {
         //     provide: LocationStrategy,
         //     useClass: IonicRouteStrategy

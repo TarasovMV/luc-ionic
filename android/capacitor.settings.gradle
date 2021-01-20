@@ -4,3 +4,9 @@ project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/
 
 include ':capacitor-community-camera-preview'
 project(':capacitor-community-camera-preview').projectDir = new File('../node_modules/@capacitor-community/camera-preview/android')
+
+include ':codetrix-studio-capacitor-google-auth'
+project(':codetrix-studio-capacitor-google-auth').projectDir = new File('../node_modules/@codetrix-studio/capacitor-google-auth/android')
+
+include ':capacitor-plugin-vk-auth'
+project(':capacitor-plugin-vk-auth').projectDir = new File('../node_modules/capacitor-plugin-vk-auth/android')
