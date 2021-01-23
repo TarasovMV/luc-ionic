@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-content {
+  --background: transparent !important;
+}
+
 html, body, .ion-app, .ion-content {
   background: transparent !important;
 }

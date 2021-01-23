@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">luc-ionic</string>
     <string name="title_activity_main">luc-ionic</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">com.luc.app</string>
+    <string name="custom_url_scheme">com.luc.app</string>
 
     <integer name="com_vk_sdk_AppId">7731427</integer>
-    <integer name="server_client_id">345754396950-9ie0u4sfo1h1q1c0bl7rgep9tkjau18l.apps.googleusercontent.com</integer>
+    <string name="server_client_id">345754396950-9ie0u4sfo1h1q1c0bl7rgep9tkjau18l.apps.googleusercontent.com</string>
 </resources>

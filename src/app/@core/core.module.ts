@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import '@capacitor-community/camera-preview';
 import {AppConfigService} from './services/app-config.service';
 import {HttpClientModule} from '@angular/common/http';
+import {UserAgent} from '@ionic-native/user-agent/ngx';
 
 @NgModule({
     declarations: [],
@@ -13,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
         HttpClientModule,
     ],
     providers: [
+        UserAgent,
         {
             provide: APP_INITIALIZER,
             multi: true,

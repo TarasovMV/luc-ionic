@@ -22,7 +22,6 @@ export class AppComponent {
         private statusBarService: StatusBarService,
         private keyboardService: KeyboardService,
         private userAgentService: UserAgentService,
-        public appConfigService: VkAuthService,
     ) {
         this.initializeApp();
     }
@@ -32,7 +31,7 @@ export class AppComponent {
             this.splashScreen.hide();
             this.statusBarService.setDefault();
             this.keyboardService.setInitSettings(this.platform, this.appWindow);
-            this.userAgentService.setUserAgent();
+            // this.userAgentService.setUserAgent(); // TODO: not work
         });
     }
 }
