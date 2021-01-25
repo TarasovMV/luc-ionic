@@ -1,5 +1,8 @@
-<app-shared-input label="Электронная почта" type="email"></app-shared-input>
-<app-shared-input label="Пароль" type="password"></app-shared-input>
+<app-shared-input [(value)]="email" label="Электронная почта" type="email"></app-shared-input>
+<app-shared-input [(value)]="password" label="Пароль" type="password"></app-shared-input>
+<ng-container *ngIf="!loginForm.valid && !loginForm.dirty">
+  Ошибка ввода почты
+</ng-container>
 
 <a class="forget-password"> Забыли пароль? </a>
 

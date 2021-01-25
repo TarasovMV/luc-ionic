@@ -12,6 +12,7 @@ import {SharedInputComponent} from "./components/shared-input/shared-input.compo
 import {SharedMultiplyCheckerComponent} from "./components/shared-multiply-checker/shared-multiply-checker.component";
 import {SharedSelectComponent} from "./components/shared-select/shared-select.component";
 import {SharedTextareaComponent} from "./components/shared-textarea/shared-textarea.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 registerLocaleData(localeFr);
 
 
@@ -28,6 +29,8 @@ registerLocaleData(localeFr);
         CommonModule,
         IonicModule,
         AngularSvgIconModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
     ],
     exports: [
         IonicModule,
