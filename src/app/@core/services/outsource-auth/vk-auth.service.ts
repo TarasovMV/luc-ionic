@@ -1,8 +1,8 @@
+import { VKAuthWeb } from 'capacitor-plugin-vk-auth';
 import {Injectable} from '@angular/core';
 import {AppConfigService} from '../app-config.service';
 import {HttpClient} from '@angular/common/http';
-import {Browser} from '@capacitor/core';
-import {VKAuth} from 'capacitor-plugin-vk-auth';
+import {Browser, Plugins} from '@capacitor/core';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +32,7 @@ export class VkAuthService {
     }
 
     public async authRequestPlugin(): Promise<void> {
+        const VKAuth: VKAuthWeb = Plugins.VKAuth as any;
         const init = await VKAuth.initWithId({ id: '7731427' });
         console.log('init', JSON.stringify(init));
         const scope = await VKAuth.auth({ scope: ['offline'] });
