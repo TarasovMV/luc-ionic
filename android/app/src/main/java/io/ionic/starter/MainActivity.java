@@ -1,10 +1,12 @@
 package com.luc.app;
 
 import android.os.Bundle;
+import android.os.Debug;
 
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.Plugin;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import com.bazumax.plugins.vk.VKAuth;

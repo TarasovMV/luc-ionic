@@ -35,7 +35,7 @@ export class GoogleAuthService {
 
     public async authRequest(): Promise<void> {
         const googleUser = await Plugins.GoogleAuth.signIn(null);
-        console.log('user', googleUser);
+        console.log('user', JSON.stringify(googleUser));
 
         // const form = this.createForm();
         // document.body.appendChild(form);

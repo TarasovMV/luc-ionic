@@ -1,5 +1,5 @@
 <ion-item class="input-container">
   <ion-label class="label" position="floating"> {{ label }} </ion-label>
-  <ion-input *ngIf="!form" autocomplete="nope" (change)="valueChange.emit($event.target.value)" [value]="value" class="input" [type]="type"></ion-input>
-  <ion-input *ngIf="!!form" autocomplete="nope" [formControl]="form.formGroup.get(form.formGroupName)" class="input" [type]="type"></ion-input>
+  <ion-input *ngIf="!formControl" autocomplete="nope" (change)="valueChange.emit($event.target.value)" [value]="value" class="input" [type]="type"></ion-input>
+  <ion-input *ngIf="!!formControl" autocomplete="nope" [formControl]="formControl" class="input" [type]="type"></ion-input>
 </ion-item>

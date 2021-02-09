@@ -26,13 +26,11 @@ export class VkAuthService {
     public async authRequest(): Promise<void> {
         let uri = `${this.vkAuthEndpoint}?`;
         uri += Object.keys(this.vkAuthParams).map(x => `${x}=${this.vkAuthParams[x]}`).join('&');
-        // location.href = uri;
-        // window.open(uri, 'self');
         await Browser.open({url: uri, presentationStyle: 'popover'});
     }
 
     public async authRequestPlugin(): Promise<void> {
-        const VKAuth: VKAuthWeb = Plugins.VKAuth as any;
+        const VKAuth: VKAuthWeb = Plugins.VKAuth as VKAuthWeb;
         const init = await VKAuth.initWithId({ id: '7731427' });
         console.log('init', JSON.stringify(init));
         const scope = await VKAuth.auth({ scope: ['offline'] });
@@ -41,12 +39,4 @@ export class VkAuthService {
             console.log('vkAuthFinished was fired', JSON.stringify(info, null, 2));
         });
     }
-
-//     VKAuth.initWithId({ id: '7569443' })
-//     VKAuth.auth({ scope: ['offline'] });
-//     VKAuth.addListener("vkAuthFinished", (info) => {
-//     console.log("vkAuthFinished was fired", JSON.stringify(info, null, 2));
-// });
-//
-//     public async authRe
 }

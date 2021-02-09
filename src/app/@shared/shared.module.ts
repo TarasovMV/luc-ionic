@@ -13,6 +13,7 @@ import {SharedMultiplyCheckerComponent} from "./components/shared-multiply-check
 import {SharedSelectComponent} from "./components/shared-select/shared-select.component";
 import {SharedTextareaComponent} from "./components/shared-textarea/shared-textarea.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SharedFormErrorComponent} from './components/shared-form-error/shared-form-error.component';
 registerLocaleData(localeFr);
 
 
@@ -24,6 +25,7 @@ registerLocaleData(localeFr);
         SharedMultiplyCheckerComponent,
         SharedSelectComponent,
         SharedTextareaComponent,
+        SharedFormErrorComponent,
     ],
     imports: [
         CommonModule,
@@ -41,6 +43,7 @@ registerLocaleData(localeFr);
         SharedMultiplyCheckerComponent,
         SharedSelectComponent,
         SharedTextareaComponent,
+        SharedFormErrorComponent,
     ]
 })
 export class SharedModule {

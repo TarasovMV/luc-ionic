@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {PopupFeedbackComponent} from '../../../../../popups/popup-feedback/popup-feedback.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {LoadingService} from '../../../../../@core/services/loading.service';
+import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
 
 @Component({
     selector: 'app-page-tabs-user-screen-login',
@@ -15,25 +17,25 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         password: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     });
 
-    public set email(value: string) {
-        this.loginForm.get('email').setValue(value);
-    }
-    public get email(): string {
-        return this.loginForm.get('email').value;
-    }
-
-    public set password(value: string) {
-        this.loginForm.get('password').setValue(value);
-    }
-    public get password(): string {
-        return this.loginForm.get('password').value;
-    }
-
     constructor(
         private modalController: ModalController,
+        private loadingService: LoadingService,
+        private apiUserService: ApiUserService,
     ) {}
 
     ngOnInit(): void {
+        this.loginForm.valueChanges.subscribe(x => console.log('form', x));
+    }
+
+    public async loginClick(): Promise<void> {
+        Object.values(this.loginForm.controls).forEach(x => x.markAsDirty());
+        if (!this.loginForm.valid) {
+            console.warn('invalid form');
+            return;
+        }
+        const res = await this.apiUserService.userLogin(this.loginForm.value);
+        this.loadingService.stopLoading().then();
+        console.log('login status', res);
     }
 
     public async openFeedback(): Promise<void> {

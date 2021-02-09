@@ -46,15 +46,18 @@ export class PageTabsTinderComponent implements OnInit, AfterViewInit {
                 card.nativeElement.style.transition = `none`;
             },
             onMove: (e) => {
-                card.nativeElement.style.transform = `translateX(${e.deltaX}px) rotate(${e.deltaX / 8}deg)`;
+                card.nativeElement.style.transform = `translateX(${e.deltaX}px)`;
+                // card.nativeElement.style.transform = `translateX(${e.deltaX}px) rotate(${e.deltaX / 8}deg)`;
             },
             onEnd: (e) => {
                 let transform = `translateX(0px) rotate(0deg)`;
                 if (e.deltaX > screenWidth / 2) {
-                    transform = `translateX(${+screenWidth * 2}px) rotate(${e.deltaX / 2}deg)`;
+                    transform = `translateX(${+screenWidth * 2}px)`;
+                    // transform = `translateX(${+screenWidth * 2}px) rotate(${e.deltaX / 2}deg)`;
                     this.action('like');
                 } else if (e.deltaX < -screenWidth / 2) {
-                    transform = `translateX(${-screenWidth * 2}px) rotate(${e.deltaX / 2}deg)`;
+                    transform = `translateX(${-screenWidth * 2}px)`;
+                    // transform = `translateX(${-screenWidth * 2}px) rotate(${e.deltaX / 2}deg)`;
                     this.action('dislike');
                 }
                 card.nativeElement.style.transition = `.5s ease-out`;

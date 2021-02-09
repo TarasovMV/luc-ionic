@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InputType} from '../../models/shared-input.model';
-import {FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-shared-input',
@@ -9,7 +9,7 @@ import {FormGroup} from '@angular/forms';
 })
 export class SharedInputComponent implements OnInit {
 
-    @Input() form: { formGroup: FormGroup, formGroupName: string } = null;
+    @Input() formControl: FormControl;
 
     @Input() value = '';
     @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();

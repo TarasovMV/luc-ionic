@@ -22,6 +22,11 @@
     font-weight: 400;
     color: #222222;
   }
+
+  .page-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 
