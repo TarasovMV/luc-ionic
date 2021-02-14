@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IAppConfig} from '../models/config.model';
-import {PlatformLocation} from "@angular/common";
+import {PlatformLocation} from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
@@ -25,5 +25,14 @@ export class AppConfigService {
 
     public get locationOrigin(): string {
         return (this.platformLocation as any).location.origin;
+    }
+
+    load(): Promise<any>  {
+        return this.httpClient.get('assets/config.json')
+            .toPromise()
+            .then(x => {
+                this.appConfig = x as any;
+                return x;
+            });
     }
 }

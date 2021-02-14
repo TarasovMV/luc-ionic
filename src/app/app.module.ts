@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
@@ -12,6 +12,8 @@ import {CoreModule} from './@core/core.module';
 import {SharedModule} from './@shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {VKAuthWeb} from 'capacitor-plugin-vk-auth';
+import {IonicStorageModule} from '@ionic/storage';
+import {AppConfigService} from "./@core/services/app-config.service";
 // import {LocationStrategy} from '@angular/common';
 
 @NgModule({
@@ -21,6 +23,7 @@ import {VKAuthWeb} from 'capacitor-plugin-vk-auth';
         BrowserModule,
         BrowserAnimationsModule,
         IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
         AppRoutingModule,
         CoreModule,
         SharedModule,
@@ -29,6 +32,7 @@ import {VKAuthWeb} from 'capacitor-plugin-vk-auth';
         StatusBar,
         SplashScreen,
         VKAuthWeb,
+
         // {
         //     provide: LocationStrategy,
         //     useClass: IonicRouteStrategy

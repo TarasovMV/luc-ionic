@@ -1,21 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {PageTypeAuthenticate} from '../../../models/page-tabs-login.model';
-import {SharedFilterComponent} from "../../../popups/shared-filter/shared-filter.component";
-import {ModalController} from "@ionic/angular";
+import {UserInfoService} from '../../../@core/services/user-info.service';
+import {RxJsUnsubscriber} from '../../../@core/abstractions/RxJsUnsubscriber';
+import {takeUntil} from 'rxjs/operators';
+import {IUserInfo} from '../../../models/user-info.model';
 
 @Component({
     selector: 'app-page-tabs-user',
     templateUrl: './page-tabs-user.component.html',
     styleUrls: ['./page-tabs-user.component.scss'],
 })
-export class PageTabsUserComponent implements OnInit {
+export class PageTabsUserComponent extends RxJsUnsubscriber implements OnInit, OnDestroy {
 
-    public pageType$: BehaviorSubject<PageTypeAuthenticate> = new BehaviorSubject<PageTypeAuthenticate>('reg');
+    public userInfo$: Observable<IUserInfo> = this.userService.authUser$.asObservable();
+    public pageType$: BehaviorSubject<PageTypeAuthenticate> = new BehaviorSubject<PageTypeAuthenticate>('auth');
 
-    constructor() {}
+    constructor(private userService: UserInfoService) {
+        super();
+    }
 
     ngOnInit(): void {
+        this.autoPageTypeChanger();
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+    }
+
+    public exitAccount(): void {
+        this.userService.clearUser();
     }
 
     public switchPage(type: PageTypeAuthenticate) {
@@ -23,5 +37,15 @@ export class PageTabsUserComponent implements OnInit {
             return;
         }
         this.pageType$.next(type);
+    }
+
+    private autoPageTypeChanger(): void {
+        this.userService.authUser$.pipe(takeUntil(this.unsubscribe$)).subscribe(x => {
+            if (x) {
+                this.pageType$.next('auth');
+            } else {
+                this.pageType$.next('login');
+            }
+        });
     }
 }

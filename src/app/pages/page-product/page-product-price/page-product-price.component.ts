@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {IPageProductPriceModel} from '../../../models/page-product.model';
+import {IPageProductPreviewModel} from '../../../models/page-product.model';
 
 @Component({
     selector: 'app-page-product-price',
@@ -9,7 +9,7 @@ import {IPageProductPriceModel} from '../../../models/page-product.model';
 })
 export class PageProductPriceComponent implements OnInit {
 
-    @Input() data: IPageProductPriceModel = null;
+    @Input() data: IPageProductPreviewModel = null;
 
     constructor() {
     }

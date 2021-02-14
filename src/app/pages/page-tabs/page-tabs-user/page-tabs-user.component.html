@@ -1,8 +1,11 @@
 <div class="container">
   <ng-container [ngSwitch]="pageType$ | async">
     <ng-container *ngSwitchCase="'auth'">
-      <div class="header"> Евгений </div>
-      <div class="subheader"> username@mail.ru </div>
+      <div class="header"> {{ (userInfo$ | async).name }} </div>
+      <div class="subheader">
+        <span>{{ (userInfo$ | async).email }}</span>
+        <a (click)="exitAccount()"> Выйти </a>
+      </div>
     </ng-container>
     <ng-container *ngSwitchDefault>
       <div class="header"> Профиль </div>

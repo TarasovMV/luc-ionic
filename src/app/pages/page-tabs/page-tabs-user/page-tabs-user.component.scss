@@ -17,10 +17,16 @@
   }
 
   .subheader {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1.97vh;
     font-size: 1.9vh;
     font-weight: 400;
     color: #222222;
+
+    &__exit {
+
+    }
   }
 
   .page-wrapper {

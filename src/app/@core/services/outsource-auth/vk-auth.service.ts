@@ -16,7 +16,7 @@ export class VkAuthService {
         // redirect_uri: `https://oauth.vk.com/blank.html`,
         response_type: 'token',
         display: 'mobile',
-        scope: '1', // TODO check
+        scope: 'offline', // TODO check
         state: 'vk',
     };
 

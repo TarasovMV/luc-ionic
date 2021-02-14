@@ -31,10 +31,13 @@
     "@ionic-native/web-intent": "^5.31.1",
     "@ionic/angular": "^5.0.0",
     "@ionic/pwa-elements": "^3.0.1",
+    "@ionic/storage": "^2.3.1",
+    "@schematics/angular": "^11.1.4",
     "angular-svg-icon": "^10.0.0",
     "capacitor-plugin-vk-auth": "0.0.3",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
+    "updated": "^2.0.2",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

@@ -1,8 +1,10 @@
+// TODO отнаследовать модель от IPageProductPreviewModel (extends)
 export interface IPageProductModel {
     shopTitle: string;
     shopUrl: string;
-    product: IPageProductPriceModel;
+    product: IPageProductPreviewModel;
     infoList: IPageProductInfoModel[];
+    // isFavorite: boolean; // TODO add references
 }
 
 export interface IPageProductInfoModel {
@@ -10,7 +12,9 @@ export interface IPageProductInfoModel {
     value: string;
 }
 
-export interface IPageProductPriceModel {
+export interface IPageProductPreviewModel {
+    // id: BigInteger; // TODO add references
+    // imageUrl: string; // TODO add references
     brand: string;
     type: string;
     price: number;

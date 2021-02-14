@@ -4,6 +4,7 @@ import {PopupFeedbackComponent} from '../../../../../popups/popup-feedback/popup
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoadingService} from '../../../../../@core/services/loading.service';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
+import {UserInfoService} from "../../../../../@core/services/user-info.service";
 
 @Component({
     selector: 'app-page-tabs-user-screen-login',
@@ -21,6 +22,7 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         private modalController: ModalController,
         private loadingService: LoadingService,
         private apiUserService: ApiUserService,
+        private userService: UserInfoService,
     ) {}
 
     ngOnInit(): void {
@@ -35,7 +37,10 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         }
         const res = await this.apiUserService.userLogin(this.loginForm.value);
         this.loadingService.stopLoading().then();
-        console.log('login status', res);
+        if (!res) {
+            return;
+        }
+        this.userService.setUser(res);
     }
 
     public async openFeedback(): Promise<void> {

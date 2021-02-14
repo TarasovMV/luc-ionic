@@ -1,10 +1,10 @@
 <app-shared-input [formControl]="regForm.get('name')" label="Имя" type="text"></app-shared-input>
-<ng-container *ngIf="checkFieldError('name')">Обязательное поле</ng-container>
+<app-shared-form-error *ngIf="checkFieldError('name')">Обязательное поле</app-shared-form-error>
 <app-shared-input [formControl]="regForm.get('email')" label="Электронная почта" type="email"></app-shared-input>
-<ng-container *ngIf="checkFieldError('email')"> Введите корректный email </ng-container>
+<app-shared-form-error *ngIf="checkFieldError('email')"> Введите корректный email </app-shared-form-error>
 <app-shared-input [formControl]="regForm.get('passwords').get('password')" label="Пароль" type="password"></app-shared-input>
 <app-shared-input [formControl]="regForm.get('passwords').get('repeatPassword')" label="Повторите пароль" type="password"></app-shared-input>
-<ng-container *ngIf="checkFieldError('passwords')"> Пароли не совпадают </ng-container>
+<app-shared-form-error *ngIf="checkFieldError('passwords')"> Пароли не совпадают </app-shared-form-error>
 
 <div class="agree-container" (click)="agreeClick()">
   <app-shared-multiply-checker [isActive]="regForm.get('isPersonalDataAgree').valueChanges | async"></app-shared-multiply-checker>
