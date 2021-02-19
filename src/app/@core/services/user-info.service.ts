@@ -22,6 +22,9 @@ export class UserInfoService {
     }
 
     public setUser(user: IUserInfo): void {
+        if (!user) {
+            return;
+        }
         this.authUser$.next({...user});
         if (!!user?.token) {
             this.storage.set(this.userAuthTokenPath, user?.token).then();

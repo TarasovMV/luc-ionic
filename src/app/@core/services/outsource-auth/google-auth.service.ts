@@ -33,9 +33,14 @@ export class GoogleAuthService {
         console.log(params);
     }
 
-    public async authRequest(): Promise<void> {
+    public async authRequest(): Promise<{email: string, gooleOAuthToken: string}> {
         const googleUser = await Plugins.GoogleAuth.signIn('https://www.googleapis.com/auth/userinfo.profile');
-        console.log('user', JSON.stringify(googleUser));
+        // console.log('user', JSON.stringify(googleUser));
+        console.log('user', googleUser);
+        return {
+            email: googleUser?.email,
+            gooleOAuthToken: googleUser?.authentication?.accessToken,
+        };
 
         // const form = this.createForm();
         // document.body.appendChild(form);

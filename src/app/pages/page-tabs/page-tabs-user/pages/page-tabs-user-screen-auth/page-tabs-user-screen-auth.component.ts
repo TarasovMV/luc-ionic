@@ -3,6 +3,9 @@ import { RxJsUnsubscriber } from '../../../../../@core/abstractions/RxJsUnsubscr
 import {UserInfoService} from '../../../../../@core/services/user-info.service';
 import {takeUntil} from 'rxjs/operators';
 import {FormControl, FormGroup} from '@angular/forms';
+import {MobileShareService} from '../../../../../@core/services/mobile-share.service';
+import {ModalController} from '@ionic/angular';
+import {PopupFeedbackComponent} from '../../../../../popups/popup-feedback/popup-feedback.component';
 
 @Component({
     selector: 'app-page-tabs-user-screen-auth',
@@ -12,7 +15,11 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class PageTabsUserScreenAuthComponent extends RxJsUnsubscriber implements OnInit, OnDestroy {
     public userForm: FormGroup;
 
-    constructor(private userService: UserInfoService) {
+    constructor(
+        private userService: UserInfoService,
+        private shareService: MobileShareService,
+        private modalController: ModalController,
+    ) {
         super();
     }
 
@@ -29,4 +36,22 @@ export class PageTabsUserScreenAuthComponent extends RxJsUnsubscriber implements
         super.ngOnDestroy();
     }
 
+    public share(): void {
+        this.shareService.shareData(
+            'LUC',
+            'Try to use it!'
+        );
+    }
+
+    public async openFeedback(): Promise<void> {
+        await this.presentModalFeedback();
+    }
+
+    private async presentModalFeedback() {
+        const modal = await this.modalController.create({
+            component: PopupFeedbackComponent,
+            componentProps: {email: this.userService.authUser$?.value?.email}
+        });
+        return await modal.present();
+    }
 }

@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoadingService} from '../../../../../@core/services/loading.service';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
 import {UserInfoService} from "../../../../../@core/services/user-info.service";
+import {MobileShareService} from '../../../../../@core/services/mobile-share.service';
 
 @Component({
     selector: 'app-page-tabs-user-screen-login',
@@ -23,6 +24,7 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         private loadingService: LoadingService,
         private apiUserService: ApiUserService,
         private userService: UserInfoService,
+        private shareService: MobileShareService,
     ) {}
 
     ngOnInit(): void {
@@ -41,6 +43,13 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
             return;
         }
         this.userService.setUser(res);
+    }
+
+    public share(): void {
+        this.shareService.shareData(
+            'LUC',
+            'Try to use it!'
+        );
     }
 
     public async openFeedback(): Promise<void> {

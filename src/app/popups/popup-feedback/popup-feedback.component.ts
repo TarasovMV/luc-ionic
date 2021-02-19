@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, ModalController} from '@ionic/angular';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-popup-feedback',
@@ -7,6 +8,11 @@ import {AlertController, ModalController} from '@ionic/angular';
     styleUrls: ['./popup-feedback.component.scss'],
 })
 export class PopupFeedbackComponent implements OnInit {
+    form: FormGroup = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.email]),
+    });
+
+    email: string = '';
 
     constructor(
         private modalCtrl: ModalController,
@@ -14,6 +20,7 @@ export class PopupFeedbackComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.form.get('email').setValue(this.email);
     }
 
     public async close(): Promise<void> {

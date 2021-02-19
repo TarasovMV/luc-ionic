@@ -1,9 +1,11 @@
 import {Subject} from 'rxjs';
-import {OnDestroy} from '@angular/core';
+import {Directive, OnDestroy} from '@angular/core';
 
 /**
  * use for takeUntil(unsubscribe$)
  */
+@Directive()
+// tslint:disable-next-line:directive-class-suffix
 export class RxJsUnsubscriber implements OnDestroy{
     protected unsubscribe$: Subject<void> = new Subject<void>();
 

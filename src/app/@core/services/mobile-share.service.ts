@@ -11,6 +11,13 @@ export class MobileShareService {
     constructor(private platform: Platform) {
     }
 
+    public shareData(title: string, text: string): void {
+        this.share({
+            title,
+            text
+        }).then();
+    }
+
     private async share(options: ShareOptions): Promise<void> {
         if (this.platform.is('android' || 'ios')) {
             const shareRet = await Share.share(options);

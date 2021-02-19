@@ -28,7 +28,7 @@ export class ApiUserService {
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/register`, body).toPromise();
         } catch (e) {
-            console.error('userRegister', e);
+            console.error('userRegister', JSON.stringify(e));
             return null;
         }
     }
@@ -41,7 +41,28 @@ export class ApiUserService {
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth`, body).toPromise();
         } catch (e) {
-            console.error('userRegister', e);
+            console.error('userRegister', JSON.stringify(e));
+            return null;
+        }
+    }
+
+    public async userGoogle(body: {gooleOAuthToken: string, email: string}): Promise<IUserInfo> {
+        try {
+            return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth/google`, body).toPromise();
+        } catch (e) {
+            console.error('userRegister', JSON.stringify(e));
+            return null;
+        }
+    }
+
+    public async userVk(token: string): Promise<IUserInfo> {
+        const body = {
+            vkOAuthToken: token,
+        };
+        try {
+            return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth/vk`, body).toPromise();
+        } catch (e) {
+            console.error('userRegister', JSON.stringify(e));
             return null;
         }
     }
@@ -50,7 +71,7 @@ export class ApiUserService {
         try {
             return await this.http.get<IUserInfo>(`${this.restUrl}/api/User/current`).toPromise();
         } catch (e) {
-            console.error('userCurrent', e);
+            console.error('userRegister', JSON.stringify(e));
             return null;
         }
     }
