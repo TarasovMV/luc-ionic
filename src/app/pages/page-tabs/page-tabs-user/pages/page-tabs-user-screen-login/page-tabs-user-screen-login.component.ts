@@ -4,7 +4,7 @@ import {PopupFeedbackComponent} from '../../../../../popups/popup-feedback/popup
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoadingService} from '../../../../../@core/services/loading.service';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
-import {UserInfoService} from "../../../../../@core/services/user-info.service";
+import {UserInfoService} from '../../../../../@core/services/user-info.service';
 import {MobileShareService} from '../../../../../@core/services/mobile-share.service';
 
 @Component({

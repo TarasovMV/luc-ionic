@@ -52,3 +52,7 @@ ion-skeleton-text {
 .flex-free-space {
   flex-grow: 1;
 }
+
+.action-sheet-group.sc-ion-action-sheet-md:first-child {
+  border-radius: 4.3vw 4.3vw 0 0;
+}

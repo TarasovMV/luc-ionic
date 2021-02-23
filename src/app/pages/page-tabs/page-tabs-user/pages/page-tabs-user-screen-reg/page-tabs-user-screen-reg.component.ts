@@ -44,6 +44,7 @@ export class PageTabsUserScreenRegComponent implements OnInit {
             console.warn('invalid form');
             return;
         }
+        await this.loadingService.startLoading();
         const res = await this.apiUserService.userRegister(this.regForm.value);
         this.loadingService.stopLoading().then();
         console.log('reg status', res);

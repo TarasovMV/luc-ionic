@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-shared-textarea',
@@ -7,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SharedTextareaComponent implements OnInit {
     @Input() label: string = '';
+    @Input() formControl: FormControl;
 
     constructor() {
     }

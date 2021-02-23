@@ -6,6 +6,7 @@ import {KeyboardService} from './@core/services/keyboard.service';
 import {Observable} from 'rxjs';
 import {VkAuthService} from './@core/services/outsource-auth/vk-auth.service';
 import {UserAgentService} from './@core/services/outsource-auth/user-agent.service';
+import {UserInfoService} from "./@core/services/user-info.service";
 
 @Component({
     selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent {
         private statusBarService: StatusBarService,
         private keyboardService: KeyboardService,
         private userAgentService: UserAgentService,
+        private userInfoService: UserInfoService,
     ) {
         this.initializeApp();
     }

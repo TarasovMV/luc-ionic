@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-login.model';
 import {LoggerService} from '../logger.service';
 import {IUserInfo} from '../../../models/user-info.model';
+import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
 
 @Injectable({
     providedIn: 'root'
@@ -73,6 +74,25 @@ export class ApiUserService {
         } catch (e) {
             console.error('userRegister', JSON.stringify(e));
             return null;
+        }
+    }
+
+    public async sendReport(feedback: IFeedback): Promise<boolean> {
+        try {
+            await this.http.post<unknown>(`${this.restUrl}/api/Feedback`, feedback).toPromise();
+            return true;
+        } catch (e) {
+            console.error('sendReport', e);
+            return false;
+        }
+    }
+
+    public async getReportReference(): Promise<IFeedbackTheme[]> {
+        try {
+            return await this.http.get<IFeedbackTheme[]>(`${this.restUrl}/api/Feedback/categories`).toPromise();
+        } catch (e) {
+            console.error('getReportReference', e);
+            return [];
         }
     }
 }

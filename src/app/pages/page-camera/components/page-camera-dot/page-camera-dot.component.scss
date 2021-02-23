@@ -1,0 +1,36 @@
+.circle {
+  display: flex;
+  width: 4.45vh;
+  height: 4.45vh;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: .25vh solid rgba(#FFFFFF, .5);
+  box-sizing: border-box;
+
+  .entry-circle {
+    margin: 0.5vh;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 50%;
+  }
+
+  .entry-check {
+    display: none;
+    margin: .8vh;
+    color: #FFFFFF;
+  }
+
+  &__active {
+    border-color: transparent;
+    background: #45BF78;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
+
+    .entry-circle {
+      display: none;
+    }
+
+    .entry-check {
+      display: block;
+    }
+  }
+}

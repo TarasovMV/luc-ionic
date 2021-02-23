@@ -2,7 +2,13 @@
   <div class="camera-preview" id="camera-preview"></div>
 </ng-template>
 <div class="img-preview" *ngIf="!!(imgSrcObservable | async); else cameraPreview">
-  <ion-img alt="" [src]="imgSrc"></ion-img>
+  <app-page-camera-dot
+    *ngFor="let dot of dotsGroup?.dotsObserver$ | async"
+    [style]="'position: absolute; top:' + dot.position.y + 'px; left: ' + dot.position.x + 'px'"
+    [isActive]="dot.isChosen"
+    (click)="dotsGroup.selectDot(dot)"
+  ></app-page-camera-dot>
+  <ion-img #imgElement alt="" [src]="imgSrc"></ion-img>
 </div>
 
 <div class="container">
@@ -17,7 +23,21 @@
   <div class="flex-free-space"></div>
 
   <div class="buttons-container" *ngIf="!!(imgSrcObservable | async); else buttonsGallery">
-    <div (click)="findPhoto()" class="button-photo ion-activatable ripple-parent">
+    <div *ngIf="(viewType$ | async) === 'search'"
+         (click)="findPhoto()"
+         class="button-photo ion-activatable ripple-parent"
+    >
+      <ion-ripple-effect></ion-ripple-effect>
+      <svg-icon
+        class="button-icon button-icon__search"
+        src="assets/icon/svg/search.svg">
+      </svg-icon>
+    </div>
+    <div *ngIf="(viewType$ | async) === 'choosing'"
+         (click)="findDot()"
+         class="button-photo ion-activatable ripple-parent"
+         [class.button-photo__unactive]="!(dotsGroup?.isValid$ | async)"
+    >
       <ion-ripple-effect></ion-ripple-effect>
       <svg-icon
         class="button-icon button-icon__search"

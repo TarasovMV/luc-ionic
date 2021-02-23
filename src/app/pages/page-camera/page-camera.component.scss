@@ -28,11 +28,11 @@
   height: 100%;
   padding: 7vh 0;
   box-sizing: border-box;
-  z-index: 1; // for web version
 
   .buttons-container {
     display: flex;
     justify-content: space-evenly;
+    z-index: 1; // for web version
 
     .button-photo {
       display: flex;
@@ -41,6 +41,12 @@
       width: 8.7vh;
       border-radius: 50%;
       background: #6B7683;
+      transition: .3s;
+
+      &__unactive {
+        transition: .3s;
+        opacity: .3;
+      }
     }
 
     .button-icon {

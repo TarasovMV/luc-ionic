@@ -1,4 +1,4 @@
 <ion-item class="input-container">
   <ion-label class="label" position="floating"> {{ label }} </ion-label>
-  <ion-textarea auto-grow></ion-textarea>
+  <ion-textarea *ngIf="formControl" [formControl]="formControl" auto-grow></ion-textarea>
 </ion-item>

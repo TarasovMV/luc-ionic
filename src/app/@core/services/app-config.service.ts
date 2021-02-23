@@ -23,6 +23,20 @@ export class AppConfigService {
         return this.appConfig.restUrl;
     }
 
+    public get userUrl(): string {
+        if (!this.appConfig) {
+            throw Error('Config file not loaded!');
+        }
+        return this.appConfig.userUrl;
+    }
+
+    public get recognitionUrl(): string {
+        if (!this.appConfig) {
+            throw Error('Config file not loaded!');
+        }
+        return this.appConfig.recognitionUrl;
+    }
+
     public get locationOrigin(): string {
         return (this.platformLocation as any).location.origin;
     }
