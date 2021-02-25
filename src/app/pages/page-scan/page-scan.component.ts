@@ -6,6 +6,8 @@ import {map} from 'rxjs/operators';
 import {DATA_SOURCE} from './page-scan.mock';
 import {ModalController, NavController} from '@ionic/angular';
 import {SharedFilterComponent} from '../../popups/shared-filter/shared-filter.component';
+import {PageProductComponent} from "../page-product/page-product.component";
+import {RecognitionInfoService} from "../../@core/services/recognition-info.service";
 
 @Component({
     selector: 'app-page-scan',
@@ -13,9 +15,6 @@ import {SharedFilterComponent} from '../../popups/shared-filter/shared-filter.co
     styleUrls: ['./page-scan.component.scss'],
 })
 export class PageScanComponent implements OnInit {
-
-    private readonly nextRouteUrl: string = '/main/product';
-
     private readonly defaultProducts: IPageScanProductModel[] = new Array(6);
 
     private products$: BehaviorSubject<IPageScanProductModel[]> =
@@ -31,18 +30,19 @@ export class PageScanComponent implements OnInit {
         private navCtrl: NavController,
         private location: Location,
         private modalController: ModalController,
+        private recognitionInfoService: RecognitionInfoService,
     ) {
     }
 
     public ngOnInit(): void {
-        setTimeout(() => this.products$.next(DATA_SOURCE.products), 5000);
+        this.getData().then();
     }
 
     public async chooseProduct(product: IPageScanProductModel): Promise<void> {
         if (!product) {
             return;
         }
-        await this.navCtrl.navigateRoot(this.nextRouteUrl);
+        await this.presentModalInfo();
     }
 
     public closePage(): void {
@@ -53,9 +53,22 @@ export class PageScanComponent implements OnInit {
         await this.presentModalFilter();
     }
 
+    private async getData(): Promise<void> {
+        const res = await this.recognitionInfoService.recognitionSaveFunction?.();
+        res?.previews?.forEach(x => x.category = x?.type?.split('/').reverse()[0]);
+        this.products$.next(res?.previews ?? []);
+    }
+
     private async presentModalFilter() {
         const modal = await this.modalController.create({
             component: SharedFilterComponent,
+        });
+        return await modal.present();
+    }
+
+    private async presentModalInfo() {
+        const modal = await this.modalController.create({
+            component: PageProductComponent,
         });
         return await modal.present();
     }

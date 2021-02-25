@@ -1,6 +1,7 @@
 <ng-container *ngIf="!!(dataSourceShared | async); else pageScanProductSkeleton">
   <div class="container">
     <div class="photo">
+      <img class="image" alt="" [src]="(dataSourceShared | async).imageUrl">
     </div>
     <div class="price">
       <ng-container *ngIf="isSaleMode | async; else normalPriceMode">

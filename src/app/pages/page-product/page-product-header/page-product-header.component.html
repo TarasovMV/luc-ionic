@@ -1,7 +1,7 @@
 <div class="header">
   <svg-icon (click)="backClick()" class="icon icon__back" src="assets/icon/svg/back.svg"></svg-icon>
   <span *ngIf="label else skeletonProductHeader" class="header__brand flex-free-space"> {{ label }} </span>
-  <span class="header__spacer"></span>
+  <svg-icon class="icon icon__share" src="assets/icon/svg/share.svg"></svg-icon>
 </div>
 
 <ng-template #skeletonProductHeader>

@@ -5,6 +5,7 @@ import {PageScanProductComponent} from './page-scan-product/page-scan-product.co
 import {SharedModule} from '../../@shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {SharedFilterModule} from '../../popups/shared-filter/shared-filter.module';
+import {PageProductModule} from '../page-product/page-product.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {SharedFilterModule} from '../../popups/shared-filter/shared-filter.modul
         CommonModule,
         SharedModule,
         SharedFilterModule,
+        PageProductModule,
         RouterModule.forChild([{path: '', component: PageScanComponent}]),
     ]
 })

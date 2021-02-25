@@ -7,8 +7,11 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {NavController} from '@ionic/angular';
 import {StatusBarService} from '../../@core/services/status-bar.service';
 import {ApiRecognitionService} from '../../@core/services/api/api-recognition.service';
-import {PageCameraDotGroup} from "./components/page-camera-dot/page-camera-dot-group.class";
-import {LoadingService} from "../../@core/services/loading.service";
+import {PageCameraDotGroup} from './components/page-camera-dot/page-camera-dot-group.class';
+import {LoadingService} from '../../@core/services/loading.service';
+import {dataURLtoFile} from "../../@shared/functions/base64-file.function";
+import {IRecognitionDetected} from "../../models/recognition.model";
+import {RecognitionInfoService} from "../../@core/services/recognition-info.service";
 const {CameraPreview, Camera} = Plugins;
 
 @Component({
@@ -49,12 +52,15 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
         className: 'camera-preview',
     };
 
+    private responseRecognitionData: IRecognitionDetected = null;
+
     constructor(
         private location: Location,
         private navCtrl: NavController,
         private statusBarService: StatusBarService,
         private apiRecognitionService: ApiRecognitionService,
         private loadingService: LoadingService,
+        private recognitionInfoService: RecognitionInfoService,
     ) {}
 
     public ngOnInit(): void {
@@ -110,18 +116,22 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     public async findPhoto(): Promise<void> {
-        console.log('find photo');
         await this.loadingService.startLoading();
-        await this.apiRecognitionService.searchByPhoto(this.imgSrc);
+        const recognitionDetected = await this.apiRecognitionService.searchByPhoto(this.imgSrc);
+        if (!recognitionDetected) {
+            return;
+        }
         await this.loadingService.stopLoading();
         this.viewType$.next('choosing');
-        const imgHtml: HTMLElement = (this.imgElement as any).el;
-        const imgRange = {
-            rangeX: [imgHtml.offsetLeft, imgHtml.offsetLeft + imgHtml.offsetWidth],
-            rangeY: [imgHtml.offsetTop, imgHtml.offsetTop + imgHtml.offsetHeight],
-        };
-        console.log(imgRange);
-        this.dotsGroup = new PageCameraDotGroup();
+        const imgRange = this.getImgRange();
+        const imgDimension = await this.getImageDimensions(this.imgSrc);
+        recognitionDetected.detectedObjects.forEach((x, i) => x.id = i);
+        this.responseRecognitionData = recognitionDetected;
+        this.dotsGroup = new PageCameraDotGroup(
+            recognitionDetected.detectedObjects,
+            imgRange,
+            imgDimension,
+        );
     }
 
     public async findDot(): Promise<void> {
@@ -131,17 +141,39 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
             return;
         }
         console.log('findDot', selectedDot);
+        const resDot = this.responseRecognitionData.detectedObjects.find(x => x.id === selectedDot.id);
+        this.recognitionInfoService.recognitionSaveFunction =
+            async () => await this.apiRecognitionService.searchByDot(this.responseRecognitionData.searchId, resDot);
         await this.navCtrl.navigateRoot(this.nextRouteUrl);
     }
 
     private cancelPhoto(): void {
         this.imgSrc = null;
         this.dotsGroup?.clear();
+        this.viewType$.next('search');
     }
 
     private goToPreviousRoute = (): void => {
         CameraPreview.stop();
         // queueMicrotask for camera stop fix
         queueMicrotask(() => this.location.back());
+    }
+
+    private getImgRange(): { rangeX: number[]; rangeY: number[]; } {
+        const imgHtml: HTMLElement = (this.imgElement as any).el;
+        return {
+            rangeX: [imgHtml.offsetLeft, imgHtml.offsetLeft + imgHtml.offsetWidth],
+            rangeY: [imgHtml.offsetTop, imgHtml.offsetTop + imgHtml.offsetHeight],
+        };
+    }
+
+    private async getImageDimensions(file: string): Promise<{ width: number; height: number; }> {
+        return new Promise ((resolved) => {
+            const i = new Image();
+            i.onload = () => {
+                resolved({width: i.width, height: i.height});
+            };
+            i.src = file;
+        });
     }
 }

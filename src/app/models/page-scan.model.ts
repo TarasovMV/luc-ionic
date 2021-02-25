@@ -4,8 +4,10 @@ export interface IPageScanModel {
 
 export interface IPageScanProductModel {
     id?: number;
+    imageUrl?: string;
     price: number;
     oldPrice?: number;
     brand: string;
     category: string;
+    type?: string;
 }

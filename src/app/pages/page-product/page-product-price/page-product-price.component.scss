@@ -6,10 +6,18 @@
   .title {
 
     &__brand {
+      display: flex;
+      justify-content: space-between;
       font-size: 2.96vh;
       font-weight: 700;
       color: #2F3441;
       margin-bottom: 0.62vh;
+
+      svg-icon {
+        width: 2.46vh;
+        height: 2.46vh;
+        color: #99A0AB;
+      }
     }
 
     &__type {

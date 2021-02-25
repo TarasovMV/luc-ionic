@@ -1,0 +1,9 @@
+<div class="container ion-activatable ripple-parent" [class.container__selected]="isSelected">
+  <ion-ripple-effect></ion-ripple-effect>
+  <div class="selected-wrapper">
+    <div class="selected-circle">
+      <svg-icon src="assets/icon/svg/check.svg"></svg-icon>
+    </div>
+  </div>
+  <img class="image" [ngClass]="'image__' + (!!image ? 'active' : 'disable')" alt="" [src]="image">
+</div>

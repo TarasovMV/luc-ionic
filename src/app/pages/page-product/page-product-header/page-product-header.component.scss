@@ -16,16 +16,16 @@
     color: #222222;
   }
 
-  &__spacer {
-    width: 2.43vh;
-  }
-
   .icon {
     width: 2.43vh;
     height: 2.43vh;
 
     &__back {
       color: #3A83F1;
+    }
+
+    &__share {
+      color: #99A0AB;;
     }
   }
 }

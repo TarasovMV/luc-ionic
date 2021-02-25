@@ -11,6 +11,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/page-user-init/page-user-init.module').then(m => m.PageUserInitModule)
     },
     {
+        path: 'pre_favorites',
+        loadChildren: () => import('./pages/page-prefavorites/page-prefavorites.module').then(m => m.PagePrefavoritesModule)
+    },
+    {
         path: 'main',
         loadChildren: () => import('./main/main.module').then(m => m.MainModule),
     },

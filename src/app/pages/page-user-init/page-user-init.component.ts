@@ -9,7 +9,7 @@ import {NavController} from '@ionic/angular';
 })
 export class PageUserInitComponent implements OnInit {
 
-    private readonly nextRouteUrl: string = '/main';
+    private readonly nextRouteUrl: string = '/pre_favorites';
 
     constructor(private navCtrl: NavController) {
     }

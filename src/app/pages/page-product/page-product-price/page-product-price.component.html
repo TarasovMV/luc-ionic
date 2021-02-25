@@ -1,5 +1,8 @@
 <div class="titles-container" *ngIf="data; else skeletonProductPrice">
-  <div class="title__brand"> {{ data?.brand || 'Brand' }} </div>
+  <div class="title__brand">
+    <span> {{ data?.brand || 'Brand' }} </span>
+    <svg-icon src="assets/icon/svg/like.svg"></svg-icon>
+  </div>
   <div class="title__type"> {{ data?.type || '---' }} </div>
   <div class="title__price">
     <ng-container *ngIf="data?.oldPrice; else productPriceNormal">
