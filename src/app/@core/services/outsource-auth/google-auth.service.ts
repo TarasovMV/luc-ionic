@@ -34,9 +34,11 @@ export class GoogleAuthService {
     }
 
     public async authRequest(): Promise<{email: string, gooleOAuthToken: string}> {
-        const googleUser = await Plugins.GoogleAuth.signIn('https://www.googleapis.com/auth/userinfo.profile');
-        // console.log('user', JSON.stringify(googleUser));
-        console.log('user', googleUser);
+        // const googleUser = await Plugins.GoogleAuth.signIn('https://www.googleapis.com/auth/userinfo.profile');
+        const googleUser = await Plugins.GoogleAuth.signIn();
+        console.log('user', JSON.stringify(googleUser));
+        const credential = auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+        // console.log('user', googleUser);
         return {
             email: googleUser?.email,
             gooleOAuthToken: googleUser?.authentication?.accessToken,
