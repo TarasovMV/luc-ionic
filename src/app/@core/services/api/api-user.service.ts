@@ -47,7 +47,7 @@ export class ApiUserService {
         }
     }
 
-    public async userGoogle(body: {gooleOAuthToken: string, email: string}): Promise<IUserInfo> {
+    public async userGoogle(body: {googleOAuthToken: string, email: string}): Promise<IUserInfo> {
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth/google`, body).toPromise();
         } catch (e) {

@@ -1,7 +1,7 @@
 import {IPageCameraDot} from '../../../../models/page-camera.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {IRecognitionDetectedObject} from "../../../../models/recognition.model";
+import {IRecognitionDetectedObject} from '../../../../models/recognition.model';
 
 export class PageCameraDotGroup {
     private dots$: BehaviorSubject<IPageCameraDot[]> = new BehaviorSubject<IPageCameraDot[]>([]);
@@ -55,7 +55,7 @@ export class PageCameraDotGroup {
             ?.map(d => ({
                 id: d.id,
                 x: center(d.area.lowerLeftCorner.x, d.area.upperRightCorner.x),
-                y: imgDimension.height - center(d.area.lowerLeftCorner.y, d.area.upperRightCorner.y),
+                y: center(d.area.lowerLeftCorner.y, d.area.upperRightCorner.y),
             }))
             ?.filter(d => d.x >= 0 && d.x <= imgDimension.width && d.y >= 0 && d.y <= imgDimension.height)
             ?.map(d => ({

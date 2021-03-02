@@ -33,28 +33,24 @@ export class GoogleAuthService {
         console.log(params);
     }
 
-    public async authRequest(): Promise<{email: string, gooleOAuthToken: string}> {
+    public async authRequest(): Promise<{email: string, googleOAuthToken: string}> {
         // const googleUser = await Plugins.GoogleAuth.signIn('https://www.googleapis.com/auth/userinfo.profile');
         const googleUser = await Plugins.GoogleAuth.signIn();
         console.log('user', JSON.stringify(googleUser));
-        const credential = auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
-        // console.log('user', googleUser);
         return {
             email: googleUser?.email,
-            gooleOAuthToken: googleUser?.authentication?.accessToken,
+            googleOAuthToken: googleUser?.authentication?.accessToken,
         };
 
         // const form = this.createForm();
         // document.body.appendChild(form);
         // form.submit();
-
         // TODO: cors block short variant
         // let uri = this.oauth2Endpoint;
         // uri += Object.keys(this.oauth2Params).reduce(
         //     (acc = '', next) => `${acc}${acc ? '&' : '?'}${next}=${this.oauth2Params[next]}`,
         //     '',
         // );
-        // console.log(uri);
         // location.href = uri;
     }
 

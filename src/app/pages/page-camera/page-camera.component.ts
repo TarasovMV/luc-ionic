@@ -83,7 +83,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
         this.subscriptions.forEach((s) => s.unsubscribe());
         this.imgSrc = null;
         CameraPreview.stop();
-        this.statusBarService.setDefault().then();
+        await this.statusBarService.setDefault();
     }
 
     public switchCamera(): void {

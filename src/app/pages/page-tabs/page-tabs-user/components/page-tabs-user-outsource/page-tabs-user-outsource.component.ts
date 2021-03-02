@@ -27,8 +27,7 @@ export class PageTabsUserOutsourceComponent implements OnInit {
 
     public async googleAuth(): Promise<void> {
         const googleData = await this.googleAuthService.authRequest();
-        console.log('googleData', googleData);
-        if (!googleData?.gooleOAuthToken || !googleData?.email) {
+        if (!googleData?.googleOAuthToken || !googleData?.email) {
             return;
         }
         const user = await this.apiUserService.userGoogle(googleData);
