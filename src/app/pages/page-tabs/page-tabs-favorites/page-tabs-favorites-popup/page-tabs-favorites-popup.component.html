@@ -1,8 +1,8 @@
 <div (click)="switchVisible()" class="container">
-  <img class="image" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4cXilLqWd8tskKFoG040zVnSymkScPPq_OQ&usqp=CAU">
+  <img class="image" alt="" [src]="imgSrc">
   <div class="ui-wrapper" [@enterTrigger] *ngIf="isInterface$ | async">
     <div class="buttons-container">
-      <div (click)="close()" class="small-icon-container">
+      <div (click)="close($event)" class="small-icon-container">
         <svg-icon class="icon" [src]="'assets/icon/svg/back.svg'"></svg-icon>
       </div>
       <div class="small-icon-container">
@@ -10,14 +10,14 @@
       </div>
     </div>
     <div class="buttons-container buttons-container__big">
-      <ng-container *ngTemplateOutlet="circleButton; context:{src: 'share'}"></ng-container>
-      <ng-container *ngTemplateOutlet="circleButton context:{src: 'search'}"></ng-container>
+      <ng-container *ngTemplateOutlet="circleButton; context:{src: 'share', event: search.bind(this)}"></ng-container>
+      <ng-container *ngTemplateOutlet="circleButton context:{src: 'search', event: search.bind(this)}"></ng-container>
     </div>
   </div>
 </div>
 
-<ng-template #circleButton let-src="src">
-  <div class="circle-button ion-activatable ripple-parent">
+<ng-template #circleButton let-src="src" let-event="event">
+  <div (click)="event($event)" class="circle-button ion-activatable ripple-parent">
     <ion-ripple-effect></ion-ripple-effect>
     <div class="icon-container">
       <svg-icon class="icon" [src]="'assets/icon/svg/' + src + '.svg'"></svg-icon>

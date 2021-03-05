@@ -11,3 +11,23 @@ export function dataURLtoFile(dataUrl: string, filename: string = 'default'): Fi
 
     return new File([u8arr], filename, {type: mime});
 }
+
+export async function urlToDataUrl(imageUrl: string): Promise<string> {
+    const proxy = 'https://api.codetabs.com/v1/proxy?quest=';
+    let res;
+    try {
+        res = await fetch(imageUrl);
+    } catch (e) {
+        res = await fetch(proxy + imageUrl);
+    }
+    const blob = await res.blob();
+    console.log(res);
+
+    return new Promise((resolve, reject) => {
+        const reader: FileReader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result as string);
+        };
+        reader.readAsDataURL(blob);
+    });
+}

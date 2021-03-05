@@ -9,9 +9,9 @@ import {StatusBarService} from '../../@core/services/platform/status-bar.service
 import {ApiRecognitionService} from '../../@core/services/api/api-recognition.service';
 import {PageCameraDotGroup} from './components/page-camera-dot/page-camera-dot-group.class';
 import {LoadingService} from '../../@core/services/loading.service';
-import {dataURLtoFile} from "../../@shared/functions/base64-file.function";
-import {IRecognitionDetected} from "../../models/recognition.model";
-import {RecognitionInfoService} from "../../@core/services/recognition-info.service";
+import {IRecognitionDetected} from '../../models/recognition.model';
+import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
+import {ActivatedRoute} from '@angular/router';
 const {CameraPreview, Camera} = Plugins;
 
 @Component({
@@ -39,9 +39,11 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
 
     public dotsGroup: PageCameraDotGroup;
 
+    private isSrcWithImage: boolean = false;
+
     private subscriptions: Subscription[] = [];
 
-    private options: CameraPreviewOptions = {
+    private readonly options: CameraPreviewOptions = {
         x: 0,
         y: 0,
         width: window.screen.width,
@@ -55,6 +57,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     private responseRecognitionData: IRecognitionDetected = null;
 
     constructor(
+        private activeRoute: ActivatedRoute,
         private location: Location,
         private navCtrl: NavController,
         private statusBarService: StatusBarService,
@@ -68,6 +71,11 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     public ngAfterViewInit(): void {
+        const img = this.activeRoute.snapshot.queryParamMap.get('img');
+        if (img) {
+            this.imgSrc = img;
+            this.isSrcWithImage = true;
+        }
         this.subscriptions.push(
             this.imgSrcObservable.subscribe((ref) => {
                 if (!!ref) {
@@ -108,7 +116,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     public clickClose(): void {
-        if (!!this.imgSrc) {
+        if (!!this.imgSrc && !this.isSrcWithImage) {
             this.cancelPhoto();
         } else {
             this.goToPreviousRoute();
@@ -140,11 +148,10 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
             console.warn('findDot', 'there`re not selected dots');
             return;
         }
-        console.log('findDot', selectedDot);
         const resDot = this.responseRecognitionData.detectedObjects.find(x => x.id === selectedDot.id);
         this.recognitionInfoService.recognitionSaveFunction =
             async () => await this.apiRecognitionService.searchByDot(this.responseRecognitionData.searchId, resDot);
-        await this.navCtrl.navigateRoot(this.nextRouteUrl);
+        await this.navCtrl.navigateForward(this.nextRouteUrl);
     }
 
     private cancelPhoto(): void {
@@ -154,7 +161,6 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     private goToPreviousRoute = (): void => {
-        CameraPreview.stop();
         // queueMicrotask for camera stop fix
         queueMicrotask(() => this.location.back());
     }

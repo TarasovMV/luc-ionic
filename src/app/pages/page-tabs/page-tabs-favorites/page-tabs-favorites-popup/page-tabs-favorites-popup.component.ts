@@ -1,7 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ModalController, NavController} from '@ionic/angular';
 import {BehaviorSubject} from 'rxjs';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {urlToDataUrl} from '../../../../@shared/functions/base64-file.function';
+import {StatusBarService} from '../../../../@core/services/platform/status-bar.service';
 
 @Component({
     selector: 'app-page-tabs-favorites-popup',
@@ -23,10 +25,17 @@ import {animate, style, transition, trigger} from '@angular/animations';
 })
 export class PageTabsFavoritesPopupComponent implements OnInit {
 
+    private readonly nextRouteUrl = '/main/camera';
+    // TODO: add getting src
+    public readonly imgSrc: string =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4cXilLqWd8tskKFoG040zVnSymkScPPq_OQ&usqp=CAU';
     public isInterface$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-    constructor(private modalController: ModalController) {
-    }
+    constructor(
+        private statusBarService: StatusBarService,
+        private modalController: ModalController,
+        private navCtrl: NavController,
+    ) {}
 
     ngOnInit(): void {
     }
@@ -35,7 +44,20 @@ export class PageTabsFavoritesPopupComponent implements OnInit {
         this.isInterface$.next(!this.isInterface$.value);
     }
 
-    public async close(): Promise<void> {
+    public async close(event: MouseEvent): Promise<void> {
+        event.stopPropagation();
+        await this.closeModal();
+    }
+
+    public async search(event: MouseEvent): Promise<void> {
+        event.stopPropagation();
+        const img = await urlToDataUrl(this.imgSrc);
+        await this.navCtrl.navigateForward(this.nextRouteUrl, {queryParams: { img }});
+        await this.closeModal();
+    }
+
+    private async closeModal(): Promise<void> {
+        await this.statusBarService.setDefault();
         await this.modalController.dismiss();
     }
 }
