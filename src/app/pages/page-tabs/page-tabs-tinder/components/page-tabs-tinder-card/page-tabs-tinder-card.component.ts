@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {NavController} from '@ionic/angular';
 import {urlToDataUrl} from '../../../../../@shared/functions/base64-file.function';
-import {LoadingService} from "../../../../../@core/services/loading.service";
+import {LoadingService} from '../../../../../@core/services/loading.service';
 
 @Component({
     selector: 'app-page-tabs-tinder-card',

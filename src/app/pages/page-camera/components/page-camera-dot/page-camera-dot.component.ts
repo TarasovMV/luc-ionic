@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'app-page-camera-dot',
@@ -8,6 +8,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 })
 export class PageCameraDotComponent implements OnInit {
     @Input() isActive: boolean = false;
+    @Output() selectDot: EventEmitter<unknown> = new EventEmitter<unknown>();
 
     constructor() {
     }

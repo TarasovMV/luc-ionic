@@ -4,9 +4,9 @@
 <div class="img-preview" *ngIf="!!(imgSrcObservable | async); else cameraPreview">
   <app-page-camera-dot
     *ngFor="let dot of dotsGroup?.dotsObserver$ | async"
-    [style]="'position: absolute; top:' + dot.position.y + 'px; left: ' + dot.position.x + 'px'"
+    [style]="'pointer-events: none; position: absolute; top:' + dot.position.y + 'px; left: ' + dot.position.x + 'px'"
     [isActive]="dot.isChosen"
-    (click)="dotsGroup.selectDot(dot)"
+    (selectDot)="dotsGroup.selectDot(dot)"
   ></app-page-camera-dot>
   <ion-img #imgElement alt="" [src]="imgSrc"></ion-img>
 </div>
