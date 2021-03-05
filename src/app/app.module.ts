@@ -13,7 +13,7 @@ import {SharedModule} from './@shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {VKAuthWeb} from 'capacitor-plugin-vk-auth';
 import {IonicStorageModule} from '@ionic/storage';
-import {AppConfigService} from "./@core/services/app-config.service";
+import {AppConfigService} from "./@core/services/platform/app-config.service";
 // import {LocationStrategy} from '@angular/common';
 
 @NgModule({

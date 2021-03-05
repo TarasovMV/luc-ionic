@@ -5,7 +5,7 @@ import {CameraPreviewOptions} from '@capacitor-community/camera-preview';
 import {CameraResultType, CameraSource} from '@capacitor/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {NavController} from '@ionic/angular';
-import {StatusBarService} from '../../@core/services/status-bar.service';
+import {StatusBarService} from '../../@core/services/platform/status-bar.service';
 import {ApiRecognitionService} from '../../@core/services/api/api-recognition.service';
 import {PageCameraDotGroup} from './components/page-camera-dot/page-camera-dot-group.class';
 import {LoadingService} from '../../@core/services/loading.service';

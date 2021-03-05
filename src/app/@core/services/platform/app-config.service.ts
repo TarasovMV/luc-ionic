@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IAppConfig} from '../models/config.model';
+import {IAppConfig} from '../../models/config.model';
 import {PlatformLocation} from '@angular/common';
 
 @Injectable({

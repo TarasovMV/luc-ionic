@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppConfigService} from '../app-config.service';
+import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {dataURLtoFile} from '../../../@shared/functions/base64-file.function';
 import {IRecognitionDetected, IRecognitionDetectedObject, IRecognitionResult} from "../../../models/recognition.model";

@@ -1,8 +1,8 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBarService} from './@core/services/status-bar.service';
-import {KeyboardService} from './@core/services/keyboard.service';
+import {StatusBarService} from './@core/services/platform/status-bar.service';
+import {KeyboardService} from './@core/services/platform/keyboard.service';
 import {Observable} from 'rxjs';
 import {VkAuthService} from './@core/services/outsource-auth/vk-auth.service';
 import {UserAgentService} from './@core/services/outsource-auth/user-agent.service';

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {AppConfigService} from '../app-config.service';
+import {AppConfigService} from '../platform/app-config.service';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 

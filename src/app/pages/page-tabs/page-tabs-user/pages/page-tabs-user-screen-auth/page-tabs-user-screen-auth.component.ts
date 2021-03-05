@@ -3,7 +3,7 @@ import { RxJsUnsubscriber } from '../../../../../@core/abstractions/RxJsUnsubscr
 import {UserInfoService} from '../../../../../@core/services/user-info.service';
 import {takeUntil} from 'rxjs/operators';
 import {FormControl, FormGroup} from '@angular/forms';
-import {MobileShareService} from '../../../../../@core/services/mobile-share.service';
+import {MobileShareService} from '../../../../../@core/services/platform/mobile-share.service';
 import {ModalController} from '@ionic/angular';
 import {PopupFeedbackComponent} from '../../../../../popups/popup-feedback/popup-feedback.component';
 

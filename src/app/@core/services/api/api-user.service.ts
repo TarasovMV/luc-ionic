@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppConfigService} from '../app-config.service';
+import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-login.model';
 import {LoggerService} from '../logger.service';

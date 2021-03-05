@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AppConfigService} from './services/app-config.service';
+import {AppConfigService} from './services/platform/app-config.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserAgent} from '@ionic-native/user-agent/ngx';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
