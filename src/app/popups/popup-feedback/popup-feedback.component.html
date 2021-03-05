@@ -7,7 +7,7 @@
   <app-shared-textarea [formControl]="form.get('message')" label="Ваше сообщение"></app-shared-textarea>
   <app-shared-form-error *ngIf="!form.valid && form.dirty"> Заполните все поля формы </app-shared-form-error>
   <div class="flex-free-space"></div>
-  <app-shared-button (click)="send()" type="main" style="width: 100%">
+  <app-shared-button (click)="send()" type="alternative" style="width: 100%">
     Отправить сообщение
   </app-shared-button>
 </div>

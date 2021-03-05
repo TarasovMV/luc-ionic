@@ -6,13 +6,23 @@ button {
 }
 
 .main {
+  background: #2CB172;
+  color: #FFFFFF;
+}
+
+.main-sub {
+  color: #2CB172;
+  background: none;
+}
+
+.alternative {
   background: #41485D;
   color: #FFFFFF;
 }
 
-.sub {
-  background: #EAEDF5;
-  color: #2F3441;
+.alternative-sub {
+  color: #6B7683;
+  background: none;
 }
 
 .skeleton {

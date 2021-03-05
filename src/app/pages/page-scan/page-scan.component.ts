@@ -36,6 +36,7 @@ export class PageScanComponent implements OnInit {
 
     public ngOnInit(): void {
         this.getData().then();
+        this.presentModalInfo();
     }
 
     public async chooseProduct(product: IPageScanProductModel): Promise<void> {

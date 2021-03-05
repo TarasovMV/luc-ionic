@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 })
 export class SharedButtonComponent implements OnInit {
 
-    @Input() type: 'main' | 'sub' | 'skeleton' = 'main';
+    @Input() type: 'main' | 'main-sub' | 'skeleton' | 'alternative' = 'main';
 
     constructor() {
     }
