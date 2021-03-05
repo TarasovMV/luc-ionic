@@ -1,5 +1,5 @@
 <div class="container">
-  <ion-router-outlet class="page-wrapper"></ion-router-outlet>
+  <ion-router-outlet  (activate)="routing($event)" class="page-wrapper"></ion-router-outlet>
   <div class="footer">
     <svg-icon *ngFor="let tab of tabs"
               class="tab-icon"

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
 import {IPageProductModel} from '../../models/page-product.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {DATA_SOURCE} from './page-product.mock';
-import {ModalController} from "@ionic/angular";
+import {ModalController} from '@ionic/angular';
 
 @Component({
     selector: 'app-page-product',
@@ -20,7 +19,7 @@ export class PageProductComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        setTimeout(() => this.data.next(DATA_SOURCE), 3000);
+        setTimeout(() => this.data.next(DATA_SOURCE), 2000);
     }
 
     public async closePage(): Promise<void> {

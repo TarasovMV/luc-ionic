@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
+import {IPageTab, PageTabType} from '../../models/page-tab.model';
 
 @Component({
     selector: 'app-page-tabs',
@@ -8,8 +9,14 @@ import {NavController} from '@ionic/angular';
 })
 export class PageTabsComponent implements OnInit {
 
-    public readonly tabs: string[] = ['search', 'blocks', 'like', 'user'];
-    public currentTab: string = 'search';
+    public readonly tabs: PageTabType[] = ['search', 'blocks', 'like', 'user'];
+    private readonly tabsRouting: {[key in PageTabType]: string} = {
+        search: 'main/tabs/main',
+        blocks: 'main/tabs/tinder',
+        like: 'main/tabs/favorites',
+        user: 'main/tabs/user',
+    };
+    public currentTab: PageTabType = 'search';
 
     constructor(private navCtrl: NavController) {
     }
@@ -17,23 +24,11 @@ export class PageTabsComponent implements OnInit {
     public ngOnInit(): void {
     }
 
-    public selectTab(tab: string): void {
-        this.currentTab = tab;
-        switch (tab) {
-            case 'search':
-                this.navCtrl.navigateRoot('main/tabs/main').then();
-                break;
-            case 'blocks':
-                this.navCtrl.navigateRoot('main/tabs/tinder').then();
-                break;
-            case 'like':
-                this.navCtrl.navigateRoot('main/tabs/favorites').then();
-                break;
-            case 'user':
-                this.navCtrl.navigateRoot('main/tabs/user').then();
-                break;
-            default:
-                break;
-        }
+    public selectTab(tab: PageTabType): void {
+        this.navCtrl.navigateRoot(this.tabsRouting[tab] ?? this.tabsRouting[this.currentTab]).then();
+    }
+
+    routing(event: IPageTab): void {
+        this.currentTab = event?.tabName;
     }
 }

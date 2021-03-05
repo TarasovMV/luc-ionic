@@ -1,6 +1,7 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GestureController, Platform} from '@ionic/angular';
 import {BehaviorSubject} from 'rxjs';
+import {IPageTab, PageTabType} from '../../../models/page-tab.model';
 
 @Component({
     selector: 'app-page-tabs-tinder',
@@ -8,7 +9,8 @@ import {BehaviorSubject} from 'rxjs';
     styleUrls: ['./page-tabs-tinder.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageTabsTinderComponent implements OnInit, AfterViewInit {
+export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit {
+    readonly tabName: PageTabType = 'blocks';
 
     @ViewChild('tinderCard') tinderCard: ElementRef;
 

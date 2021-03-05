@@ -5,13 +5,15 @@ import {UserInfoService} from '../../../@core/services/user-info.service';
 import {RxJsUnsubscriber} from '../../../@core/abstractions/RxJsUnsubscriber';
 import {takeUntil} from 'rxjs/operators';
 import {IUserInfo} from '../../../models/user-info.model';
+import {IPageTab, PageTabType} from '../../../models/page-tab.model';
 
 @Component({
     selector: 'app-page-tabs-user',
     templateUrl: './page-tabs-user.component.html',
     styleUrls: ['./page-tabs-user.component.scss'],
 })
-export class PageTabsUserComponent extends RxJsUnsubscriber implements OnInit, OnDestroy {
+export class PageTabsUserComponent extends RxJsUnsubscriber implements OnInit, OnDestroy, IPageTab {
+    readonly tabName: PageTabType = 'user';
 
     public userInfo$: Observable<IUserInfo> = this.userService.authUser$.asObservable();
     public pageType$: BehaviorSubject<PageTypeAuthenticate> = new BehaviorSubject<PageTypeAuthenticate>('auth');
