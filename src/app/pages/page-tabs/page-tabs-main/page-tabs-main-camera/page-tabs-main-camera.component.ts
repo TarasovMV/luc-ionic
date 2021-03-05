@@ -11,7 +11,7 @@ export class PageTabsMainCameraComponent implements OnInit {
     constructor(private navCtrl: NavController) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
 
     public async clickCamera(): Promise<void> {

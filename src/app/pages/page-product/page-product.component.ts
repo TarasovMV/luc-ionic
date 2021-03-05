@@ -16,8 +16,7 @@ export class PageProductComponent implements OnInit {
     public sharedData: Observable<IPageProductModel> = this.data.asObservable();
 
     constructor(
-        private location: Location,
-        private modalCtrl: ModalController,
+        public modalCtrl: ModalController,
     ) {}
 
     public ngOnInit(): void {

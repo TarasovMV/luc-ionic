@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ModalController, NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-page-product-buttons',
@@ -8,12 +9,21 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 })
 export class PageProductButtonsComponent implements OnInit {
 
+    private readonly mainScreenUrl: string = '/main';
     @Input() shopUrl: string = null;
+    @Input() modalController: ModalController = null;
 
-    constructor() {
+    constructor(
+        private navCtrl: NavController
+    ) {
     }
 
     public ngOnInit(): void {
+    }
+
+    public async goToMainScreen(): Promise<void> {
+        await this.navCtrl.navigateRoot(this.mainScreenUrl);
+        await this.modalController?.dismiss();
     }
 
 }
