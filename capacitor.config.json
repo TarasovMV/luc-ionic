@@ -1,6 +1,6 @@
 {
   "appId": "com.luc.app",
-  "appName": "luc-ionic",
+  "appName": "LUC",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

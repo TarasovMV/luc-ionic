@@ -39,7 +39,7 @@ export class GoogleAuthService {
         console.log('user', JSON.stringify(googleUser));
         return {
             email: googleUser?.email,
-            googleOAuthToken: googleUser?.authentication?.accessToken,
+            googleOAuthToken: googleUser?.authentication?.idToken,
         };
 
         // const form = this.createForm();

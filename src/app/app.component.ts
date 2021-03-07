@@ -14,7 +14,7 @@ import {UserInfoService} from "./@core/services/user-info.service";
     styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-    @ViewChild('appWindow', {static: true}) appWindow: ElementRef;
+    @ViewChild('appWindow', {static: true}) private appWindow: ElementRef;
     public height$: Observable<number>;
 
     constructor(

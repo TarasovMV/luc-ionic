@@ -1,14 +1,38 @@
-<div class="container">
-  <div class="header"> Избранное </div>
-  <div class="subheader"> Ваша персональная коллекция </div>
-  <div class="content-wrapper">
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-    <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-  </div>
+
+
+
+  <div class="container">
+    <div class="header"> Избранное </div>
+    <div class="subheader"> Ваша персональная коллекция </div>
+    <ion-content>
+      <ion-refresher #refresher slot="fixed" style="z-index: 999" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <div class="content-wrapper">
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
+      </div>
+    </ion-content>
 </div>
+

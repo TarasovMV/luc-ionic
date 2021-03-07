@@ -27,4 +27,10 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
         });
         return await modal.present();
     }
+
+    doRefresh(event): void {
+        setTimeout(() => {
+            event.srcElement.complete();
+        }, 1000);
+    }
 }

@@ -24,13 +24,21 @@
 
   .content-wrapper {
     display: flex;
+    height: 100%;
     flex-wrap: wrap;
     row-gap: 4vw;
     column-gap: 4vw;
+    overflow: auto;
 
     .item {
       width: 27.6vw;
       height: 34.13vw;
     }
   }
+}
+
+ion-content {
+  flex-grow: 1;
+  overflow: hidden;
+  --overflow: hidden;
 }
