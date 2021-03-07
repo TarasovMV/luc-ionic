@@ -32,12 +32,7 @@ export class VkAuthService {
     public async authRequestPlugin(): Promise<string> {
         const VKAuth: VKAuthWeb = Plugins.VKAuth as VKAuthWeb;
         const init = await VKAuth.initWithId({ id: '7731427' });
-        // console.log('init', JSON.stringify(init));
         const scope = await VKAuth.auth({ scope: ['offline'] });
-        // console.log('scope', JSON.stringify(scope));
-        // VKAuth.addListener('vkAuthFinished', (info) => {
-        //     console.log('vkAuthFinished was fired', JSON.stringify(info, null, 2));
-        // });
 
         return new Promise((resolve, reject) => {
             VKAuth.addListener('vkAuthFinished', (info) => {

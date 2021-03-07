@@ -35,12 +35,12 @@ export class PageTabsUserOutsourceComponent implements OnInit {
     }
 
     public async vkAuth(): Promise<void> {
-        // this.vkAuthService.authRequest();
         const token = await this.vkAuthService.authRequestPlugin();
         if (!token) {
             return;
         }
-        await this.apiUserService.userVk(token);
+        const user = await this.apiUserService.userVk(token);
+        this.userService.setUser(user);
     }
 
     private snapshotMapping(): void {
