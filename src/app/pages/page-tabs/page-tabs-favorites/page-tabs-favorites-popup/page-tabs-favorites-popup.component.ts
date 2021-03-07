@@ -46,18 +46,19 @@ export class PageTabsFavoritesPopupComponent implements OnInit {
 
     public async close(event: MouseEvent): Promise<void> {
         event.stopPropagation();
+        await this.statusBarService.setDefault();
         await this.closeModal();
     }
 
     public async search(event: MouseEvent): Promise<void> {
         event.stopPropagation();
         const img = await urlToDataUrl(this.imgSrc);
+        await this.statusBarService.setDefault();
         await this.navCtrl.navigateForward(this.nextRouteUrl, {queryParams: { img }});
         await this.closeModal();
     }
 
     private async closeModal(): Promise<void> {
-        await this.statusBarService.setDefault();
         await this.modalController.dismiss();
     }
 }
