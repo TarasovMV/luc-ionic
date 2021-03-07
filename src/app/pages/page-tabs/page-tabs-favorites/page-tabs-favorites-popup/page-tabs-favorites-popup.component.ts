@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ModalController, NavController} from '@ionic/angular';
 import {BehaviorSubject} from 'rxjs';
 import {animate, style, transition, trigger} from '@angular/animations';
@@ -23,13 +23,15 @@ import {StatusBarService} from '../../../../@core/services/platform/status-bar.s
         ])
     ],
 })
-export class PageTabsFavoritesPopupComponent implements OnInit {
+export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
 
     private readonly nextRouteUrl = '/main/camera';
     // TODO: add getting src
     public readonly imgSrc: string =
         'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4cXilLqWd8tskKFoG040zVnSymkScPPq_OQ&usqp=CAU';
     public isInterface$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+    private isSetDefault: boolean = true;
 
     constructor(
         private statusBarService: StatusBarService,
@@ -38,6 +40,14 @@ export class PageTabsFavoritesPopupComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.statusBarService.hide().then();
+    }
+
+    async ngOnDestroy(): Promise<void> {
+        if (!this.isSetDefault) {
+            return;
+        }
+        await this.statusBarService.setDefault();
     }
 
     public switchVisible(): void {
@@ -46,14 +56,13 @@ export class PageTabsFavoritesPopupComponent implements OnInit {
 
     public async close(event: MouseEvent): Promise<void> {
         event.stopPropagation();
-        await this.statusBarService.setDefault();
         await this.closeModal();
     }
 
     public async search(event: MouseEvent): Promise<void> {
         event.stopPropagation();
         const img = await urlToDataUrl(this.imgSrc);
-        await this.statusBarService.setDefault();
+        this.isSetDefault = false;
         await this.navCtrl.navigateForward(this.nextRouteUrl, {queryParams: { img }});
         await this.closeModal();
     }
