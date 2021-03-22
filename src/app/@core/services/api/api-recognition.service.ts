@@ -3,6 +3,7 @@ import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {dataURLtoFile} from '../../../@shared/functions/base64-file.function';
 import {IRecognitionDetected, IRecognitionDetectedObject, IRecognitionResult} from "../../../models/recognition.model";
+import {IPageProductModel} from "../../../models/page-product.model";
 
 @Injectable({
     providedIn: 'root'
@@ -34,6 +35,26 @@ export class ApiRecognitionService {
             return await this.http.post<IRecognitionResult>(`${this.restUrl}/api/Reco/search/${searchId}`, dot).toPromise();
         } catch (e) {
             console.error('searchByDot', e);
+            return null;
+        }
+    }
+
+    public async searchByText(search: string): Promise<any> {
+        try {
+            return await this.http.get<IRecognitionResult>(`${this.restUrl}/api/Text?query=${search}`).toPromise();
+        } catch (e) {
+            console.error('searchByText', e);
+            return null;
+        }
+    }
+
+    public async getFullItem(id: number): Promise<IPageProductModel> {
+        try {
+            const url = `${this.restUrl} /api/Reco/feed/${id}`;
+            console.log(url);
+            return await this.http.get<IPageProductModel>(`${this.restUrl}/api/Reco/feed/${id}`).toPromise();
+        } catch (e) {
+            console.error('getFullItem', e);
             return null;
         }
     }

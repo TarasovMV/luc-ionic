@@ -3,11 +3,11 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {IPageScanProductModel} from '../../models/page-scan.model';
 import {Location} from '@angular/common';
 import {map} from 'rxjs/operators';
-import {DATA_SOURCE} from './page-scan.mock';
 import {ModalController, NavController} from '@ionic/angular';
 import {SharedFilterComponent} from '../../popups/shared-filter/shared-filter.component';
-import {PageProductComponent} from "../page-product/page-product.component";
-import {RecognitionInfoService} from "../../@core/services/recognition-info.service";
+import {PageProductComponent} from '../page-product/page-product.component';
+import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
+import {ApiRecognitionService} from "../../@core/services/api/api-recognition.service";
 
 @Component({
     selector: 'app-page-scan',
@@ -31,6 +31,7 @@ export class PageScanComponent implements OnInit {
         private location: Location,
         private modalController: ModalController,
         private recognitionInfoService: RecognitionInfoService,
+        private apiRecognitionService: ApiRecognitionService,
     ) {
     }
 
@@ -42,6 +43,7 @@ export class PageScanComponent implements OnInit {
         if (!product) {
             return;
         }
+        this.recognitionInfoService.recognitionFeedFunction = () => this.apiRecognitionService.getFullItem(product.id);
         await this.presentModalInfo();
     }
 

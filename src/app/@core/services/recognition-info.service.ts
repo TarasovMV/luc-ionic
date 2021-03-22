@@ -1,13 +1,21 @@
 import {Injectable} from '@angular/core';
-import {IRecognitionResult} from '../../models/recognition.model';
+import {IRecognitionResult, IRecognitionTextResult} from '../../models/recognition.model';
+import {IPageProductModel} from "../../models/page-product.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class RecognitionInfoService {
 
-    recognitionSaveFunction: () => Promise<IRecognitionResult>;
+    public recognitionSaveFunction: () => Promise<IRecognitionResult>;
+    public recognitionFeedFunction: () => Promise<IPageProductModel>;
 
-    constructor() {
+    constructor() {}
+
+    public textResultMapper(result: IRecognitionTextResult): IRecognitionResult {
+        return {
+            scoreId: result.id,
+            previews: result.searchResults,
+        };
     }
 }

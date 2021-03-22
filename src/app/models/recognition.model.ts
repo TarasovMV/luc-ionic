@@ -25,3 +25,11 @@ export interface IRecognitionResult {
     previews: IPageScanProductModel[];
     scoreId: number;
 }
+
+export interface IRecognitionTextResult {
+    id: number;
+    time: Date;
+    query: string;
+    searchResults: IPageScanProductModel[];
+    searchResultsCount: number;
+}

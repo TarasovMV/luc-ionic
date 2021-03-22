@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IPageProductModel} from '../../models/page-product.model';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {DATA_SOURCE} from './page-product.mock';
 import {ModalController} from '@ionic/angular';
+import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
 
 @Component({
     selector: 'app-page-product',
@@ -16,10 +16,13 @@ export class PageProductComponent implements OnInit {
 
     constructor(
         public modalCtrl: ModalController,
+        private recognitionInfoService: RecognitionInfoService,
     ) {}
 
-    public ngOnInit(): void {
-        setTimeout(() => this.data.next(DATA_SOURCE), 2000);
+    public async ngOnInit(): Promise<void> {
+        const res = await this.recognitionInfoService.recognitionFeedFunction?.();
+        res.infoList = res.infoList ?? [];
+        this.data.next(res);
     }
 
     public async closePage(): Promise<void> {

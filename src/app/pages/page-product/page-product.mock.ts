@@ -1,14 +1,14 @@
 import {IPageProductModel} from '../../models/page-product.model';
 
 export const DATA_SOURCE: IPageProductModel = {
+    id: new Uint8Array(1234),
+    imageUrl: '',
     shopTitle: 'Lamoda',
     shopUrl: 'http://example.com',
-    product: {
-        brand: 'Mango Man',
-        type: 'Рубашка',
-        price: 1990,
-        oldPrice: 4990,
-    },
+    brand: 'Mango Man',
+    type: 'Рубашка',
+    price: 1990,
+    oldPrice: 4990,
     infoList: [
         {
             title: 'Состав',

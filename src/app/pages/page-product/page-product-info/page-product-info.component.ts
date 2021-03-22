@@ -14,7 +14,5 @@ export class PageProductInfoComponent implements OnInit {
     constructor() {
     }
 
-    public ngOnInit(): void {
-    }
-
+    public ngOnInit(): void {}
 }
