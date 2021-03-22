@@ -5,7 +5,7 @@
       <img class="image" alt="" [src]="(sharedData | async).imageUrl">
 <!--      TODO: add img scroller-->
     </div>
-    <app-page-product-price [data]="(sharedData | async)"></app-page-product-price>
+    <app-page-product-price [data]="(sharedData | async)" (favouriteClick)="setFavorite()"></app-page-product-price>
     <app-page-product-buttons [modalController]="modalCtrl" [shopUrl]="(sharedData | async)?.shopUrl"></app-page-product-buttons>
     <app-page-product-info [data]="(sharedData | async)?.infoList"></app-page-product-info>
   </div>

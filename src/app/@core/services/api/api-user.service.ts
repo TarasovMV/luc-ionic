@@ -5,6 +5,7 @@ import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-l
 import {LoggerService} from '../logger.service';
 import {IUserInfo} from '../../../models/user-info.model';
 import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
+import {IFavoritesResponse} from "../../../models/favorites.model";
 
 @Injectable({
     providedIn: 'root'
@@ -94,5 +95,22 @@ export class ApiUserService {
             console.error('getReportReference', e);
             return [];
         }
+    }
+
+    public async getFavorites(): Promise<IFavoritesResponse> {
+        try {
+            return await this.http.get<IFavoritesResponse>(`${this.restUrl}/api/Favourites`).toPromise();
+        } catch (e) {
+            console.error('getFavorites', e);
+            return null;
+        }
+    }
+
+    public async addFavorites(feedId: number): Promise<IFavoritesResponse> {
+        return await this.http.post<IFavoritesResponse>(`${this.restUrl}/api/Favourites`, {feedId}).toPromise();
+    }
+
+    public async deleteFavorites(feedId: number): Promise<unknown> {
+        return await this.http.post<unknown>(`${this.restUrl}/api/Favourites`, {feedId}).toPromise();
     }
 }

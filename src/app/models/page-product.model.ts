@@ -2,9 +2,8 @@
 export interface IPageProductModel extends IPageProductPreviewModel {
     shopTitle: string;
     shopUrl: string;
-    // product: IPageProductPreviewModel;
     infoList: IPageProductInfoModel[];
-    // isFavorite: boolean; // TODO add references
+    isFavorite?: boolean; // TODO add references
 }
 
 export interface IPageProductInfoModel {
@@ -13,7 +12,7 @@ export interface IPageProductInfoModel {
 }
 
 export interface IPageProductPreviewModel {
-    id: BigInteger; // TODO add references
+    id: number; // TODO add references
     imageUrl: string;
     brand: string;
     type: string;

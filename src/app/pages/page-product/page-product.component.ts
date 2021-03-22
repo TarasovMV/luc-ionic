@@ -3,6 +3,8 @@ import {IPageProductModel} from '../../models/page-product.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ModalController} from '@ionic/angular';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
+import {ApiUserService} from "../../@core/services/api/api-user.service";
+import {FavoritesController} from "../../@shared/classes/favorites.class";
 
 @Component({
     selector: 'app-page-product',
@@ -11,18 +13,28 @@ import {RecognitionInfoService} from '../../@core/services/recognition-info.serv
 })
 export class PageProductComponent implements OnInit {
 
+    private readonly favoritesController: FavoritesController;
     private data: BehaviorSubject<IPageProductModel> = new BehaviorSubject<IPageProductModel>(null);
     public sharedData: Observable<IPageProductModel> = this.data.asObservable();
 
     constructor(
         public modalCtrl: ModalController,
         private recognitionInfoService: RecognitionInfoService,
-    ) {}
+        apiUserService: ApiUserService,
+    ) {
+        this.favoritesController = new FavoritesController(apiUserService);
+    }
 
     public async ngOnInit(): Promise<void> {
         const res = await this.recognitionInfoService.recognitionFeedFunction?.();
         res.infoList = res.infoList ?? [];
         this.data.next(res);
+    }
+
+    public async setFavorite(): Promise<void> {
+        const product = this.data.getValue();
+        const isFavorite = await this.favoritesController.setFavourite(product.id, !product.isFavorite);
+        this.data.next({...product, isFavorite});
     }
 
     public async closePage(): Promise<void> {
