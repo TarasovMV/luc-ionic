@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {IUserInfo} from '../../models/user-info.model';
-import { Storage } from '@ionic/storage';
 import {ApiUserService} from './api/api-user.service';
 import {AppTokenService} from './app-token.service';
 
@@ -9,16 +8,13 @@ import {AppTokenService} from './app-token.service';
     providedIn: 'root'
 })
 export class UserInfoService {
-    private readonly userAuthTokenPath: string = 'user-token';
-
     public authUser$: BehaviorSubject<IUserInfo> = new BehaviorSubject<IUserInfo>(null);
 
     constructor(
-        private storage: Storage,
         private apiUserService: ApiUserService,
         private tokenService: AppTokenService,
     ) {
-        this.init().then();
+        // this.tokenService.debugClear();
     }
 
     public setUser(user: IUserInfo): void {
@@ -27,27 +23,40 @@ export class UserInfoService {
         }
         this.authUser$.next({...user});
         if (!!user?.token) {
-            this.storage.set(this.userAuthTokenPath, user?.token).then();
-            this.tokenService.userToken = user.token;
+            this.tokenService.userTokenAuth = user.token;
         }
     }
 
     public clearUser(): void {
         this.authUser$.next(null);
-        this.storage.set(this.userAuthTokenPath, null).then();
         this.tokenService.userToken = null;
     }
 
-    private async init(): Promise<void> {
+    public async init(): Promise<void> {
+        if (!!this.authUser$.getValue()) {
+            return;
+        }
         const user = await this.getUserFromStorage();
-        if (!user) {
+        if (!user || this.isAnonUser(user)) {
+            console.log('init', this.tokenService.userToken);
+            if (!this.tokenService.userToken) {
+                await this.anonymousRegister();
+            }
             return;
         }
         this.setUser(user);
     }
 
     private async getUserFromStorage(): Promise<IUserInfo> {
-        this.tokenService.userToken = await this.storage.get(this.userAuthTokenPath);
         return await this.apiUserService.userCurrent();
+    }
+
+    private async anonymousRegister(): Promise<void> {
+        const anonUser = await this.apiUserService.userAnonymousRegister();
+        this.tokenService.userToken = anonUser?.token;
+    }
+
+    private isAnonUser = (user: IUserInfo): boolean => {
+        return !(!!user?.email || !!user.name);
     }
 }

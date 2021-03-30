@@ -1,6 +1,6 @@
-import {IPageProductModel} from '../../models/page-product.model';
+import {IProductModel} from '../../models/page-product.model';
 
-export const DATA_SOURCE: IPageProductModel = {
+export const DATA_SOURCE: IProductModel = {
     id: 12345,
     imageUrl: '',
     shopTitle: 'Lamoda',

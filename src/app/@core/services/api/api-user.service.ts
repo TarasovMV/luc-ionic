@@ -5,7 +5,7 @@ import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-l
 import {LoggerService} from '../logger.service';
 import {IUserInfo} from '../../../models/user-info.model';
 import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
-import {IFavoritesResponse} from "../../../models/favorites.model";
+import {IFavoritesResponse} from '../../../models/favorites.model';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +19,15 @@ export class ApiUserService {
         private loggerService: LoggerService,
     ) {
         this.restUrl = appConfigService.restUrl;
+    }
+
+    public async userAnonymousRegister(): Promise<IUserInfo> {
+        try {
+            return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/register/anonymous`, null).toPromise();
+        } catch (e) {
+            console.error('userAnonymousRegister', JSON.stringify(e));
+            return null;
+        }
     }
 
     public async userRegister(data: IPageTabsUserReg): Promise<IUserInfo> {
@@ -43,7 +52,7 @@ export class ApiUserService {
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth`, body).toPromise();
         } catch (e) {
-            console.error('userRegister', JSON.stringify(e));
+            console.error('userLogin', JSON.stringify(e));
             return null;
         }
     }
@@ -52,7 +61,7 @@ export class ApiUserService {
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth/google`, body).toPromise();
         } catch (e) {
-            console.error('userRegister', JSON.stringify(e));
+            console.error('userGoogle', JSON.stringify(e));
             return null;
         }
     }
@@ -64,7 +73,7 @@ export class ApiUserService {
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/auth/vk`, body).toPromise();
         } catch (e) {
-            console.error('userRegister', JSON.stringify(e));
+            console.error('userVk', JSON.stringify(e));
             return null;
         }
     }
@@ -73,7 +82,7 @@ export class ApiUserService {
         try {
             return await this.http.get<IUserInfo>(`${this.restUrl}/api/User/current`).toPromise();
         } catch (e) {
-            console.error('userRegister', JSON.stringify(e));
+            console.error('userCurrent', JSON.stringify(e));
             return null;
         }
     }
@@ -97,9 +106,9 @@ export class ApiUserService {
         }
     }
 
-    public async getFavorites(): Promise<IFavoritesResponse> {
+    public async getFavorites(): Promise<IFavoritesResponse[]> {
         try {
-            return await this.http.get<IFavoritesResponse>(`${this.restUrl}/api/Favourites`).toPromise();
+            return await this.http.get<IFavoritesResponse[]>(`${this.restUrl}/api/Favourites`).toPromise();
         } catch (e) {
             console.error('getFavorites', e);
             return null;

@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {urlToDataUrl} from '../../../../@shared/functions/base64-file.function';
 import {StatusBarService} from '../../../../@core/services/platform/status-bar.service';
+import {IProductModel} from "../../../../models/page-product.model";
 
 @Component({
     selector: 'app-page-tabs-favorites-popup',
@@ -24,13 +25,16 @@ import {StatusBarService} from '../../../../@core/services/platform/status-bar.s
     ],
 })
 export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
-
     private readonly nextRouteUrl = '/main/camera';
-    // TODO: add getting src
-    public readonly imgSrc: string =
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT4cXilLqWd8tskKFoG040zVnSymkScPPq_OQ&usqp=CAU';
-    public isInterface$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+    @Input() set data(value: IProductModel) {
+        this.imgSrc = value.imageUrl;
+        this.item = { ...value };
+    }
+
+    public imgSrc: string = null;
+    public isInterface$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+    private item: IProductModel = null;
     private isSetDefault: boolean = true;
 
     constructor(

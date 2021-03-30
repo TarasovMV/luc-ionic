@@ -1,5 +1,5 @@
 import {ApiUserService} from '../../@core/services/api/api-user.service';
-import {IPageProductModel} from '../../models/page-product.model';
+import {IProductModel} from '../../models/page-product.model';
 
 export class FavoritesController {
     private isLoading: boolean = false;
@@ -27,7 +27,7 @@ export class FavoritesController {
         }
     }
 
-    private async addFavourite(id: number): Promise<IPageProductModel> {
+    private async addFavourite(id: number): Promise<IProductModel> {
         const res = await this.apiUserService.addFavorites(id);
         return res?.feed;
     }

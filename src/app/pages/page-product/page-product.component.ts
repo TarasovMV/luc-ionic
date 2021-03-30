@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IPageProductModel} from '../../models/page-product.model';
+import {IProductModel} from '../../models/page-product.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ModalController} from '@ionic/angular';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
@@ -14,8 +14,8 @@ import {FavoritesController} from "../../@shared/classes/favorites.class";
 export class PageProductComponent implements OnInit {
 
     private readonly favoritesController: FavoritesController;
-    private data: BehaviorSubject<IPageProductModel> = new BehaviorSubject<IPageProductModel>(null);
-    public sharedData: Observable<IPageProductModel> = this.data.asObservable();
+    private data: BehaviorSubject<IProductModel> = new BehaviorSubject<IProductModel>(null);
+    public sharedData: Observable<IProductModel> = this.data.asObservable();
 
     constructor(
         public modalCtrl: ModalController,

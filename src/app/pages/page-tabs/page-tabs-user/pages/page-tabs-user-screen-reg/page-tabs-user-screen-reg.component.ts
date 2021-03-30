@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoadingService} from '../../../../../@core/services/loading.service';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
+import {UserInfoService} from "../../../../../@core/services/user-info.service";
 
 @Component({
     selector: 'app-page-tabs-user-screen-reg',
@@ -21,7 +22,11 @@ export class PageTabsUserScreenRegComponent implements OnInit {
         isPersonalDataAgree: new FormControl(false, [agreeValidator]),
     });
 
-    constructor(private loadingService: LoadingService, private apiUserService: ApiUserService) {
+    constructor(
+        private loadingService: LoadingService,
+        private apiUserService: ApiUserService,
+        private userService: UserInfoService,
+    ) {
     }
 
     ngOnInit(): void {
@@ -47,7 +52,7 @@ export class PageTabsUserScreenRegComponent implements OnInit {
         await this.loadingService.startLoading();
         const res = await this.apiUserService.userRegister(this.regForm.value);
         this.loadingService.stopLoading().then();
-        console.log('reg status', res);
+        this.userService.setUser(res);
     }
 }
 

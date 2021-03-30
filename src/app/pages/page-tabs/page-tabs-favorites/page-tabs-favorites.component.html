@@ -1,38 +1,13 @@
-
-
-
-  <div class="container">
-    <div class="header"> Избранное </div>
-    <div class="subheader"> Ваша персональная коллекция </div>
-    <ion-content>
-      <ion-refresher #refresher slot="fixed" style="z-index: 999" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
-      <div class="content-wrapper">
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-        <app-page-tabs-favourites-item (click)="itemClick()" class="item"></app-page-tabs-favourites-item>
-      </div>
-    </ion-content>
+<div class="container">
+  <div class="header"> Избранное </div>
+  <div class="subheader"> Ваша персональная коллекция </div>
+  <ion-content>
+    <ion-refresher #refresher slot="fixed" style="z-index: 999" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div class="content-wrapper">
+      <app-page-tabs-favourites-item [data]="item" *ngFor="let item of data$ | async" (click)="itemClick(item)" class="item"></app-page-tabs-favourites-item>
+    </div>
+  </ion-content>
 </div>
 

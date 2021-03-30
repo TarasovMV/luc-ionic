@@ -1,5 +1,5 @@
 // TODO отнаследовать модель от IPageProductPreviewModel (extends)
-export interface IPageProductModel extends IPageProductPreviewModel {
+export interface IProductModel extends IProductPreviewModel {
     shopTitle: string;
     shopUrl: string;
     infoList: IPageProductInfoModel[];
@@ -11,7 +11,7 @@ export interface IPageProductInfoModel {
     value: string;
 }
 
-export interface IPageProductPreviewModel {
+export interface IProductPreviewModel {
     id: number; // TODO add references
     imageUrl: string;
     brand: string;

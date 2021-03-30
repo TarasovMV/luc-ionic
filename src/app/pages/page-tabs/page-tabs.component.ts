@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {IPageTab, PageTabType} from '../../models/page-tab.model';
 import {BehaviorSubject} from 'rxjs';
+import {UserInfoService} from "../../@core/services/user-info.service";
 
 @Component({
     selector: 'app-page-tabs',
@@ -20,9 +21,14 @@ export class PageTabsComponent implements OnInit {
 
     public currentTab$: BehaviorSubject<PageTabType> = new BehaviorSubject<PageTabType>('search');
 
-    constructor(private navCtrl: NavController) {}
+    constructor(
+        private navCtrl: NavController,
+        private userInfoService: UserInfoService,
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.userInfoService.init().then();
+    }
 
     public selectTab(tab: PageTabType): void {
         this.navCtrl.navigateRoot(this.tabsRouting[tab] ?? this.tabsRouting[this.currentTab$.value]).then();

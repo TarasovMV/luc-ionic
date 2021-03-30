@@ -8,6 +8,7 @@ import {AuthenticationInterceptor} from './interceptors/authentication.intercept
 
 // camera web view
 import '@capacitor-community/camera-preview';
+import {AppTokenService} from './services/app-token.service';
 
 @NgModule({
     declarations: [],
@@ -18,6 +19,7 @@ import '@capacitor-community/camera-preview';
     providers: [
         UserAgent,
         { provide: APP_INITIALIZER, useFactory: appInit, deps: [AppConfigService], multi: true },
+        { provide: APP_INITIALIZER, useFactory: loadToken, deps: [AppTokenService], multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor,  multi: true },
     ]
@@ -27,4 +29,8 @@ export class CoreModule {
 
 function appInit(appConfigService: AppConfigService) {
     return () => appConfigService.load();
+}
+
+function loadToken(tokenService: AppTokenService) {
+    return () => tokenService.loadToken();
 }

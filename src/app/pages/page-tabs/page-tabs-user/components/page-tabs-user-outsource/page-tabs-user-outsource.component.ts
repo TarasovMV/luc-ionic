@@ -36,6 +36,7 @@ export class PageTabsUserOutsourceComponent implements OnInit {
 
     public async vkAuth(): Promise<void> {
         const token = await this.vkAuthService.authRequestPlugin();
+        // const token = '639958b4f485100334dcc574d0d037ce91007c5810502258d20649b0bff1ac0b66d19054523f828bd2132';
         if (!token) {
             return;
         }

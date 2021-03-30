@@ -1,6 +1,6 @@
-import {IPageProductModel} from './page-product.model';
+import {IProductModel} from './page-product.model';
 
 export interface IFavoritesResponse {
-    feed: IPageProductModel;
+    feed: IProductModel;
     createdAt: Date;
 }

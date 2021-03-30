@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {NoPreloading, RouterModule, Routes} from '@angular/router';
+import {AuthenticationGuard} from './@core/guards/authentication.guard';
 
 const routes: Routes = [
     {
         path: 'preview',
-        loadChildren: () => import('./pages/page-preview/page-preview.module').then(m => m.PagePreviewModule)
+        loadChildren: () => import('./pages/page-preview/page-preview.module').then(m => m.PagePreviewModule),
+        canActivate: [AuthenticationGuard],
     },
     {
         path: 'user_init',

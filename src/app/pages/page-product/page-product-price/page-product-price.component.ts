@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IPageProductPreviewModel} from '../../../models/page-product.model';
+import {IProductPreviewModel} from '../../../models/page-product.model';
 
 @Component({
     selector: 'app-page-product-price',
@@ -9,7 +9,7 @@ import {IPageProductPreviewModel} from '../../../models/page-product.model';
 })
 export class PageProductPriceComponent implements OnInit {
 
-    @Input() data: IPageProductPreviewModel = null;
+    @Input() data: IProductPreviewModel = null;
     @Output() favouriteClick: EventEmitter<unknown> = new EventEmitter<unknown>();
 
     constructor() {

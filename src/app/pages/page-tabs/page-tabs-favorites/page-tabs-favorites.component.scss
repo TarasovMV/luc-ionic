@@ -1,10 +1,12 @@
+$padding-w: 0 4.27vw;
+
 .container {
   display: flex;
   flex-flow: column;
   width: 100%;
   height: 100%;
   gap: 1.97vh;
-  padding: 0 4.27vw;
+  //padding: 0 4.27vw;
   box-sizing: border-box;
   overflow: scroll;
   background: white;
@@ -14,12 +16,14 @@
     font-weight: 700;
     color: #222222;
     margin-top: 2.46vh;
+    padding: $padding-w;
   }
 
   .subheader {
     font-size: 1.9vh;
     font-weight: 400;
     color: #222222;
+    padding: $padding-w;
   }
 
   .content-wrapper {
@@ -29,6 +33,8 @@
     row-gap: 4vw;
     column-gap: 4vw;
     overflow: auto;
+    padding: $padding-w;
+    padding-top: 0.5vh;
 
     .item {
       width: 27.6vw;

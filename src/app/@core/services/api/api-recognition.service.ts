@@ -3,7 +3,7 @@ import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {dataURLtoFile} from '../../../@shared/functions/base64-file.function';
 import {IRecognitionDetected, IRecognitionDetectedObject, IRecognitionResult} from "../../../models/recognition.model";
-import {IPageProductModel} from "../../../models/page-product.model";
+import {IProductModel} from "../../../models/page-product.model";
 
 @Injectable({
     providedIn: 'root'
@@ -48,11 +48,10 @@ export class ApiRecognitionService {
         }
     }
 
-    public async getFullItem(id: number): Promise<IPageProductModel> {
+    public async getFullItem(id: number): Promise<IProductModel> {
         try {
             const url = `${this.restUrl} /api/Reco/feed/${id}`;
-            console.log(url);
-            return await this.http.get<IPageProductModel>(`${this.restUrl}/api/Reco/feed/${id}`).toPromise();
+            return await this.http.get<IProductModel>(`${this.restUrl}/api/Reco/feed/${id}`).toPromise();
         } catch (e) {
             console.error('getFullItem', e);
             return null;
