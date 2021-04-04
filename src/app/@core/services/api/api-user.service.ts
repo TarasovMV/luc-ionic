@@ -44,6 +44,14 @@ export class ApiUserService {
         }
     }
 
+    public async userUpdate(body: IUserInfo): Promise<IUserInfo> {
+        try {
+            return await this.http.put<IUserInfo>(`${this.restUrl}/api/User`, body).toPromise();
+        } catch (e) {
+            return null;
+        }
+    }
+
     public async userLogin(data: IPageTabsUserLogin): Promise<IUserInfo> {
         const body = {
             email: data?.email,

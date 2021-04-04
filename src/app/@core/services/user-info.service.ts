@@ -1,20 +1,44 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {IUserInfo} from '../../models/user-info.model';
+import {IUserInfo, UserInfoGender} from '../../models/user-info.model';
 import {ApiUserService} from './api/api-user.service';
 import {AppTokenService} from './app-token.service';
+import {Storage} from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserInfoService {
+    private readonly initialGenderPath: string = 'initial-gender';
+    public readonly genderReference: {[key in UserInfoGender]: string} = {
+        male: 'Мужской',
+        female: 'Женский',
+    };
+
     public authUser$: BehaviorSubject<IUserInfo> = new BehaviorSubject<IUserInfo>(null);
 
     constructor(
         private apiUserService: ApiUserService,
         private tokenService: AppTokenService,
+        private storage: Storage,
     ) {
         // this.tokenService.debugClear();
+    }
+
+    public async setInitialGender(value: UserInfoGender) {
+        value = value ?? 'female';
+        await this.storage.set(this.initialGenderPath, value);
+    }
+    public async getInitialGender(): Promise<UserInfoGender> {
+        const value = await this.storage.get(this.initialGenderPath);
+        return value ?? 'female';
+    }
+
+    public async updateUser(user: IUserInfo): Promise<IUserInfo> {
+        let res = await this.apiUserService.userUpdate(user);
+        res = res ?? {...this.authUser$.getValue()};
+        this.authUser$.next(res);
+        return res;
     }
 
     public setUser(user: IUserInfo): void {
@@ -38,7 +62,6 @@ export class UserInfoService {
         }
         const user = await this.getUserFromStorage();
         if (!user || this.isAnonUser(user)) {
-            console.log('init', this.tokenService.userToken);
             if (!this.tokenService.userToken) {
                 await this.anonymousRegister();
             }
@@ -54,6 +77,8 @@ export class UserInfoService {
     private async anonymousRegister(): Promise<void> {
         const anonUser = await this.apiUserService.userAnonymousRegister();
         this.tokenService.userToken = anonUser?.token;
+        const gender = await this.getInitialGender();
+        await this.updateUser({...anonUser, gender});
     }
 
     private isAnonUser = (user: IUserInfo): boolean => {

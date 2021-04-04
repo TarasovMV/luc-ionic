@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {AbstractControl} from '@angular/forms';
 
 export interface ISelectModel<T> {
     value: T;
@@ -13,13 +13,13 @@ export interface ISelectModel<T> {
 })
 export class SharedSelectComponent implements OnInit {
     @Input() label: string = '';
-    @Input() formControl: FormControl;
+    @Input() formControl: AbstractControl;
     @Input() values: ISelectModel<unknown>[] = [];
 
     constructor() {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
 
 }

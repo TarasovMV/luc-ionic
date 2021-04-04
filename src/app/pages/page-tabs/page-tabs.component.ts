@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {IPageTab, PageTabType} from '../../models/page-tab.model';
 import {BehaviorSubject} from 'rxjs';
-import {UserInfoService} from "../../@core/services/user-info.service";
+import {UserInfoService} from '../../@core/services/user-info.service';
 
 @Component({
     selector: 'app-page-tabs',

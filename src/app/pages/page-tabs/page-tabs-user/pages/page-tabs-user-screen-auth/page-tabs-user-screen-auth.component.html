@@ -1,6 +1,7 @@
-<app-shared-select label="Пол"></app-shared-select>
-<app-shared-input label="Возраст" type="number"></app-shared-input>
-<app-shared-select label="Город проживания"></app-shared-select>
+<app-shared-select label="Пол" [values]="genderReference" [formControl]="userForm.controls.gender"></app-shared-select>
+<!--TODO: add later-->
+<!--<app-shared-input label="Возраст" type="number"></app-shared-input>-->
+<!--<app-shared-select label="Город проживания"></app-shared-select>-->
 
 <div class="menu-container">
   <div class="flex-free-space"></div>
