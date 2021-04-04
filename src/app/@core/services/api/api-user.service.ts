@@ -3,7 +3,7 @@ import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-login.model';
 import {LoggerService} from '../logger.service';
-import {IUserInfo} from '../../../models/user-info.model';
+import {IUserInfo, UserInfoGender} from '../../../models/user-info.model';
 import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
 import {IFavoritesResponse} from '../../../models/favorites.model';
 
@@ -21,9 +21,12 @@ export class ApiUserService {
         this.restUrl = appConfigService.restUrl;
     }
 
-    public async userAnonymousRegister(): Promise<IUserInfo> {
+    public async userAnonymousRegister(gender: UserInfoGender, birthdate: Date): Promise<IUserInfo> {
+        const body = {
+            gender
+        };
         try {
-            return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/register/anonymous`, null).toPromise();
+            return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/register/anonymous`, body).toPromise();
         } catch (e) {
             console.error('userAnonymousRegister', JSON.stringify(e));
             return null;

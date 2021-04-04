@@ -75,10 +75,12 @@ export class UserInfoService {
     }
 
     private async anonymousRegister(): Promise<void> {
-        const anonUser = await this.apiUserService.userAnonymousRegister();
-        this.tokenService.userToken = anonUser?.token;
         const gender = await this.getInitialGender();
-        await this.updateUser({...anonUser, gender});
+        const anonUser = await this.apiUserService.userAnonymousRegister(gender, null);
+        if (!anonUser) {
+            return;
+        }
+        this.tokenService.userToken = anonUser?.token;
     }
 
     private isAnonUser = (user: IUserInfo): boolean => {
