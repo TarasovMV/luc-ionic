@@ -13,10 +13,14 @@
       color: #2F3441;
       margin-bottom: 0.62vh;
 
-      svg-icon {
+      .favorite {
         width: 2.46vh;
         height: 2.46vh;
         color: #99A0AB;
+
+        &__active {
+          color: #FF3B30;
+        }
       }
     }
 

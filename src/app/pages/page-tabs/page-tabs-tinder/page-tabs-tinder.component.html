@@ -5,7 +5,12 @@
   </div>
   <div class="subheader"> Выбирай лучшее, то что тебе нравится, а LUC найдет для тебя это </div>
   <div class="card-container">
-    <div class="card" #tinderCard><app-page-tabs-tinder-card [imgSrc]="currentImg$ | async"></app-page-tabs-tinder-card></div>
-    <div class="card card__pseudo"> <div class="shadow"></div> <img alt="" [src]="nextImg$ | async" /> </div>
+<!--    <div class="card" #tinderCard><app-page-tabs-tinder-card [imgSrc]="currentImg$ | async"></app-page-tabs-tinder-card></div>-->
+<!--    <div class="card card__pseudo"> <div class="shadow"></div> <img alt="" [src]="nextImg$ | async" /> </div>-->
+    <ion-slides (ionSlideDidChange)="slideDetectChange()" style="width: 100%; height: 100%" #ionSlides>
+      <ion-slide *ngFor="let card of cards$ | async">
+        <app-page-tabs-tinder-card class="card" [data]="card"></app-page-tabs-tinder-card>
+      </ion-slide>
+    </ion-slides>
   </div>
 </div>

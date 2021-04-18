@@ -12,12 +12,12 @@ import {LoadingService} from '../../../../../@core/services/loading.service';
 })
 export class PageTabsTinderCardComponent implements OnInit {
 
-    @Input() private set imgSrc(value: string) {
+    @Input() private set data(method: () => Promise<any>) {
         this.disableInfo();
-        this._imgSrc = value;
+        method().then((res) => this.data$.next(res));
     }
-    _imgSrc: string;
-    isInfo$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public data$ = new BehaviorSubject(null);
+    public isInfo$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private readonly nextRouteUrl = '/main/camera';
 
     constructor(
@@ -32,8 +32,11 @@ export class PageTabsTinderCardComponent implements OnInit {
     }
 
     public async search(): Promise<void> {
+        if (!this.data$.getValue()) {
+            return;
+        }
         await this.loadingService.startLoading();
-        const img = await urlToDataUrl(this._imgSrc);
+        const img = await urlToDataUrl(this.data$.value.url);
         await this.loadingService.stopLoading();
         await this.navCtrl.navigateForward(this.nextRouteUrl, {queryParams: { img }});
     }

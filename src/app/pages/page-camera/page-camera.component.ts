@@ -75,6 +75,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
         if (img) {
             this.imgSrc = img;
             this.isSrcWithImage = true;
+            this.findPhoto().then();
         }
         this.subscriptions.push(
             this.imgSrcObservable.subscribe((ref) => {

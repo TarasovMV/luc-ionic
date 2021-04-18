@@ -1,5 +1,5 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {GestureController, Platform} from '@ionic/angular';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {GestureController, IonSlides, Platform} from '@ionic/angular';
 import {BehaviorSubject} from 'rxjs';
 import {IPageTab, PageTabType} from '../../../models/page-tab.model';
 
@@ -13,22 +13,17 @@ export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit 
     readonly tabName: PageTabType = 'blocks';
 
     @ViewChild('tinderCard') tinderCard: ElementRef;
+    @ViewChild('ionSlides') ionSlide: IonSlides;
 
-    public data$ = new BehaviorSubject([
-        {
-            url: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwlooks.ru%2Fimages%2Farticle%2Forig%2F2017%2F02%2Felegantnyj-stil-v-odezhde-dlya-zhenshchin.jpg&f=1&nofb=1',
-        },
-        {
-            url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage01.bonprix.ru%2Fassets%2F957x1344%2F1568808722%2F19235679-RveOc5BR.jpg&f=1&nofb=1',
-        }
+    public cards$ = new BehaviorSubject([
+        () => this.getNextImage(),
+        () => this.getNextImage(),
+        () => this.getNextImage(),
     ]);
-    public currentImg$: BehaviorSubject<string> = new BehaviorSubject<string>(this.data$.value[0].url);
-    public nextImg$: BehaviorSubject<string> = new BehaviorSubject<string>(this.data$.value[1].url);
 
     constructor(
         private gestureCtrl: GestureController,
         private platform: Platform,
-        private cdRef: ChangeDetectorRef,
     ) {}
 
     ngOnInit(): void {}
@@ -71,26 +66,23 @@ export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit 
 
     private action(actionType: 'like' | 'dislike'): void {
         console.log('tinder-action', actionType);
-        setTimeout(() => {
-            this.changeImg();
-            this.tinderCard.nativeElement.style.transform = 'none';
-            this.tinderCard.nativeElement.style.transition = 'none';
-            this.cdRef.detectChanges();
-        }, 200);
     }
 
-    private changeImg(): void {
-        this.currentImg$.next(this.getNextImg(this.currentImg$.value));
-        this.nextImg$.next(this.getNextImg(this.nextImg$.value));
-    }
-
-    private getNextImg(currentImg: string): string {
-        let idx = this.data$.value.findIndex(x => x.url === currentImg);
-        if (idx === -1) {
-            console.error('Image not found');
-            return currentImg;
+    public async slideDetectChange(): Promise<void> {
+        const cards = this.cards$.getValue();
+        const currentIdx = await this.ionSlide.getActiveIndex();
+        console.log(cards.length, currentIdx);
+        if (cards.length - (currentIdx + 1) < 1) {
+            console.log('push');
+            this.cards$.next([...cards, () => this.getNextImage()]);
         }
-        idx = (idx + 1) > this.data$.value.length - 1 ? 0 : idx + 1;
-        return this.data$.value[idx].url;
+    }
+
+    private getNextImage(): Promise<any> {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve({
+                url: 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwlooks.ru%2Fimages%2Farticle%2Forig%2F2017%2F02%2Felegantnyj-stil-v-odezhde-dlya-zhenshchin.jpg&f=1&nofb=1',
+            }), 3000);
+        });
     }
 }

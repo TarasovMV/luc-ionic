@@ -1,0 +1,23 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .counter {
+    position: absolute;
+    right: 5.3vw;
+    top: 5.3vw;
+    padding: 1vh;
+    z-index: 2;
+    font-size: 1.72vh;
+    color: #FFFFFF;
+    background: rgba(34, 34, 34, 0.65);
+    border-radius: 1vh;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

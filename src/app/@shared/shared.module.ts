@@ -14,6 +14,7 @@ import {SharedSelectComponent} from "./components/shared-select/shared-select.co
 import {SharedTextareaComponent} from "./components/shared-textarea/shared-textarea.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedFormErrorComponent} from './components/shared-form-error/shared-form-error.component';
+import {SharedImageSliderComponent} from './components/shared-image-slider/shared-image-slider.component';
 registerLocaleData(localeFr);
 
 
@@ -26,6 +27,7 @@ registerLocaleData(localeFr);
         SharedSelectComponent,
         SharedTextareaComponent,
         SharedFormErrorComponent,
+        SharedImageSliderComponent,
     ],
     imports: [
         CommonModule,
@@ -44,6 +46,7 @@ registerLocaleData(localeFr);
         SharedSelectComponent,
         SharedTextareaComponent,
         SharedFormErrorComponent,
+        SharedImageSliderComponent,
     ]
 })
 export class SharedModule {

@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="header">
+    <svg-icon (click)="close()" class="close" src="assets/icon/svg/close.svg"></svg-icon>
+  </div>
+  <div class="container">
+    <ng-container *ngIf="!!(articleData$ | async)">
+      <div class="title padding"> {{ (articleData$ | async).title }} </div>
+      <ng-container *ngFor="let block of (articleData$ | async).blocks">
+        <ng-container
+          [ngTemplateOutlet]="{'subtitle': subtitle, 'text': text, 'photo': photo}[block.type]"
+          [ngTemplateOutletContext]="{ $implicit: block }">
+        </ng-container>
+      </ng-container>
+      <div class="source padding"> Источники: {{ sources$ | async }} </div>
+      <div class="author padding"> Редактор: <span>{{ (articleData$ | async).author.name }}</span> </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #text let-data>
+  <div class="text padding"> {{ data.text }} </div>
+</ng-template>
+
+<ng-template #photo let-data>
+  <div class="photo-wrapper">
+    <app-shared-image-slider [imagesUrl]="data.urls"></app-shared-image-slider>
+  </div>
+</ng-template>
+
+<ng-template #subtitle let-data>
+  <div class="subtitle padding"> {{ data.text }} </div>
+</ng-template>

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     ) {}
 
     public async ngOnInit(): Promise<void> {
-        // this.initializeApp();
+        this.initializeApp();
     }
 
     private initializeApp(): void {

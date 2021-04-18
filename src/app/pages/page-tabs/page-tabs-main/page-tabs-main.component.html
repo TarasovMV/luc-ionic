@@ -10,8 +10,8 @@
       <app-page-tabs-main-camera></app-page-tabs-main-camera>
     </div>
     <div class="recommend-container">
-      <div class="title"> Рекоммендации </div>
-      <div class="subtitle"> Подборка основанна на вашем вкусе </div>
+      <div class="title"> Рекомендации </div>
+      <div class="subtitle"> Подборка, основанная на вашем вкусе </div>
       <div class="cards">
         <app-page-tabs-main-recommend-card></app-page-tabs-main-recommend-card>
         <app-page-tabs-main-recommend-card></app-page-tabs-main-recommend-card>
@@ -22,9 +22,9 @@
       <div class="title"> Тренды </div>
       <div class="subtitle"> Модные тенденции весна 2021 </div>
       <div class="cards">
-        <app-page-tabs-main-trend-card></app-page-tabs-main-trend-card>
-        <app-page-tabs-main-trend-card></app-page-tabs-main-trend-card>
-        <app-page-tabs-main-trend-card></app-page-tabs-main-trend-card>
+        <app-page-tabs-main-trend-card (click)="presentModalArticle()"></app-page-tabs-main-trend-card>
+        <app-page-tabs-main-trend-card (click)="presentModalArticle()"></app-page-tabs-main-trend-card>
+        <app-page-tabs-main-trend-card (click)="presentModalArticle()"></app-page-tabs-main-trend-card>
       </div>
     </div>
   </div>

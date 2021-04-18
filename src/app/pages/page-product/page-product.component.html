@@ -2,7 +2,7 @@
   <app-page-product-header [label]="(sharedData | async)?.shopTitle" (back)="closePage()"></app-page-product-header>
   <div class="scroll-wrapper">
     <div class="img-container">
-      <img class="image" alt="" [src]="(sharedData | async).imageUrl">
+      <img class="image" alt="" [src]="(sharedData | async)?.imageUrl">
 <!--      TODO: add img scroller-->
     </div>
     <app-page-product-price [data]="(sharedData | async)" (favouriteClick)="setFavorite()"></app-page-product-price>

@@ -20,7 +20,9 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
         private apiUserService: ApiUserService,
     ) {}
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.loadFavorites().then();
+    }
 
     public itemClick(item: IProductModel): void {
         this.modalOpen(item).then();
@@ -34,8 +36,11 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
     }
 
     private async loadFavorites(): Promise<void> {
-        const res = await this.apiUserService.getFavorites();
-        this.data$.next(res?.map(x => x.feed) ?? []);
+        const res = (await this.apiUserService.getFavorites())?.map(x => x.feed) ?? [];
+        if (JSON.stringify(this.data$.getValue()) === JSON.stringify(res)) {
+            return;
+        }
+        this.data$.next(res);
     }
 
     private async modalOpen(item: IProductModel): Promise<void> {
@@ -43,6 +48,7 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
             component: PageTabsFavoritesPopupComponent,
             componentProps: { data: item }
         });
+        modal.onDidDismiss().then(() => this.loadFavorites());
         return await modal.present();
     }
 }

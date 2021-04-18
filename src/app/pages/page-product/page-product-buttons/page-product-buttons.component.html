@@ -1,6 +1,6 @@
 <ng-container *ngIf="shopUrl; else skeletonPageButtons">
   <div class="container">
-    <app-shared-button type="main" style="width: 100%">
+    <app-shared-button (click)="openShopUrl()" type="main" style="width: 100%">
       Перейти в магазин
     </app-shared-button>
     <div class="sub-container">

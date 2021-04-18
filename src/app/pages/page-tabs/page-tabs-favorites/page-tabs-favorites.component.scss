@@ -28,7 +28,7 @@ $padding-w: 0 4.27vw;
 
   .content-wrapper {
     display: flex;
-    height: 100%;
+    max-height: 100%;
     flex-wrap: wrap;
     row-gap: 4vw;
     column-gap: 4vw;

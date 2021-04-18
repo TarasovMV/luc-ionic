@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <div class="counter"> {{ counter$ | async }} из {{ imagesUrl.length }} </div>
+
+  <ion-slides (ionSlideDidChange)="slideDetectChange()" #ionSlides style="height: 100%; width: 100%">
+    <ion-slide *ngFor="let img of imagesUrl">
+      <img [src]="img"/>
+    </ion-slide>
+  </ion-slides>
+</div>

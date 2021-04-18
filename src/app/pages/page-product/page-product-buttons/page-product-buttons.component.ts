@@ -1,3 +1,6 @@
+import { Plugins } from '@capacitor/core';
+const { Browser } = Plugins;
+
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {ModalController, NavController} from '@ionic/angular';
 
@@ -24,6 +27,10 @@ export class PageProductButtonsComponent implements OnInit {
     public async goToMainScreen(): Promise<void> {
         await this.navCtrl.navigateRoot(this.mainScreenUrl);
         await this.modalController?.dismiss();
+    }
+
+    public async openShopUrl(): Promise<void> {
+        await Browser.open({url: this.shopUrl});
     }
 
 }
