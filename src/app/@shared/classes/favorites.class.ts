@@ -8,7 +8,7 @@ export class FavoritesController {
 
     public async setFavourite(id: number, isFavorite: boolean): Promise<boolean | null> {
         if (this.isLoading) {
-            return null;
+            return !isFavorite;
         }
         this.isLoading = true;
         try {

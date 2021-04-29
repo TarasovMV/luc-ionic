@@ -14,7 +14,7 @@ export class PageTabsMainComponent implements IPageTab, OnInit, OnDestroy {
 
     constructor(private modalController: ModalController) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
     }
 
     public ngOnDestroy(): void {

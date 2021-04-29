@@ -1,9 +1,17 @@
 <div class="content">
-  <div class="image"></div>
-  <div class="label">
-    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
-  </div>
+  <ng-container *ngIf="!!data; else skeleton">
+    <div class="image"></div>
+    <div class="label">
+
+    </div>
+  </ng-container>
+  <ng-template #skeleton>
+    <div class="image"></div>
+    <div class="label">
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    </div>
+  </ng-template>
 </div>

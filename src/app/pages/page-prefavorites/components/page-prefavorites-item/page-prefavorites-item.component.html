@@ -5,5 +5,5 @@
       <svg-icon src="assets/icon/svg/check.svg"></svg-icon>
     </div>
   </div>
-  <img class="image" [ngClass]="'image__' + (!!image ? 'active' : 'disable')" alt="" [src]="image">
+  <img class="image" [ngClass]="'image__' + (!!image ? 'active' : 'disable')" alt="" [src]="image | safeUrl">
 </div>

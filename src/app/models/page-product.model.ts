@@ -18,4 +18,5 @@ export interface IProductPreviewModel {
     type: string;
     price: number;
     oldPrice?: number;
+    isFavorite?: boolean; // TODO add references
 }

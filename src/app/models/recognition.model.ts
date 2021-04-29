@@ -1,5 +1,11 @@
 import {IPageScanProductModel} from './page-scan.model';
 
+export interface IStartScreenReco {
+    id: number;
+    file: string;
+    filename: string;
+}
+
 export interface IRecognitionDetected {
     detectedObjects: IRecognitionDetectedObject[];
     searchId: number;

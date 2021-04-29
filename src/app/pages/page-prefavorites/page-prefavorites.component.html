@@ -3,13 +3,14 @@
   <div class="subheader"> На основе вашего выбора, мы будем рекоменовать вам одежду </div>
   <div class="content-wrapper">
     <app-page-prefavorites-item
-      *ngFor="let item of itemsGroup.itemsObserver$ | async"
+      *ngFor="let item of (itemsGroup?.itemsObserver$ | async) || []"
       class="item"
+      [image]="item.file"
       [isSelected]="item.isSelected"
       (click)="itemsGroup.select(item)"
     ></app-page-prefavorites-item>
   </div>
-  <div class="button-container" [class.button-container__unactive]="!(itemsGroup.isValid$ | async)">
+  <div class="button-container" [class.button-container__unactive]="!(itemsGroup?.isValid$ | async)">
     <app-shared-button (click)="continue()"> Продолжить </app-shared-button>
   </div>
 </div>

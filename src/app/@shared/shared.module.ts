@@ -47,6 +47,7 @@ registerLocaleData(localeFr);
         SharedTextareaComponent,
         SharedFormErrorComponent,
         SharedImageSliderComponent,
+        SafeUrlPipe,
     ]
 })
 export class SharedModule {

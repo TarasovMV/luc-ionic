@@ -16,6 +16,7 @@ export class AuthenticationGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Promise<boolean> {
+        // return true;
         if (this.tokenService.userToken) {
             this.navCtrl.navigateRoot('/main').then();
             return false;

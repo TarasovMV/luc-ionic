@@ -1,8 +1,10 @@
 import {BehaviorSubject, Observable} from 'rxjs';
 import {IPagePrefavoritesItem} from '../../../models/page-prefavorites.model';
 import {map} from 'rxjs/operators';
+import {IStartScreenReco} from '../../../models/recognition.model';
 
 export class PagePrefavoritesItemGroup {
+    private readonly verifyCount: number = 3;
     private items$: BehaviorSubject<IPagePrefavoritesItem[]> = new BehaviorSubject<IPagePrefavoritesItem[]>([]);
     public  itemsObserver$: Observable<IPagePrefavoritesItem[]> = this.items$;
     get items(): IPagePrefavoritesItem[] {
@@ -16,30 +18,14 @@ export class PagePrefavoritesItemGroup {
         return this.items?.filter(x => !!x.isSelected) ?? [];
     }
     isValid$: Observable<boolean> = this.items$.asObservable().pipe(
-        map(x => x.findIndex(i => !!i.isSelected) !== -1)
+        map(x => x.filter(i => i.isSelected)?.length >= this.verifyCount)
     );
     get isValid(): boolean {
-        return this.items.findIndex(i => !!i.isSelected) !== -1;
+        return this.items.filter(i => i.isSelected)?.length >= this.verifyCount;
     }
 
-    constructor() {
-        this.items = [
-            {
-                isSelected: false,
-            },
-            {
-                isSelected: false,
-            },
-            {
-                isSelected: false,
-            },
-            {
-                isSelected: false,
-            },
-            {
-                isSelected: false,
-            },
-        ];
+    constructor(items: IStartScreenReco[]) {
+        this.items = items.map(x => ({...x, file: `data:image/png;base64, ${x.file}`, isSelected: false}));
     }
 
     public select(item: IPagePrefavoritesItem): void {

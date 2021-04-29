@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {dataURLtoFile} from '../../../@shared/functions/base64-file.function';
-import {IRecognitionDetected, IRecognitionDetectedObject, IRecognitionResult} from "../../../models/recognition.model";
+import {IRecognitionDetected, IRecognitionDetectedObject, IRecognitionResult, IStartScreenReco} from '../../../models/recognition.model';
 import {IProductModel} from "../../../models/page-product.model";
+import {UserInfoGender} from '../../../models/user-info.model';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,15 @@ export class ApiRecognitionService {
         private http: HttpClient,
     ) {
         this.restUrl = appConfigService.recognitionUrl;
+    }
+
+    public async getStartScreenReco(gender: UserInfoGender): Promise<IStartScreenReco[]> {
+        try {
+            return await this.http.get<IStartScreenReco[]>(`${this.restUrl}/api/StartScreenReco?gender=${gender}`).toPromise();
+        } catch (e) {
+            console.error('getStartScreenReco', e);
+            return [];
+        }
     }
 
     public async searchByPhoto(dataUrl: string): Promise<IRecognitionDetected> {

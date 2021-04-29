@@ -15,7 +15,7 @@ export class PageProductComponent implements OnInit {
 
     private readonly favoritesController: FavoritesController;
     private data$: BehaviorSubject<IProductModel> = new BehaviorSubject<IProductModel>(null);
-    public sharedData: Observable<IProductModel> = this.data$.asObservable();
+    public sharedData: Observable<IProductModel> = this.data$;
 
     constructor(
         public modalCtrl: ModalController,

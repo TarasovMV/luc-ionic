@@ -131,6 +131,6 @@ export class ApiUserService {
     }
 
     public async deleteFavorites(feedId: number): Promise<unknown> {
-        return await this.http.post<unknown>(`${this.restUrl}/api/Favourites`, {feedId}).toPromise();
+        return await this.http.delete<unknown>(`${this.restUrl}/api/Favourites/${feedId}`).toPromise();
     }
 }
