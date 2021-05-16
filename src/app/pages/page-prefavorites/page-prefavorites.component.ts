@@ -3,6 +3,8 @@ import {PagePrefavoritesItemGroup} from './classes/page-prefavorites-item-group.
 import {NavController} from '@ionic/angular';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
 import {BehaviorSubject} from 'rxjs';
+import {UserInfoService} from '../../@core/services/user-info.service';
+import {ApiFileService} from '../../@core/services/api/api-file.service';
 
 @Component({
     selector: 'app-page-prefavorites',
@@ -16,12 +18,14 @@ export class PagePrefavoritesComponent implements OnInit {
 
     constructor(
         private navCtrl: NavController,
+        private userInfoService: UserInfoService,
         private recognitionInfoService: RecognitionInfoService,
+        private apiFileService: ApiFileService,
     ) {}
 
     async ngOnInit(): Promise<void> {
         const items = await this.recognitionInfoService.getStartReco();
-        console.log('i', items);
+        items.forEach(x => x.imageUrl = this.apiFileService.getStartRecoPhotoById(x.id));
         this.itemsGroup = new PagePrefavoritesItemGroup(items);
         this.isLoad$.next(false);
     }
@@ -30,6 +34,7 @@ export class PagePrefavoritesComponent implements OnInit {
         if (!this.itemsGroup.isValid) {
             return;
         }
+        this.userInfoService.selectedPreFavourites = this.itemsGroup.activeItems.map(x => ({id: x.id}));
         await this.navCtrl.navigateRoot(this.nextRouteUrl);
     }
 }

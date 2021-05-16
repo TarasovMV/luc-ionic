@@ -4,6 +4,8 @@ import {map} from 'rxjs/operators';
 import {IStartScreenReco} from '../../../models/recognition.model';
 
 export class PagePrefavoritesItemGroup {
+    private initItems: IStartScreenReco[];
+
     private readonly verifyCount: number = 3;
     private items$: BehaviorSubject<IPagePrefavoritesItem[]> = new BehaviorSubject<IPagePrefavoritesItem[]>([]);
     public  itemsObserver$: Observable<IPagePrefavoritesItem[]> = this.items$;
@@ -23,8 +25,11 @@ export class PagePrefavoritesItemGroup {
     get isValid(): boolean {
         return this.items.filter(i => i.isSelected)?.length >= this.verifyCount;
     }
+    // get result(): IStartScreenReco[] {
+    // }
 
     constructor(items: IStartScreenReco[]) {
+        this.initItems = items;
         this.items = items.map(x => ({...x, file: `data:image/png;base64, ${x.file}`, isSelected: false}));
     }
 

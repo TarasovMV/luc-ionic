@@ -20,14 +20,16 @@ export class PageTabsComponent implements OnInit {
     };
 
     public currentTab$: BehaviorSubject<PageTabType> = new BehaviorSubject<PageTabType>('search');
+    public isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private navCtrl: NavController,
         private userInfoService: UserInfoService,
     ) {}
 
-    ngOnInit(): void {
-        this.userInfoService.init().then();
+    async ngOnInit(): Promise<void> {
+        await this.userInfoService.init();
+        this.isActive$.next(true);
     }
 
     public selectTab(tab: PageTabType): void {

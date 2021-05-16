@@ -6,6 +6,7 @@ import {AppTokenService} from './app-token.service';
 import {Storage} from '@ionic/storage';
 import {IArticle} from '../../models/article.model';
 import {ApiFileService} from './api/api-file.service';
+import {IStartScreenReco} from '../../models/recognition.model';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class UserInfoService {
     };
 
     public authUser$: BehaviorSubject<IUserInfo> = new BehaviorSubject<IUserInfo>(null);
+    public selectedPreFavourites: { id: number }[] = [];
 
     constructor(
         private apiUserService: ApiUserService,
@@ -92,7 +94,7 @@ export class UserInfoService {
 
     private async anonymousRegister(): Promise<void> {
         const gender = await this.getInitialGender();
-        const anonUser = await this.apiUserService.userAnonymousRegister(gender, null);
+        const anonUser = await this.apiUserService.userAnonymousRegister(gender, new Date(), this.selectedPreFavourites);
         if (!anonUser) {
             return;
         }

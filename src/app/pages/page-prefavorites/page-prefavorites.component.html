@@ -5,7 +5,7 @@
     <app-page-prefavorites-item
       *ngFor="let item of (itemsGroup?.itemsObserver$ | async) || []"
       class="item"
-      [image]="item.file"
+      [image]="item.imageUrl"
       [isSelected]="item.isSelected"
       (click)="itemsGroup.select(item)"
     ></app-page-prefavorites-item>

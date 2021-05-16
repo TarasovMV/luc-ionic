@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: column;
   height: 100%;
+  background: white;
 
   .page-wrapper {
     position: relative;
@@ -29,4 +30,9 @@
     color: #2CB172;
     transition: .2s;
   }
+}
+
+ion-spinner {
+  margin: auto;
+  --color: #2CB172;
 }

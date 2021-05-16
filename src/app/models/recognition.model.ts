@@ -2,6 +2,7 @@ import {IPageScanProductModel} from './page-scan.model';
 
 export interface IStartScreenReco {
     id: number;
+    imageUrl: string;
     file: string;
     filename: string;
 }

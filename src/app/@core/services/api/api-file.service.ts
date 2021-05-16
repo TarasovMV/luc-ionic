@@ -11,6 +11,10 @@ export class ApiFileService {
         this.restUrl = appConfigService.fileUrl;
     }
 
+    public getStartRecoPhotoById(id: number): string {
+        return `${this.restUrl}/api/Photo/start-screen-reco/${id}`;
+    }
+
     public getTinderPhotoById(id: number): string {
         return `${this.restUrl}/api/Photo/tinder/${id}`;
     }

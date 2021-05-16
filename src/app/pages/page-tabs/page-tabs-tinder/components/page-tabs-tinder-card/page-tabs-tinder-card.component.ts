@@ -22,12 +22,15 @@ export class PageTabsTinderCardComponent implements OnInit {
 
     @Input() private set data(method: () => Promise<ITinderSuggestion>) {
         this.disableInfo();
-        method().then((res) => {
+        method().then(async (res) => {
             if (!res) {
                 // TODO: add error handler
                 return;
             }
             res.imageUrl = res.type !== 'tinderItem' ? res.imageUrl : this.apiFileService.getTinderPhotoById(res.tinderId);
+            if (res.type === 'feed') {
+                res.feedPreview = await this.apiRecognitionService.getFullItem(res.feedId);
+            }
             this.data$.next(res);
         });
     }
@@ -80,7 +83,6 @@ export class PageTabsTinderCardComponent implements OnInit {
 
     public async setFavorite(): Promise<void> {
         const data = this.data$.getValue();
-        console.log('setFavorite', data);
         if (!data.feedPreview) { return; }
         data.feedPreview.isFavorite = await this.favoritesController.setFavourite(data.feedId, !data.feedPreview.isFavorite);
         this.data$.next({ ...data });

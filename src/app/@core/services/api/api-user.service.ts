@@ -7,6 +7,7 @@ import {IUserInfo, UserInfoGender} from '../../../models/user-info.model';
 import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
 import {IFavoritesResponse} from '../../../models/favorites.model';
 import {IArticle} from '../../../models/article.model';
+import {IStartScreenReco} from '../../../models/recognition.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,9 +23,11 @@ export class ApiUserService {
         this.restUrl = appConfigService.restUrl;
     }
 
-    public async userAnonymousRegister(gender: UserInfoGender, birthdate: Date): Promise<IUserInfo> {
+    public async userAnonymousRegister(gender: UserInfoGender, birthdate: Date, selectedRecommendations: {id: number}[]): Promise<IUserInfo> {
         const body = {
-            gender
+            gender,
+            birthdate,
+            selectedRecommendations,
         };
         try {
             return await this.http.post<IUserInfo>(`${this.restUrl}/api/User/register/anonymous`, body).toPromise();
