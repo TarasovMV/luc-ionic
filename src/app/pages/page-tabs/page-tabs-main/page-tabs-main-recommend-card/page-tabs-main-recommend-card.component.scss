@@ -9,6 +9,14 @@
   border-radius: 1.48vh;
   background: #DCE0EB;
   margin-bottom: 1.7vh;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    border: 0;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .label {

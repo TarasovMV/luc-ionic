@@ -1,9 +1,7 @@
 <div class="content">
   <ng-container *ngIf="!!data; else skeleton">
-    <div class="image"></div>
-    <div class="label">
-
-    </div>
+    <div (click)="presentModalArticle()" class="image"> <img [src]="data.imageUrl"> </div>
+    <div (click)="presentModalArticle()" class="label"> {{data.title}} </div>
   </ng-container>
   <ng-template #skeleton>
     <div class="image"></div>

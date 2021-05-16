@@ -3,7 +3,7 @@ import {AppConfigService} from '../platform/app-config.service';
 import {HttpClient} from '@angular/common/http';
 import {dataURLtoFile} from '../../../@shared/functions/base64-file.function';
 import {IRecognitionDetected, IRecognitionDetectedObject, IRecognitionResult, IStartScreenReco} from '../../../models/recognition.model';
-import {IProductModel} from "../../../models/page-product.model";
+import {IProductModel, IProductPreviewModel} from '../../../models/page-product.model';
 import {UserInfoGender} from '../../../models/user-info.model';
 
 @Injectable({
@@ -17,6 +17,16 @@ export class ApiRecognitionService {
         private http: HttpClient,
     ) {
         this.restUrl = appConfigService.recognitionUrl;
+    }
+
+    public async getMainRecommends(): Promise<IProductPreviewModel[]> {
+        try {
+            const url: string = `${this.restUrl}/api/MainScreen/feeds`;
+            return await this.http.get<IProductPreviewModel[]>(url).toPromise();
+        } catch (e) {
+            console.error('getMainRecommends', e);
+            return [];
+        }
     }
 
     public async getStartScreenReco(gender: UserInfoGender): Promise<IStartScreenReco[]> {

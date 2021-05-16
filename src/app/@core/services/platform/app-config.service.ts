@@ -37,6 +37,13 @@ export class AppConfigService {
         return this.appConfig.recognitionUrl;
     }
 
+    public get fileUrl(): string {
+        if (!this.appConfig) {
+            throw Error('Config file not loaded!');
+        }
+        return this.appConfig.fileUrl;
+    }
+
     public get locationOrigin(): string {
         return (this.platformLocation as any).location.origin;
     }

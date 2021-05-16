@@ -1,8 +1,10 @@
 <ng-container *ngIf="!!data; else skeleton">
-  <div class="container">
-    <div class="image"></div>
-    <div class="label label__title"> Title </div>
-    <div class="label label__subtitle"> Subtitle </div>
+  <div (click)="openProduct()" class="container">
+    <div class="image">
+      <img [src]="data.imageUrl">
+    </div>
+    <div class="label label__title"> {{ data.brand }} </div>
+    <div class="label label__subtitle"> {{ data.type | categorySplit }} </div>
   </div>
 </ng-container>
 

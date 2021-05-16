@@ -1,19 +1,40 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {IPageTabsMainCard} from '../../../../models/page-tabs-main.model';
+import {IProductPreviewModel} from '../../../../models/page-product.model';
+import {PageProductComponent} from '../../../page-product/page-product.component';
+import {RecognitionInfoService} from '../../../../@core/services/recognition-info.service';
+import {ModalController} from '@ionic/angular';
+import {ApiRecognitionService} from '../../../../@core/services/api/api-recognition.service';
 
 @Component({
     selector: 'app-page-tabs-main-recommend-card',
     templateUrl: './page-tabs-main-recommend-card.component.html',
     styleUrls: ['./page-tabs-main-recommend-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageTabsMainRecommendCardComponent implements OnInit {
 
-    @Input() data: IPageTabsMainCard = null;
+    @Input() data: IProductPreviewModel = null;
 
-    constructor() {
+    constructor(
+        private recognitionInfoService: RecognitionInfoService,
+        private apiRecognitionService: ApiRecognitionService,
+        private modalController: ModalController,
+    ) {}
+
+    ngOnInit(): void {}
+
+    public async openProduct(): Promise<void> {
+        const productId = this.data.id;
+        if (!productId) { return; }
+        this.recognitionInfoService.recognitionFeedFunction = () => this.apiRecognitionService.getFullItem(productId);
+        await this.presentModalInfo();
     }
 
-    ngOnInit() {
+    private async presentModalInfo() {
+        const modal = await this.modalController.create({
+            component: PageProductComponent,
+        });
+        return await modal.present();
     }
-
 }

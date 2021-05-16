@@ -9,6 +9,7 @@ import {PageTabsMainTrendCardComponent} from './page-tabs-main-trend-card/page-t
 import {PageTabsMainRecommendCardComponent} from './page-tabs-main-recommend-card/page-tabs-main-recommend-card.component';
 import {PageTabsMainSearchModalComponent} from './page-tabs-main-search-modal/page-tabs-main-search-modal.component';
 import {PageTabsMainArticleComponent} from './page-tabs-main-article/page-tabs-main-article.component';
+import {PageProductModule} from '../../page-product/page-product.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {PageTabsMainArticleComponent} from './page-tabs-main-article/page-tabs-m
         CommonModule,
         SharedModule,
         RouterModule.forChild([{path: '', component: PageTabsMainComponent}]),
+        PageProductModule,
     ]
 })
 export class PageTabsMainModule {

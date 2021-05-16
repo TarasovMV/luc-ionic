@@ -1,4 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {IArticle} from '../../../../models/article.model';
+import {PageTabsMainArticleComponent} from '../page-tabs-main-article/page-tabs-main-article.component';
+import {ModalController} from '@ionic/angular';
 
 @Component({
     selector: 'app-page-tabs-main-trend-card',
@@ -7,9 +10,17 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageTabsMainTrendCardComponent implements OnInit {
-    @Input() data: any;
+    @Input() data: IArticle;
 
-    constructor() {}
+    constructor(private modalController: ModalController) {}
 
     public ngOnInit(): void {}
+
+    public async presentModalArticle(): Promise<void> {
+        const modal = await this.modalController.create({
+            component: PageTabsMainArticleComponent,
+            componentProps: { articleJson: this.data.jsonContent }
+        });
+        await modal.present();
+    }
 }

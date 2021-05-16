@@ -4,6 +4,8 @@ import {IUserInfo, UserInfoGender} from '../../models/user-info.model';
 import {ApiUserService} from './api/api-user.service';
 import {AppTokenService} from './app-token.service';
 import {Storage} from '@ionic/storage';
+import {IArticle} from '../../models/article.model';
+import {ApiFileService} from './api/api-file.service';
 
 @Injectable({
     providedIn: 'root'
@@ -19,10 +21,24 @@ export class UserInfoService {
 
     constructor(
         private apiUserService: ApiUserService,
+        private apiFileService: ApiFileService,
         private tokenService: AppTokenService,
         private storage: Storage,
     ) {
         // this.tokenService.debugClear();
+    }
+
+    public async getAllArticles(): Promise<IArticle[]> {
+        const articles = await this.apiUserService.getAllArticles();
+        articles
+            .map(x => x.jsonContent)
+            .map(x => x.blocks)
+            .forEach(x => x.filter(k => k.type === 'photo').forEach(k => k.urls = k.urls.map(u => this.apiFileService.getArticlePhoto(u))));
+        articles.forEach(x => {
+            x.title = x.jsonContent.title;
+            x.imageUrl = x.jsonContent.blocks.find(b => b.type === 'photo').urls[0];
+        });
+        return articles;
     }
 
     public async setInitialGender(value: UserInfoGender) {

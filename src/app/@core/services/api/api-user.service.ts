@@ -6,6 +6,7 @@ import {LoggerService} from '../logger.service';
 import {IUserInfo, UserInfoGender} from '../../../models/user-info.model';
 import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
 import {IFavoritesResponse} from '../../../models/favorites.model';
+import {IArticle} from '../../../models/article.model';
 
 @Injectable({
     providedIn: 'root'
@@ -132,5 +133,14 @@ export class ApiUserService {
 
     public async deleteFavorites(feedId: number): Promise<unknown> {
         return await this.http.delete<unknown>(`${this.restUrl}/api/Favourites/${feedId}`).toPromise();
+    }
+
+    public async getAllArticles(): Promise<IArticle[]> {
+        try {
+            return await this.http.get<IArticle[]>(`${this.restUrl}/api/Articles/all`).toPromise();
+        } catch (e) {
+            console.error('getAllArticles', e);
+            return [];
+        }
     }
 }

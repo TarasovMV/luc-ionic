@@ -10,6 +10,7 @@ import {RecognitionInfoService} from '../../../../../@core/services/recognition-
 import {PageProductComponent} from '../../../../page-product/page-product.component';
 import {FavoritesController} from '../../../../../@shared/classes/favorites.class';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
+import {ApiFileService} from '../../../../../@core/services/api/api-file.service';
 
 @Component({
     selector: 'app-page-tabs-tinder-card',
@@ -21,7 +22,14 @@ export class PageTabsTinderCardComponent implements OnInit {
 
     @Input() private set data(method: () => Promise<ITinderSuggestion>) {
         this.disableInfo();
-        method().then((res) => this.data$.next(res));
+        method().then((res) => {
+            if (!res) {
+                // TODO: add error handler
+                return;
+            }
+            res.imageUrl = res.type !== 'tinderItem' ? res.imageUrl : this.apiFileService.getTinderPhotoById(res.tinderId);
+            this.data$.next(res);
+        });
     }
     public data$: BehaviorSubject<ITinderSuggestion> = new BehaviorSubject<ITinderSuggestion>(null);
     public isFavorite$: Observable<boolean> = this.data$.pipe(
@@ -42,6 +50,7 @@ export class PageTabsTinderCardComponent implements OnInit {
         private modalController: ModalController,
         private recognitionInfoService: RecognitionInfoService,
         private apiUserService: ApiUserService,
+        private apiFileService: ApiFileService,
     ) {
         this.favoritesController = new FavoritesController(apiUserService);
     }

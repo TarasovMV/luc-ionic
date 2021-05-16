@@ -1,5 +1,6 @@
 {
   "restUrl": "http://194.67.203.143:5678",
   "userUrl": "http://194.67.203.143:5678",
-  "recognitionUrl": "http://194.67.203.143:5679"
+  "recognitionUrl": "http://194.67.203.143:5679",
+  "fileUrl": "http://194.67.203.143:5679"
 }

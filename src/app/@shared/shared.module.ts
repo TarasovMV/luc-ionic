@@ -15,6 +15,7 @@ import {SharedTextareaComponent} from "./components/shared-textarea/shared-texta
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedFormErrorComponent} from './components/shared-form-error/shared-form-error.component';
 import {SharedImageSliderComponent} from './components/shared-image-slider/shared-image-slider.component';
+import { CategorySplitPipe } from './pipes/category-split.pipe';
 registerLocaleData(localeFr);
 
 
@@ -28,6 +29,7 @@ registerLocaleData(localeFr);
         SharedTextareaComponent,
         SharedFormErrorComponent,
         SharedImageSliderComponent,
+        CategorySplitPipe,
     ],
     imports: [
         CommonModule,
@@ -48,6 +50,7 @@ registerLocaleData(localeFr);
         SharedFormErrorComponent,
         SharedImageSliderComponent,
         SafeUrlPipe,
+        CategorySplitPipe,
     ]
 })
 export class SharedModule {
