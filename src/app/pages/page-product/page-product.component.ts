@@ -5,6 +5,7 @@ import {ModalController} from '@ionic/angular';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
 import {ApiUserService} from '../../@core/services/api/api-user.service';
 import {FavoritesController} from '../../@shared/classes/favorites.class';
+import {MobileShareService} from '../../@core/services/platform/mobile-share.service';
 
 @Component({
     selector: 'app-page-product',
@@ -20,6 +21,7 @@ export class PageProductComponent implements OnInit {
     constructor(
         public modalCtrl: ModalController,
         private recognitionInfoService: RecognitionInfoService,
+        private shareService: MobileShareService,
         apiUserService: ApiUserService,
     ) {
         this.favoritesController = new FavoritesController(apiUserService);
@@ -39,5 +41,15 @@ export class PageProductComponent implements OnInit {
 
     public async closePage(): Promise<void> {
         await this.modalCtrl.dismiss();
+    }
+
+    public shareProduct(): void {
+        const product = this.data$.getValue();
+        if (!product) { return; }
+        this.shareService.shareData(
+            'Отправленно из приложения LUC',
+            `Посмотри что нашел в LUC в магазине ${product.shopTitle}:`,
+            product.shopUrl,
+        );
     }
 }

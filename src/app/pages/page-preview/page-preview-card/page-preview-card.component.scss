@@ -6,11 +6,18 @@
   margin: auto auto 11vh;
 }
 
+.container {
+  height: 60vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
 .title-wrapper {
   font-size: 2.7vh;
   font-weight: 700;
   color: #202D3D;
-  margin-bottom: 2.8vh;
+  //margin-bottom: 2.8vh;
 }
 
 .description-wrapper {

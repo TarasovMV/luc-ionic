@@ -46,9 +46,13 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
     private async modalOpen(item: IProductModel): Promise<void> {
         const modal = await this.modalController.create({
             component: PageTabsFavoritesPopupComponent,
-            componentProps: { data: item }
+            componentProps: { data: {item, delete: () => this.deleteItem(item)} }
         });
         modal.onDidDismiss().then(() => this.loadFavorites());
         return await modal.present();
+    }
+
+    private async deleteItem(item: IProductModel): Promise<void> {
+        await this.apiUserService.deleteFavorites(item.id);
     }
 }

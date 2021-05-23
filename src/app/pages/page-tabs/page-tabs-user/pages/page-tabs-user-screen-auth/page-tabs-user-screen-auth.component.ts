@@ -34,7 +34,7 @@ export class PageTabsUserScreenAuthComponent extends RxJsUnsubscriber implements
     ngOnInit(): void {
         this.userService.authUser$.pipe(takeUntil(this.unsubscribe$)).subscribe(user => {
             // TODO: replace to deepEqual
-            if (this.currentUser?.gender === user?.gender) {
+            if (!!this.currentUser && this.currentUser?.gender === user?.gender) {
                 return;
             }
             this.userForm.controls.gender.setValue(user.gender);

@@ -11,16 +11,18 @@ export class MobileShareService {
     constructor(private platform: Platform) {
     }
 
-    public shareData(title: string, text: string): void {
+    public shareData(title: string, text: string, url: string = null): void {
         this.share({
             title,
-            text
+            text,
+            url,
+            dialogTitle: title,
         }).then();
     }
 
     private async share(options: ShareOptions): Promise<void> {
         if (this.platform.is('android' || 'ios')) {
-            const shareRet = await Share.share(options);
+            const shareRes = await Share.share(options);
         } else {
             console.warn('your system not supported');
         }

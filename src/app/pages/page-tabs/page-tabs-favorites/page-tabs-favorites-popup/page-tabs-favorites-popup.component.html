@@ -5,12 +5,15 @@
       <div (click)="close($event)" class="small-icon-container">
         <svg-icon class="icon" [src]="'assets/icon/svg/back.svg'"></svg-icon>
       </div>
-      <div class="small-icon-container">
+      <div class="small-icon-container" (click)="delete($event)">
         <svg-icon class="icon" [src]="'assets/icon/svg/trash.svg'"></svg-icon>
       </div>
     </div>
     <div class="buttons-container buttons-container__big">
-      <ng-container *ngTemplateOutlet="circleButton; context:{src: 'share', event: search.bind(this)}"></ng-container>
+      <ng-container *ngTemplateOutlet="circleButton; context:{src: 'share', event: share.bind(this)}"></ng-container>
+      <div (click)="openProduct($event)" class="shop">
+        <svg-icon src="assets/icon/svg/shopping-cart.svg"></svg-icon>
+      </div>
       <ng-container *ngTemplateOutlet="circleButton context:{src: 'search', event: search.bind(this)}"></ng-container>
     </div>
   </div>

@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {PageTabsFavouritesItemComponent} from './page-tabs-favourites-item/page-tabs-favourites-item.component';
 import {SharedModule} from '../../../@shared/shared.module';
 import {PageTabsFavoritesPopupComponent} from './page-tabs-favorites-popup/page-tabs-favorites-popup.component';
+import {PageProductModule} from '../../page-product/page-product.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {PageTabsFavoritesPopupComponent} from './page-tabs-favorites-popup/page-
         CommonModule,
         RouterModule.forChild([{path: '', component: PageTabsFavoritesComponent}]),
         SharedModule,
+        PageProductModule,
     ]
 })
 export class PageTabsFavoritesModule {

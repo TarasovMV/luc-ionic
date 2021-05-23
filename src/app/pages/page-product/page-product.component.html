@@ -1,5 +1,9 @@
 <div class="container">
-  <app-page-product-header [label]="(sharedData | async)?.shopTitle" (back)="closePage()"></app-page-product-header>
+  <app-page-product-header
+    [label]="(sharedData | async)?.shopTitle"
+    (back)="closePage()"
+    (share)="shareProduct()"
+  ></app-page-product-header>
   <div class="scroll-wrapper">
     <div class="img-container">
       <img class="image" alt="" [src]="(sharedData | async)?.imageUrl">

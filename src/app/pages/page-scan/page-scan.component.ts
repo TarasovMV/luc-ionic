@@ -52,6 +52,8 @@ export class PageScanComponent implements OnInit {
     }
 
     public async openFilter(): Promise<void> {
+        // TODO: add true filters and clear return
+        return;
         await this.presentModalFilter();
     }
 

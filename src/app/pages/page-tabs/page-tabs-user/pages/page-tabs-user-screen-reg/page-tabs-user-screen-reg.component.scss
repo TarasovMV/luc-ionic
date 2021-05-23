@@ -13,6 +13,10 @@ app-shared-input:nth-last-of-type(1) {
   display: flex;
   gap: 4.27vw;
   font-size: 1.72vh;
+
+  a {
+    color: #2CB172;
+  }
 }
 
 .button {

@@ -10,6 +10,7 @@ export class PageProductHeaderComponent implements OnInit {
 
     @Input() label: string = null;
     @Output() back: EventEmitter<null> = new EventEmitter<null>();
+    @Output() share: EventEmitter<null> = new EventEmitter<null>();
 
     constructor() {
     }
@@ -19,5 +20,9 @@ export class PageProductHeaderComponent implements OnInit {
 
     public backClick(): void {
         this.back.emit();
+    }
+
+    public shareClick(): void {
+        this.share.emit();
     }
 }

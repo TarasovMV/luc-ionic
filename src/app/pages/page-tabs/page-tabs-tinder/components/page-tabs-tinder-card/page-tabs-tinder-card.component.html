@@ -2,7 +2,12 @@
   <div class="shadow"></div>
   <ng-container *ngIf="!!(data$ | async); else loader">
     <img alt="" [src]="(data$ | async).imageUrl"/>
-    <div (click)="toggleInfo()" class="rights" [class.rights__active]="isInfo$ | async">
+    <div
+      [ngStyle]="{visibility: !(shopUrl$ | async) ? 'visible' : 'hidden'}"
+      (click)="toggleInfo()"
+      class="rights"
+      [class.rights__active]="isInfo$ | async"
+    >
       <span> © </span>
       <div class="info"> Источник: pinterest.ru </div>
     </div>
