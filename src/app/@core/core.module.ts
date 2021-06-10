@@ -9,6 +9,7 @@ import {AuthenticationInterceptor} from './interceptors/authentication.intercept
 // camera web view
 import '@capacitor-community/camera-preview';
 import {AppTokenService} from './services/app-token.service';
+import {AppRate} from '@ionic-native/app-rate/ngx';
 
 @NgModule({
     declarations: [],
@@ -17,6 +18,7 @@ import {AppTokenService} from './services/app-token.service';
         HttpClientModule,
     ],
     providers: [
+        AppRate,
         UserAgent,
         { provide: APP_INITIALIZER, useFactory: appInit, deps: [AppConfigService], multi: true },
         { provide: APP_INITIALIZER, useFactory: loadToken, deps: [AppTokenService], multi: true },

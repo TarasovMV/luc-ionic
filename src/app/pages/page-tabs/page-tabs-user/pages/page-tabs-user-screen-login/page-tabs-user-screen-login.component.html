@@ -4,7 +4,7 @@
   Не верно заполнен email или пароль
 </app-shared-form-error>
 
-<a class="forget-password"> Забыли пароль? </a>
+<a class="forget-password" (click)="refreshPassword()"> Забыли пароль? </a>
 
 <app-shared-button (click)="loginClick()" class="button" type="main">
   Войти
@@ -13,7 +13,7 @@
 
 <div class="menu-container">
   <div class="flex-free-space"></div>
-  <app-page-tabs-user-menu icon="star"> Оценить приложение </app-page-tabs-user-menu>
+  <app-page-tabs-user-menu (click)="rate()" icon="star"> Оценить приложение </app-page-tabs-user-menu>
   <app-page-tabs-user-menu (click)="share()" icon="crowd"> Поделиться с друзьями </app-page-tabs-user-menu>
   <app-page-tabs-user-menu (click)="openFeedback()" icon="fire"> Обратная связь </app-page-tabs-user-menu>
 </div>

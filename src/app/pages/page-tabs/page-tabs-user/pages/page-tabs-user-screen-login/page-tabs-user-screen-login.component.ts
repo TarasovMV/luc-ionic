@@ -6,6 +6,8 @@ import {LoadingService} from '../../../../../@core/services/loading.service';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
 import {UserInfoService} from '../../../../../@core/services/user-info.service';
 import {MobileShareService} from '../../../../../@core/services/platform/mobile-share.service';
+import {RateAppService} from '../../../../../@core/services/platform/rate-app.service';
+import {PopupDropPassComponent} from '../../../../../popups/popup-drop-pass/popup-drop-pass.component';
 
 @Component({
     selector: 'app-page-tabs-user-screen-login',
@@ -25,6 +27,7 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         private apiUserService: ApiUserService,
         private userService: UserInfoService,
         private shareService: MobileShareService,
+        private rateAppService: RateAppService,
     ) {}
 
     ngOnInit(): void {
@@ -45,11 +48,16 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         this.userService.setUser(res);
     }
 
+    public rate(): void {
+        this.rateAppService.rateUs();
+    }
+
     public share(): void {
-        this.shareService.shareData(
-            'LUC',
-            'Try to use it!'
-        );
+        this.shareService.shareApp().then();
+    }
+
+    public async refreshPassword(): Promise<void> {
+        await this.presentModalChangePass();
     }
 
     public async openFeedback(): Promise<void> {
@@ -59,6 +67,13 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
     private async presentModalFeedback() {
         const modal = await this.modalController.create({
             component: PopupFeedbackComponent,
+        });
+        return await modal.present();
+    }
+
+    private async presentModalChangePass() {
+        const modal = await this.modalController.create({
+            component: PopupDropPassComponent,
         });
         return await modal.present();
     }

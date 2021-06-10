@@ -11,6 +11,14 @@ export class MobileShareService {
     constructor(private platform: Platform) {
     }
 
+    public async shareApp(): Promise<void> {
+        const androidUrl: string = 'https://play.google.com/store/apps/details?id=com.luc.app';
+        this.shareData(
+            'LUC',
+            `Привет! Хочешь найти подходящую тебе одежду и стиль, тогда скачивай скорее приложение LUC: Android - ${androidUrl}, iOS - уже скоро`,
+        );
+    }
+
     public shareData(title: string, text: string, url: string = null): void {
         this.share({
             title,
@@ -21,7 +29,7 @@ export class MobileShareService {
     }
 
     private async share(options: ShareOptions): Promise<void> {
-        if (this.platform.is('android' || 'ios')) {
+        if (this.platform.is('android') || this.platform.is('ios')) {
             const shareRes = await Share.share(options);
         } else {
             console.warn('your system not supported');

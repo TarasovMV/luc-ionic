@@ -10,6 +10,8 @@ import {PageTabsUserScreenLoginComponent} from "./pages/page-tabs-user-screen-lo
 import {PageTabsUserScreenRegComponent} from "./pages/page-tabs-user-screen-reg/page-tabs-user-screen-reg.component";
 import {PopupFeedbackModule} from "../../../popups/popup-feedback/popup-feedback.module";
 import {PageTabsUserScreenAuthComponent} from "./pages/page-tabs-user-screen-auth/page-tabs-user-screen-auth.component";
+import {PopupChangePassModule} from '../../../popups/popup-change-pass/popup-change-pass.module';
+import {PopupDropPassModule} from '../../../popups/popup-drop-pass/popup-drop-pass.module';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import {PageTabsUserScreenAuthComponent} from "./pages/page-tabs-user-screen-aut
         CommonModule,
         SharedModule,
         PopupFeedbackModule,
+        PopupChangePassModule,
+        PopupDropPassModule,
         RouterModule.forChild([{path: '', component: PageTabsUserComponent}]),
     ]
 })

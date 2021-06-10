@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
+import {ElementRef, Injectable} from '@angular/core';
 import {
     Plugins,
     StatusBarStyle,
 } from '@capacitor/core';
+import {Platform} from '@ionic/angular';
 
 const {StatusBar} = Plugins;
 
@@ -10,12 +11,24 @@ const {StatusBar} = Plugins;
     providedIn: 'root'
 })
 export class StatusBarService {
+    private iosBar: ElementRef;
 
-    constructor() {}
+    constructor(private platform: Platform) {}
+
+    public async init(bar: ElementRef): Promise<void> {
+        this.iosBar = bar;
+        if (!this.platform.is('ios')) {
+            this.iosBar.nativeElement.style = 'display: none;';
+        }
+    }
 
     // TODO: add theme
     public async setDefault(): Promise<void> {
         try {
+            // await StatusBar.setOverlaysWebView({overlay: true});
+            if (this.platform.is('ios')) {
+                this.iosBar.nativeElement.style = 'display: block; background: #ffffff';
+            }
             await StatusBar.show();
             await StatusBar.setStyle({style: StatusBarStyle.Light});
             await StatusBar.setBackgroundColor({color: '#ffffff'});
@@ -27,6 +40,7 @@ export class StatusBarService {
     public async hide(): Promise<void> {
         try {
             await StatusBar.hide();
+            this.iosBar.nativeElement.style = 'display: none;';
         } catch (e) {
             console.warn('StatusBar Error', e);
         }

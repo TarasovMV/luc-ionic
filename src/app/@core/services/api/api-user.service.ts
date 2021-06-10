@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AppConfigService} from '../platform/app-config.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-login.model';
 import {LoggerService} from '../logger.service';
 import {IUserInfo, UserInfoGender} from '../../../models/user-info.model';
@@ -144,6 +144,33 @@ export class ApiUserService {
         } catch (e) {
             console.error('getAllArticles', e);
             return [];
+        }
+    }
+
+    public async dropPassword(email: string): Promise<boolean> {
+        const body = {
+            email,
+        };
+        try {
+            await this.http.post(`${this.restUrl}/api/Password/reset-via-email`, body, {responseType: 'text'}).toPromise();
+            return true;
+        } catch (e) {
+            console.error('dropPassword', e);
+            return false;
+        }
+    }
+
+    public async refreshPassword(currentPassword: string, newPassword: string): Promise<boolean> {
+        const body = {
+            currentPassword,
+            newPassword,
+        };
+        try {
+            await this.http.post(`${this.restUrl}/api/Password`, body).toPromise();
+            return true;
+        } catch (e) {
+            console.error('refreshPassword', e);
+            return false;
         }
     }
 }

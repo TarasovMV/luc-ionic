@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {IPageScanProductModel} from '../../models/page-scan.model';
 import {Location} from '@angular/common';
 import {map} from 'rxjs/operators';
-import {ModalController, NavController} from '@ionic/angular';
+import {ModalController, NavController, Platform} from '@ionic/angular';
 import {SharedFilterComponent} from '../../popups/shared-filter/shared-filter.component';
 import {PageProductComponent} from '../page-product/page-product.component';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
@@ -32,11 +32,15 @@ export class PageScanComponent implements OnInit {
         private modalController: ModalController,
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
+        private platform: Platform,
     ) {
     }
 
     public ngOnInit(): void {
         this.getData().then();
+        this.platform.backButton.subscribeWithPriority(9999, () => {
+            this.closePage();
+        });
     }
 
     public async chooseProduct(product: IPageScanProductModel): Promise<void> {

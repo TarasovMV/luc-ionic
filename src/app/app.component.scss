@@ -2,3 +2,38 @@
   height: 100%;
   width: 100%;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+ion-router-outlet{
+  width: 100%;
+  height: 100%;
+}
+
+.app-navbar-notch {
+  width: 100%;
+  background: white;
+  height: env(safe-area-inset-top);
+  //height: 20px;
+}
+
+ion-app {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

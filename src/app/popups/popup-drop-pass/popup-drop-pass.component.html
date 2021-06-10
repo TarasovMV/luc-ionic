@@ -1,0 +1,15 @@
+<div class="page-wrapper">
+  <div class="header">
+    <svg-icon (click)="back()" class="icon" src="assets/icon/svg/back.svg"></svg-icon>
+    <span class="label flex-free-space"> Смена пароля </span>
+    <div class="icon"></div>
+  </div>
+  <div class="form">
+    <app-shared-input [formControl]="email" label="Email" type="email"></app-shared-input>
+    <app-shared-form-error
+      *ngIf="email?.errors && email?.touched;"
+    > Введите корректный email </app-shared-form-error>
+    <div class="flex-free-space"></div>
+    <app-shared-button (click)="dropPass()" style="width: 100%"> Сбросить пароль </app-shared-button>
+  </div>
+</div>

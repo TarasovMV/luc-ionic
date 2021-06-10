@@ -4,7 +4,7 @@ import {Plugins} from '@capacitor/core';
 import {CameraPreviewOptions} from '@capacitor-community/camera-preview';
 import {CameraResultType, CameraSource} from '@capacitor/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {NavController} from '@ionic/angular';
+import {NavController, Platform} from '@ionic/angular';
 import {StatusBarService} from '../../@core/services/platform/status-bar.service';
 import {ApiRecognitionService} from '../../@core/services/api/api-recognition.service';
 import {PageCameraDotGroup} from './components/page-camera-dot/page-camera-dot-group.class';
@@ -64,6 +64,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
         private apiRecognitionService: ApiRecognitionService,
         private loadingService: LoadingService,
         private recognitionInfoService: RecognitionInfoService,
+        private platform: Platform,
     ) {}
 
     public ngOnInit(): void {
@@ -71,6 +72,9 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     public ngAfterViewInit(): void {
+        this.platform.backButton.subscribeWithPriority(9999, () => {
+            this.clickClose();
+        });
         const img = this.activeRoute.snapshot.queryParamMap.get('img');
         if (img) {
             this.imgSrc = img;

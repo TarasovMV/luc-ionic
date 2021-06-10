@@ -14,6 +14,7 @@ import {UserInfoService} from './@core/services/user-info.service';
 })
 export class AppComponent implements OnInit {
     @ViewChild('appWindow', {static: true}) private appWindow: ElementRef;
+    @ViewChild('statusBar', {static: true}) private statusBar: ElementRef;
     public height$: Observable<number>;
 
     constructor(
@@ -27,11 +28,13 @@ export class AppComponent implements OnInit {
 
     public async ngOnInit(): Promise<void> {
         this.initializeApp();
+        console.log(this.appWindow);
     }
 
     private initializeApp(): void {
         this.platform.ready().then(() => {
             this.splashScreen.hide();
+            this.statusBarService.init(this.statusBar);
             this.statusBarService.setDefault();
             this.keyboardService.setInitSettings(this.platform, this.appWindow);
             // this.userAgentService.setUserAgent(); // TODO: not work

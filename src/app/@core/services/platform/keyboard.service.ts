@@ -19,17 +19,15 @@ export class KeyboardService {
         try {
             this.actionListeners(platform, appWindow);
             await Keyboard.setStyle({style: KeyboardStyle.Light});
-            await Keyboard.setResizeMode({mode: KeyboardResize.Ionic});
+            await Keyboard.setResizeMode({mode: KeyboardResize.None});
         } catch {}
     }
 
     public actionListeners(platform: Platform, appWindow: ElementRef): void {
         platform.keyboardDidShow.subscribe((event) => this.keyboardHeight$.next(event.keyboardHeight));
         platform.keyboardDidHide.subscribe(() => this.keyboardHeight$.next(0));
-        if (platform.is('android')) {
-            this.keyboardHeight$.subscribe((height) =>
-                (appWindow as any).el.style = `height: calc(100vh - ${height}px)`
-            );
-        }
+        this.keyboardHeight$.subscribe((height) => {
+            appWindow.nativeElement.style = `height: calc(100vh - ${height}px)`;
+        });
     }
 }
