@@ -33,26 +33,32 @@ $padding-w: 5.33vw;
   flex-grow: 1;
   padding-top: 3.7vh;
   box-sizing: border-box;
-  gap: 4.93vh;
 
   .buttons-container {
     display: flex;
     justify-content: center;
-    gap: 2.71vh;
+    margin-bottom: 4.93vh;
   }
 
   .recommend-container {
     display: flex;
     flex-flow: column;
+    margin-bottom: 4.93vh;
 
     .cards {
       display: flex;
       margin-top: 2.46vh;
-      gap: 1.97vh;
       overflow: scroll;
       padding-left: $padding-w;
       margin-left: -$padding-w;
       margin-right: -$padding-w;
+
+      .card {
+        margin-right: 1.97vh;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
 
       :last-child {
         padding-right: $padding-w;
@@ -68,7 +74,14 @@ $padding-w: 5.33vw;
       display: flex;
       flex-flow: column;
       margin-top: 2.46vh;
-      gap: 2vh;
+
+      .card {
+        margin-bottom: 2vh;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

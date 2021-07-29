@@ -2,7 +2,14 @@
   height: 100%;
   display: inherit;
   flex-flow: inherit;
-  gap: inherit;
+}
+
+:host > * {
+  margin-bottom: 1.97vh;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .forget-password {

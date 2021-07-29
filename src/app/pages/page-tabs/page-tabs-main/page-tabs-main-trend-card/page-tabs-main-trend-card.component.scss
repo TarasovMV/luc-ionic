@@ -2,7 +2,6 @@
   display: flex;
   height: 12.07vh;
   width: 100%;
-  gap: 2.59vh;
 }
 
 .image {
@@ -12,6 +11,7 @@
   border-radius: 1.48vh;
   background: #DCE0EB;
   overflow: hidden;
+  margin-right: 2.59vh;
 
   img {
     width: 100%;

@@ -39,8 +39,8 @@ export class StatusBarService {
 
     public async hide(): Promise<void> {
         try {
-            await StatusBar.hide();
             this.iosBar.nativeElement.style = 'display: none;';
+            await StatusBar.hide();
         } catch (e) {
             console.warn('StatusBar Error', e);
         }

@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  gap: 1.23vh;
   width: inherit;
   height: 5.91vh;
   padding: 0 1.85vh;
@@ -11,8 +10,8 @@
 .icon {
   width: 2.22vh;
   height: 2.22vh;
-  margin: auto 0;
   color: #41485D;
+  margin: auto 1.23vh auto 0;
 }
 
 .label {

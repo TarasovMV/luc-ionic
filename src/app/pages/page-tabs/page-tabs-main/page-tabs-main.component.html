@@ -6,14 +6,18 @@
   </div>
   <div class="content">
     <div class="buttons-container">
-      <app-page-tabs-main-search (click)="presentModalSearch()" style="flex-grow: 1"></app-page-tabs-main-search>
+      <app-page-tabs-main-search (click)="presentModalSearch()" style="flex-grow: 1; margin-right: 2.71vh"></app-page-tabs-main-search>
       <app-page-tabs-main-camera></app-page-tabs-main-camera>
     </div>
     <div class="recommend-container">
       <div class="title"> Рекомендации </div>
       <div class="subtitle"> Подборка, основанная на вашем вкусе </div>
       <div class="cards">
-        <app-page-tabs-main-recommend-card [data]="card" *ngFor="let card of recommends$ | async"></app-page-tabs-main-recommend-card>
+        <app-page-tabs-main-recommend-card
+          [data]="card"
+          class="card"
+          *ngFor="let card of recommends$ | async"
+        ></app-page-tabs-main-recommend-card>
       </div>
     </div>
     <div class="trend-container">
@@ -23,6 +27,7 @@
         <app-page-tabs-main-trend-card
           *ngFor="let article of articles$ | async"
           [data]="article"
+          class="card"
         ></app-page-tabs-main-trend-card>
       </div>
     </div>

@@ -2,7 +2,14 @@
   height: 100%;
   display: inherit;
   flex-flow: inherit;
-  gap: inherit;
+}
+
+:host > * {
+  margin-bottom: 1.97vh;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 app-shared-input:nth-last-of-type(1) {
@@ -11,8 +18,11 @@ app-shared-input:nth-last-of-type(1) {
 
 .agree-container {
   display: flex;
-  gap: 4.27vw;
   font-size: 1.72vh;
+
+  .label {
+    margin-left: 4.27vw;
+  }
 
   a {
     color: #2CB172;

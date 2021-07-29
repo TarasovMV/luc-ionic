@@ -5,8 +5,6 @@ $padding-w: 0 4.27vw;
   flex-flow: column;
   width: 100%;
   height: 100%;
-  gap: 1.97vh;
-  //padding: 0 4.27vw;
   box-sizing: border-box;
   overflow: scroll;
   background: white;
@@ -17,6 +15,7 @@ $padding-w: 0 4.27vw;
     color: #222222;
     margin-top: 2.46vh;
     padding: $padding-w;
+    margin-bottom: 1.97vh;
   }
 
   .subheader {
@@ -24,14 +23,13 @@ $padding-w: 0 4.27vw;
     font-weight: 400;
     color: #222222;
     padding: $padding-w;
+    margin-bottom: 1.97vh;
   }
 
   .content-wrapper {
     display: flex;
     max-height: 100%;
     flex-wrap: wrap;
-    row-gap: 4vw;
-    column-gap: 4vw;
     overflow: auto;
     padding: $padding-w;
     padding-top: 0.5vh;
@@ -39,6 +37,12 @@ $padding-w: 0 4.27vw;
     .item {
       width: 27.6vw;
       height: 34.13vw;
+      margin-right: 4vw;
+      margin-bottom: 4vw;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
     }
   }
 }

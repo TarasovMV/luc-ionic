@@ -5,7 +5,6 @@
 
   .search-container {
     display: flex;
-    gap: 2vh;
     padding: 2vh 3vh;
     box-sizing: border-box;
     box-shadow: 0px -8px 10px 1px black;
@@ -20,6 +19,7 @@
 
       &__back {
         color: #41485D;
+        margin-right: 2vh;
       }
     }
 

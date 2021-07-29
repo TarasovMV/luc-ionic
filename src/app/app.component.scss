@@ -18,8 +18,8 @@ ion-router-outlet{
 .app-navbar-notch {
   width: 100%;
   background: white;
-  height: env(safe-area-inset-top);
-  //height: 20px;
+  //height: env(safe-area-inset-top);
+  height: 20px;
 }
 
 ion-app {
