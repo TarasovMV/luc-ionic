@@ -21,9 +21,7 @@ export class PageTabsUserOutsourceComponent implements OnInit {
     ) {
     }
 
-    ngOnInit(): void {
-        this.snapshotMapping();
-    }
+    ngOnInit(): void {}
 
     public async googleAuth(): Promise<void> {
         const googleData = await this.googleAuthService.authRequest();
@@ -42,9 +40,5 @@ export class PageTabsUserOutsourceComponent implements OnInit {
         }
         const user = await this.apiUserService.userVk(token);
         this.userService.setUser(user);
-    }
-
-    private snapshotMapping(): void {
-        this.googleAuthService.getMapFromRoute(this.route.snapshot.fragment);
     }
 }

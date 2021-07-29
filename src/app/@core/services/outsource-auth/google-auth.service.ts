@@ -21,7 +21,7 @@ export class GoogleAuthService {
     constructor(private http: HttpClient, private appConfigService: AppConfigService) {
     }
 
-    public getMapFromRoute(fragment: string) {
+    public getMapFromRoute(fragment: string): void {
         if (!fragment) {
             return;
         }
@@ -30,7 +30,6 @@ export class GoogleAuthService {
             const param = x.split('=');
             params[param[0]] = param[1];
         });
-        console.log(params);
     }
 
     public async authRequest(): Promise<{email: string, googleOAuthToken: string}> {
