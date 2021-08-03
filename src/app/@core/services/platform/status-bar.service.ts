@@ -1,11 +1,6 @@
 import {ElementRef, Injectable} from '@angular/core';
-import {
-    Plugins,
-    StatusBarStyle,
-} from '@capacitor/core';
 import {Platform} from '@ionic/angular';
-
-const {StatusBar} = Plugins;
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 @Injectable({
     providedIn: 'root'
@@ -30,7 +25,7 @@ export class StatusBarService {
                 this.iosBar.nativeElement.style = 'display: block; background: #ffffff';
             }
             await StatusBar.show();
-            await StatusBar.setStyle({style: StatusBarStyle.Light});
+            await StatusBar.setStyle({style: Style.Light});
             await StatusBar.setBackgroundColor({color: '#ffffff'});
         } catch (e) {
             console.warn('StatusBar Error', e);

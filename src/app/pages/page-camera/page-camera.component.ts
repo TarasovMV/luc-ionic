@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
-import {Plugins} from '@capacitor/core';
-import {CameraPreviewOptions} from '@capacitor-community/camera-preview';
-import {CameraResultType, CameraSource} from '@capacitor/core';
+import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {NavController, Platform} from '@ionic/angular';
 import {StatusBarService} from '../../@core/services/platform/status-bar.service';
@@ -12,7 +10,7 @@ import {LoadingService} from '../../@core/services/loading.service';
 import {IRecognitionDetected} from '../../models/recognition.model';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
 import {ActivatedRoute} from '@angular/router';
-const {CameraPreview, Camera} = Plugins;
+import {CameraPreview, CameraPreviewOptions} from '@capacitor-community/camera-preview';
 
 @Component({
     selector: 'app-page-camera',

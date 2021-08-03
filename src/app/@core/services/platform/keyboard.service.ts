@@ -1,8 +1,7 @@
 import {ElementRef, Injectable} from '@angular/core';
-import {KeyboardResize, KeyboardStyle, Plugins} from '@capacitor/core';
 import {BehaviorSubject} from 'rxjs';
 import {Platform} from '@ionic/angular';
-const { Keyboard } = Plugins;
+import {KeyboardResize, KeyboardStyle, Keyboard} from '@capacitor/keyboard';
 
 @Injectable({
     providedIn: 'root'

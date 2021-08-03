@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Plugins, ShareOptions} from '@capacitor/core';
+import {Share, ShareOptions} from '@capacitor/share';
 import {Platform} from '@ionic/angular';
-const { Share } = Plugins;
 
 @Injectable({
     providedIn: 'root'

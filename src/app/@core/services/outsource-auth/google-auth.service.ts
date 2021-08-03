@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {AppConfigService} from '../platform/app-config.service';
 import '@codetrix-studio/capacitor-google-auth';
-import { Plugins } from '@capacitor/core';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +34,7 @@ export class GoogleAuthService {
 
     public async authRequest(): Promise<{email: string, googleOAuthToken: string}> {
         // const googleUser = await Plugins.GoogleAuth.signIn('https://www.googleapis.com/auth/userinfo.profile');
-        const googleUser = await Plugins.GoogleAuth.signIn();
+        const googleUser = await GoogleAuth.signIn();
         console.log('user', JSON.stringify(googleUser));
         return {
             email: googleUser?.email,
