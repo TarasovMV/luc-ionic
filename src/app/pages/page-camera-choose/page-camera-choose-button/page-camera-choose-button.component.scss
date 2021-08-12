@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  height: 6vh;
+  width: 50vw;
+  font-size: 2vh;
+  font-weight: 700;
+  border: solid 0.4vh #2CB172;
+  color: #2CB172;
+  margin-bottom: 2vh;
+  border-radius: 1vw;
+
+  & > * {
+    margin: auto;
+  }
+}

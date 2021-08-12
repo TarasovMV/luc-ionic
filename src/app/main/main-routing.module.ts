@@ -10,6 +10,10 @@ const routes: Routes = [
                 loadChildren: () => import('../pages/page-camera/page-camera.module').then(m => m.PageCameraModule),
             },
             {
+                path: 'camera-choose',
+                loadChildren: () => import('../pages/page-camera-choose/page-camera-choose.module').then(m => m.PageCameraChoosePageModule),
+            },
+            {
                 path: 'scan',
                 loadChildren: () => import('../pages/page-scan/page-scan.module').then(m => m.PageScanModule),
             },

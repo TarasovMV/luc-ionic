@@ -15,7 +15,7 @@ export class PageTabsMainCameraComponent implements OnInit {
     }
 
     public async clickCamera(): Promise<void> {
-        await this.navCtrl.navigateRoot('/main/camera');
+        await this.navCtrl.navigateRoot('/main/camera-choose');
     }
 
 }

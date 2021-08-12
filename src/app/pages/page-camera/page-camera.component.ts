@@ -10,7 +10,7 @@ import {LoadingService} from '../../@core/services/loading.service';
 import {IRecognitionDetected} from '../../models/recognition.model';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
 import {ActivatedRoute} from '@angular/router';
-import {CameraPreview, CameraPreviewOptions} from '@capacitor-community/camera-preview';
+// import {CameraPreview, CameraPreviewOptions} from '@capacitor-community/camera-preview';
 
 @Component({
     selector: 'app-page-camera',
@@ -41,16 +41,16 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
 
     private subscriptions: Subscription[] = [];
 
-    private readonly options: CameraPreviewOptions = {
-        x: 0,
-        y: 0,
-        width: window.screen.width,
-        height: window.screen.height,
-        position: 'rear',
-        toBack: true,
-        parent: 'camera-preview',
-        className: 'camera-preview',
-    };
+    // private readonly options: CameraPreviewOptions = {
+    //     x: 0,
+    //     y: 0,
+    //     width: window.screen.width,
+    //     height: window.screen.height,
+    //     position: 'rear',
+    //     toBack: true,
+    //     parent: 'camera-preview',
+    //     className: 'camera-preview',
+    // };
 
     private responseRecognitionData: IRecognitionDetected = null;
 
@@ -79,26 +79,26 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
             this.isSrcWithImage = true;
             this.findPhoto().then();
         }
-        this.subscriptions.push(
-            this.imgSrcObservable.subscribe((ref) => {
-                if (!!ref) {
-                    CameraPreview.stop();
-                } else {
-                    queueMicrotask(() => CameraPreview.start(this.options));
-                }
-            })
-        );
+        // this.subscriptions.push(
+        //     this.imgSrcObservable.subscribe((ref) => {
+        //         if (!!ref) {
+        //             CameraPreview.stop();
+        //         } else {
+        //             queueMicrotask(() => CameraPreview.start(this.options));
+        //         }
+        //     })
+        // );
     }
 
     public async ngOnDestroy(): Promise<void> {
         this.subscriptions.forEach((s) => s.unsubscribe());
         this.imgSrc = null;
-        CameraPreview.stop();
+        // CameraPreview.stop();
         await this.statusBarService.setDefault();
     }
 
     public switchCamera(): void {
-        CameraPreview.flip();
+        // CameraPreview.flip();
     }
 
     public async openGallery(): Promise<void> {
@@ -112,10 +112,10 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     public async takePhoto(): Promise<void> {
-        const capturedPhoto = await CameraPreview.capture({
-            quality: 70,
-        });
-        this.imgSrc = `data:image/png;base64, ${capturedPhoto.value}`;
+        // const capturedPhoto = await CameraPreview.capture({
+        //     quality: 70,
+        // });
+        // this.imgSrc = `data:image/png;base64, ${capturedPhoto.value}`;
     }
 
     public clickClose(): void {

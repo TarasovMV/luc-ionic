@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  padding: 3vh 4.27vw;
+  box-sizing: border-box;
+  background: white;
+  overflow: hidden;
+  gap: 2.37vh;
+
+  .icon {
+    width: 2.43vh;
+    height: 2.43vh;
+    z-index: 1;
+
+    &__back {
+      color: #2CB172;
+    }
+  }
+
+  .header {
+    font-size: 2.71vh;
+    font-weight: 700;
+    color: #222222;
+    margin-top: 2.46vh;
+  }
+
+  .subheader {
+    margin-bottom: 1.97vh;
+    font-size: 1.9vh;
+    font-weight: 400;
+    color: #222222;
+  }
+
+  .buttons {
+    margin: auto;
+
+    app-page-camera-choose-button {
+      margin-bottom: 1.97vh;
+    }
+  }
+}

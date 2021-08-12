@@ -25,6 +25,10 @@ const routes: Routes = [
         redirectTo: 'preview',
         pathMatch: 'full',
     },
+  {
+    path: 'page-camera-choose',
+    loadChildren: () => import('./pages/page-camera-choose/page-camera-choose.module').then( m => m.PageCameraChoosePageModule)
+  },
 ];
 
 @NgModule({

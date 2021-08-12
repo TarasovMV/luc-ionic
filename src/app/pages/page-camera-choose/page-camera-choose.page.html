@@ -1,0 +1,10 @@
+<div class="container">
+  <svg-icon (click)="back()" class="icon icon__back" src="assets/icon/svg/back.svg"></svg-icon>
+  <div class="header"> Поиск по фото </div>
+  <div class="subheader"> Выберите источник для фото </div>
+
+  <div class="buttons">
+    <app-page-camera-choose-button (click)="openGallery()">ВЫБРАТЬ ФОТО</app-page-camera-choose-button>
+    <app-page-camera-choose-button (click)="takePhoto()">СДЕЛАТЬ ФОТО</app-page-camera-choose-button>
+  </div>
+</div>
