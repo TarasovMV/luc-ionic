@@ -4,11 +4,12 @@ import {BehaviorSubject} from 'rxjs';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {urlToDataUrl} from '../../../../@shared/functions/base64-file.function';
 import {StatusBarService} from '../../../../@core/services/platform/status-bar.service';
-import {IProductModel} from '../../../../models/page-product.model';
 import {MobileShareService} from '../../../../@core/services/platform/mobile-share.service';
 import {RecognitionInfoService} from '../../../../@core/services/recognition-info.service';
 import {ApiRecognitionService} from '../../../../@core/services/api/api-recognition.service';
 import {PageProductComponent} from '../../../page-product/page-product.component';
+import {IFavouriteItem} from '../../../../models/favorites.model';
+import {BackButtonService} from '../../../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-page-tabs-favorites-popup',
@@ -30,15 +31,17 @@ import {PageProductComponent} from '../../../page-product/page-product.component
 })
 export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
     private readonly nextRouteUrl = '/main/camera';
-    @Input() set data(value: {item: IProductModel, delete: () => Promise<void>}) {
+    @Input() set data(value: {item: IFavouriteItem, delete: () => Promise<void>}) {
         this.imgSrc = value.item.imageUrl;
         this.item = { ...value.item };
         this.deleteFn = value.delete;
+        this.isFeed = !!value.item?.feed;
     }
 
     public imgSrc: string = null;
+    public isFeed: boolean = false;
     public isInterface$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-    private item: IProductModel = null;
+    private item: IFavouriteItem = null;
     private isSetDefault: boolean = true;
     private deleteFn: () => Promise<void>;
 
@@ -49,10 +52,12 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
         private shareService: MobileShareService,
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
+        private backButtonService: BackButtonService,
     ) {}
 
     ngOnInit(): void {
         this.statusBarService.hide().then();
+        this.backButtonService.actionOnBack(() => this.closeModal(), false);
     }
 
     async ngOnDestroy(): Promise<void> {
@@ -87,7 +92,7 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
 
     public share(event: MouseEvent): void {
         event.stopPropagation();
-        const product = this.item;
+        const product = this.item?.feed;
         if (!product) { return; }
         this.shareService.shareData(
             'Отправленно из приложения LUC',
@@ -98,7 +103,7 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
 
     public async openProduct(event: MouseEvent): Promise<void> {
         event.stopPropagation();
-        const productId = this.item.id;
+        const productId = this.item.feed?.id;
         if (!productId) { return; }
         this.recognitionInfoService.recognitionFeedFunction = () => this.apiRecognitionService.getFullItem(productId);
         await this.presentModalInfo();

@@ -1,12 +1,13 @@
 import {ApiUserService} from '../../@core/services/api/api-user.service';
 import {IProductModel} from '../../models/page-product.model';
+import {ITinderSuggestionId} from '../../models/tinder.model';
 
 export class FavoritesController {
     private isLoading: boolean = false;
 
     constructor(private apiUserService: ApiUserService) {}
 
-    public async setFavourite(id: number, isFavorite: boolean): Promise<boolean | null> {
+    public async setFavourite(id: ITinderSuggestionId, isFavorite: boolean): Promise<boolean | null> {
         if (this.isLoading) {
             return !isFavorite;
         }
@@ -27,13 +28,18 @@ export class FavoritesController {
         }
     }
 
-    private async addFavourite(id: number): Promise<IProductModel> {
+    private async addFavourite(id: ITinderSuggestionId): Promise<unknown> {
         const res = await this.apiUserService.addFavorites(id);
-        return res?.feed;
+        return;
     }
 
-    private async deleteFavourite(id: number): Promise<unknown> {
-        const res = await this.apiUserService.deleteFavorites(id);
-        return res;
+    private async deleteFavourite(id: ITinderSuggestionId): Promise<unknown> {
+        if (!!id.feedId) {
+            const res = await this.apiUserService.deleteFeedFavorites(id.feedId);
+            return res;
+        } else if (!!id.tinderId) {
+            const res = await this.apiUserService.deleteTinderFavorites(id.tinderId);
+            return res;
+        }
     }
 }

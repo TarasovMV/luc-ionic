@@ -13,6 +13,7 @@ import {
 import {DATA_SOURCE_BRANDS, DATA_SOURCE_COLORS, DATA_SOURCE_MAIN, DATA_SOURCE_PRICES} from './data/shared-filter.mock';
 import {map} from 'rxjs/operators';
 import {deepCopy} from '../../@shared/functions/deep-copy.function';
+import {BackButtonService} from '../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-shared-filter',
@@ -50,9 +51,13 @@ export class SharedFilterComponent implements OnInit {
     public prices$: BehaviorSubject<ISharedFilterPrice[]> =
         new BehaviorSubject<ISharedFilterPrice[]>([]);
 
-    constructor(private modalCtrl: ModalController) {}
+    constructor(
+        private modalCtrl: ModalController,
+        private backButtonService: BackButtonService,
+    ) {}
 
     ngOnInit(): void {
+        this.backButtonService.actionOnBack(() => this.close(), false);
         this.main$.next(deepCopy(DATA_SOURCE_MAIN));
         setTimeout(() => this.colors$.next(deepCopy(DATA_SOURCE_COLORS)), 0);
         setTimeout(() => this.brands$.next(deepCopy(DATA_SOURCE_BRANDS)), 0);

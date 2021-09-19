@@ -32,6 +32,10 @@ export class GoogleAuthService {
         });
     }
 
+    public init(): void {
+        GoogleAuth.init();
+    }
+
     public async authRequest(): Promise<{email: string, googleOAuthToken: string}> {
         // const googleUser = await Plugins.GoogleAuth.signIn('https://www.googleapis.com/auth/userinfo.profile');
         const googleUser = await GoogleAuth.signIn();

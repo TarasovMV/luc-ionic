@@ -8,14 +8,12 @@ import {NavController} from '@ionic/angular';
 })
 export class PageTabsMainCameraComponent implements OnInit {
 
-    constructor(private navCtrl: NavController) {
-    }
+    constructor(private navCtrl: NavController) {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     public async clickCamera(): Promise<void> {
-        await this.navCtrl.navigateRoot('/main/camera-choose');
+        await this.navCtrl.navigateForward('/main/camera-choose');
     }
 
 }

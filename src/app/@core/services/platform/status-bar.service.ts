@@ -1,6 +1,6 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {Platform} from '@ionic/angular';
-import { StatusBar, Style } from '@capacitor/status-bar';
+import {Animation, StatusBar, Style} from '@capacitor/status-bar';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +24,7 @@ export class StatusBarService {
             if (this.platform.is('ios')) {
                 this.iosBar.nativeElement.style = 'display: block; background: #ffffff';
             }
-            await StatusBar.show();
+            await StatusBar.show({animation: Animation.None});
             await StatusBar.setStyle({style: Style.Light});
             await StatusBar.setBackgroundColor({color: '#ffffff'});
         } catch (e) {
@@ -35,7 +35,7 @@ export class StatusBarService {
     public async hide(): Promise<void> {
         try {
             this.iosBar.nativeElement.style = 'display: none;';
-            await StatusBar.hide();
+            await StatusBar.hide({animation: Animation.None});
         } catch (e) {
             console.warn('StatusBar Error', e);
         }

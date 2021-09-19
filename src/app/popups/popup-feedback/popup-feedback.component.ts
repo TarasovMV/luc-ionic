@@ -8,6 +8,7 @@ import {ISelectModel} from '../../@shared/components/shared-select/shared-select
 import {map} from 'rxjs/operators';
 import {LoadingService} from '../../@core/services/loading.service';
 import {UserInfoService} from '../../@core/services/user-info.service';
+import {BackButtonService} from '../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-popup-feedback',
@@ -34,9 +35,11 @@ export class PopupFeedbackComponent implements OnInit {
         private apiUserService: ApiUserService,
         private modalCtrl: ModalController,
         private alertController: AlertController,
+        private backButtonService: BackButtonService,
     ) {}
 
     ngOnInit(): void {
+        this.backButtonService.actionOnBack(() => this.close(), false);
         this.form.get('email').setValue(this.email);
         this.getThemes().then();
         this.form.valueChanges.subscribe(x => console.log(x));

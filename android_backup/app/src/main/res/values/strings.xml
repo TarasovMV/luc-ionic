@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">LUC</string>
+    <string name="title_activity_main">LUC</string>
+    <string name="package_name">com.luc.app</string>
+    <string name="custom_url_scheme">com.luc.app</string>
+
+    <integer name="com_vk_sdk_AppId">7731427</integer>
+    <string name="server_client_id">345754396950-9ie0u4sfo1h1q1c0bl7rgep9tkjau18l.apps.googleusercontent.com</string>
+</resources>

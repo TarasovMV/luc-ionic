@@ -3,8 +3,9 @@ import {ModalController} from '@ionic/angular';
 import {PageTabsFavoritesPopupComponent} from './page-tabs-favorites-popup/page-tabs-favorites-popup.component';
 import {IPageTab, PageTabType} from '../../../models/page-tab.model';
 import {BehaviorSubject} from 'rxjs';
-import {IProductModel} from '../../../models/page-product.model';
 import {ApiUserService} from '../../../@core/services/api/api-user.service';
+import {IFavouriteItem} from '../../../models/favorites.model';
+import {RecognitionInfoService} from '../../../@core/services/recognition-info.service';
 
 @Component({
     selector: 'app-page-tabs-favorites',
@@ -13,18 +14,19 @@ import {ApiUserService} from '../../../@core/services/api/api-user.service';
 })
 export class PageTabsFavoritesComponent implements OnInit, IPageTab {
     readonly tabName: PageTabType = 'like';
-    public data$: BehaviorSubject<IProductModel[]> = new BehaviorSubject<IProductModel[]>([]);
+    public data$: BehaviorSubject<IFavouriteItem[]> = new BehaviorSubject<IFavouriteItem[]>([]);
 
     constructor(
         private modalController: ModalController,
         private apiUserService: ApiUserService,
+        private recognitionInfoService: RecognitionInfoService,
     ) {}
 
     public ngOnInit(): void {
         this.loadFavorites().then();
     }
 
-    public itemClick(item: IProductModel): void {
+    public itemClick(item: IFavouriteItem): void {
         this.modalOpen(item).then();
     }
 
@@ -36,14 +38,18 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
     }
 
     private async loadFavorites(): Promise<void> {
-        const res = (await this.apiUserService.getFavorites())?.map(x => x.feed) ?? [];
+        let res = (await this.apiUserService.getFavorites()) ?? [];
         if (JSON.stringify(this.data$.getValue()) === JSON.stringify(res)) {
             return;
         }
+        res = res.map(x => ({
+            ...x,
+            imageUrl: this.recognitionInfoService.imgHandlerUrl(!!x.tinderItem ? 'tinderItem' : 'feed', x.feed?.id ?? x.tinderItem?.id)
+        }));
         this.data$.next(res);
     }
 
-    private async modalOpen(item: IProductModel): Promise<void> {
+    private async modalOpen(item: IFavouriteItem): Promise<void> {
         const modal = await this.modalController.create({
             component: PageTabsFavoritesPopupComponent,
             componentProps: { data: {item, delete: () => this.deleteItem(item)} }
@@ -52,7 +58,11 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
         return await modal.present();
     }
 
-    private async deleteItem(item: IProductModel): Promise<void> {
-        await this.apiUserService.deleteFavorites(item.id);
+    private async deleteItem(item: IFavouriteItem): Promise<void> {
+        if (!!item.feed) {
+            await this.apiUserService.deleteFeedFavorites(item.feed?.id);
+        } else if (!!item.tinderItem) {
+            await this.apiUserService.deleteTinderFavorites(item.tinderItem?.id);
+        }
     }
 }

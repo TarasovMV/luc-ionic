@@ -16,7 +16,10 @@ export async function urlToDataUrl(imageUrl: string): Promise<string> {
     const proxy = 'https://api.codetabs.com/v1/proxy?quest=';
     let res;
     try {
-        res = await fetch(imageUrl);
+        res = await fetch(
+            imageUrl,
+            {cache: 'no-cache'}
+        );
     } catch (e) {
         res = await fetch(proxy + imageUrl);
     }

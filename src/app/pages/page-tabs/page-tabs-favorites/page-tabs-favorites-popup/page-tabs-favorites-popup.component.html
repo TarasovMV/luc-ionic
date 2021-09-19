@@ -10,8 +10,10 @@
       </div>
     </div>
     <div class="buttons-container buttons-container__big">
-      <ng-container *ngTemplateOutlet="circleButton; context:{src: 'share', event: share.bind(this)}"></ng-container>
-      <div (click)="openProduct($event)" class="shop">
+      <ng-container *ngIf="isFeed">
+        <ng-container *ngTemplateOutlet="circleButton; context:{src: 'share', event: share.bind(this)}"></ng-container>
+      </ng-container>
+      <div *ngIf="isFeed" (click)="openProduct($event)" class="shop">
         <svg-icon src="assets/icon/svg/shopping-cart.svg"></svg-icon>
       </div>
       <ng-container *ngTemplateOutlet="circleButton context:{src: 'search', event: search.bind(this)}"></ng-container>

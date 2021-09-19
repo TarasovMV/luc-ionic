@@ -12,8 +12,8 @@
       <div class="info"> Источник: pinterest.ru </div>
     </div>
     <div class="interface">
+<!--      [ngStyle]="{visibility: !!(shopUrl$ | async) ? 'visible' : 'hidden'}"-->
       <div
-        [ngStyle]="{visibility: !!(shopUrl$ | async) ? 'visible' : 'hidden'}"
         class="button" [class.button__favorite]="isFavorite$ | async"
         (click)="setFavorite()"
       >

@@ -6,6 +6,7 @@ import {RecognitionInfoService} from '../../@core/services/recognition-info.serv
 import {ApiUserService} from '../../@core/services/api/api-user.service';
 import {FavoritesController} from '../../@shared/classes/favorites.class';
 import {MobileShareService} from '../../@core/services/platform/mobile-share.service';
+import {BackButtonService} from '../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-page-product',
@@ -22,20 +23,23 @@ export class PageProductComponent implements OnInit {
         public modalCtrl: ModalController,
         private recognitionInfoService: RecognitionInfoService,
         private shareService: MobileShareService,
+        private backButtonService: BackButtonService,
         apiUserService: ApiUserService,
     ) {
         this.favoritesController = new FavoritesController(apiUserService);
     }
 
     public async ngOnInit(): Promise<void> {
+        this.backButtonService.actionOnBack(() => this.closePage(), false);
         const res = await this.recognitionInfoService.recognitionFeedFunction?.();
         res.infoList = res.infoList ?? [];
         this.data$.next(res);
+        console.log(res);
     }
 
     public async setFavorite(): Promise<void> {
         const product = this.data$.getValue();
-        const isFavorite = await this.favoritesController.setFavourite(product.id, !product.isFavorite);
+        const isFavorite = await this.favoritesController.setFavourite({feedId: product.id}, !product.isFavorite);
         this.data$.next({...product, isFavorite});
     }
 

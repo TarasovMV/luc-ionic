@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import {ModalController, NavParams} from '@ionic/angular';
 import {IArticleJson} from '../../../../models/article.model';
+import {BackButtonService} from '../../../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-page-tabs-main-article',
@@ -20,11 +21,16 @@ export class PageTabsMainArticleComponent implements OnInit {
         map(x => x.sources.join(', '))
     );
 
-    constructor(private http: HttpClient, private modalCtrl: ModalController, private params: NavParams) {
-    }
+    constructor(
+        private http: HttpClient,
+        private modalCtrl: ModalController,
+        private params: NavParams,
+        private backButtonService: BackButtonService,
+    ) {}
 
     ngOnInit(): void {
         // this.init().then();
+        this.backButtonService.actionOnBack(() => this.close(), false);
     }
 
     public async close(): Promise<void> {

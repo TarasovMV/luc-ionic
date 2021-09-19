@@ -7,7 +7,7 @@ import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
 
 // camera web view
-import '@capacitor-community/camera-preview';
+// import '@capacitor-community/camera-preview';
 import {AppTokenService} from './services/app-token.service';
 import {AppRate} from '@ionic-native/app-rate/ngx';
 

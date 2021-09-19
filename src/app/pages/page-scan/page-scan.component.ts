@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {IPageScanProductModel} from '../../models/page-scan.model';
-import {Location} from '@angular/common';
 import {map} from 'rxjs/operators';
 import {ModalController, NavController, Platform} from '@ionic/angular';
 import {SharedFilterComponent} from '../../popups/shared-filter/shared-filter.component';
 import {PageProductComponent} from '../page-product/page-product.component';
 import {RecognitionInfoService} from '../../@core/services/recognition-info.service';
-import {ApiRecognitionService} from "../../@core/services/api/api-recognition.service";
+import {ApiRecognitionService} from '../../@core/services/api/api-recognition.service';
+import {BackButtonService} from '../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-page-scan',
@@ -28,19 +28,16 @@ export class PageScanComponent implements OnInit {
 
     constructor(
         private navCtrl: NavController,
-        private location: Location,
         private modalController: ModalController,
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
         private platform: Platform,
+        private backButtonService: BackButtonService,
     ) {
     }
 
     public ngOnInit(): void {
         this.getData().then();
-        this.platform.backButton.subscribeWithPriority(9999, () => {
-            this.closePage();
-        });
     }
 
     public async chooseProduct(product: IPageScanProductModel): Promise<void> {
@@ -78,10 +75,14 @@ export class PageScanComponent implements OnInit {
         const modal = await this.modalController.create({
             component: PageProductComponent,
         });
+        modal.onDidDismiss().then(() => {
+            this.backButtonService.clearOnRoot();
+            this.backButtonService.default();
+        });
         return await modal.present();
     }
 
     private goToPreviousRoute = (): void => {
-        this.location.back();
+        this.navCtrl.back();
     }
 }

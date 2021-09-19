@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {IProductModel} from '../../../../models/page-product.model';
+import {IFavouriteItem} from '../../../../models/favorites.model';
 
 @Component({
     selector: 'app-page-tabs-favourites-item',
@@ -8,11 +8,11 @@ import {IProductModel} from '../../../../models/page-product.model';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageTabsFavouritesItemComponent implements OnInit {
-    @Input() set data(value: IProductModel) {
+    @Input() set data(value: IFavouriteItem) {
         this.item = value;
         this.image = value.imageUrl;
     }
-    private item: IProductModel = null;
+    private item: IFavouriteItem = null;
     public image: string = null;
 
     constructor() {}

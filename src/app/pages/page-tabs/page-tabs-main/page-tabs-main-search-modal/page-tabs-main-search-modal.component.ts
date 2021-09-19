@@ -1,14 +1,15 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {IonInput, ModalController, NavController} from '@ionic/angular';
 import {RecognitionInfoService} from '../../../../@core/services/recognition-info.service';
 import {ApiRecognitionService} from '../../../../@core/services/api/api-recognition.service';
+import {BackButtonService} from '../../../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-page-tabs-main-search-modal',
     templateUrl: './page-tabs-main-search-modal.component.html',
     styleUrls: ['./page-tabs-main-search-modal.component.scss'],
 })
-export class PageTabsMainSearchModalComponent implements AfterViewInit {
+export class PageTabsMainSearchModalComponent implements OnInit, AfterViewInit {
 
     @ViewChild('searchInput') searchInput: IonInput;
 
@@ -19,7 +20,12 @@ export class PageTabsMainSearchModalComponent implements AfterViewInit {
         private modalCtrl: ModalController,
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
+        private backButtonService: BackButtonService,
     ) {}
+
+    public ngOnInit(): void {
+        this.backButtonService.actionOnBack(() => this.close(), false);
+    }
 
     public ngAfterViewInit(): void {
         setTimeout(() => this.searchInput.setFocus(), 1000);

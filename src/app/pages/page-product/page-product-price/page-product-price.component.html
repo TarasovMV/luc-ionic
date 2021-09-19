@@ -3,7 +3,7 @@
     <span> {{ data?.brand || 'Brand' }} </span>
     <svg-icon class="favorite" [class.favorite__active]="data.isFavorite" (click)="favouriteClickButton()" src="assets/icon/svg/like.svg"></svg-icon>
   </div>
-  <div class="title__type"> {{ data?.type || '---' }} </div>
+  <div class="title__type"> {{ (data?.type | categorySplit) || '---' }} </div>
   <div class="title__price">
     <ng-container *ngIf="data?.oldPrice; else productPriceNormal">
       <span class="title__price__old"> {{ (data?.oldPrice || 0) | number : '' : 'fr' }} ₽ </span>

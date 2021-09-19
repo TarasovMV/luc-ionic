@@ -31,12 +31,14 @@ export class PageTabsTinderCardComponent implements OnInit {
             if (res.type === 'feed') {
                 res.feedPreview = await this.apiRecognitionService.getFullItem(res.feedId);
             }
+            res.imageUrl = this.recognitionInfoService.imgHandlerUrl(res.type, res.feedId ?? res.tinderId);
+            res.tinderItemId = res.tinderId;
             this.data$.next(res);
         });
     }
     public data$: BehaviorSubject<ITinderSuggestion> = new BehaviorSubject<ITinderSuggestion>(null);
     public isFavorite$: Observable<boolean> = this.data$.pipe(
-        map(x => x?.feedPreview?.isFavorite)
+        map(x => x?.isFavourite)
     );
     public shopUrl$: Observable<number> = this.data$.pipe(
             filter(x => x.type === 'feed'),
@@ -83,8 +85,11 @@ export class PageTabsTinderCardComponent implements OnInit {
 
     public async setFavorite(): Promise<void> {
         const data = this.data$.getValue();
-        if (!data.feedPreview) { return; }
-        data.feedPreview.isFavorite = await this.favoritesController.setFavourite(data.feedId, !data.feedPreview.isFavorite);
+        const id = data.feedId || data.tinderId;
+        if (!id) {
+            return;
+        }
+        data.isFavourite = await this.favoritesController.setFavourite(data , !data.isFavourite);
         this.data$.next({ ...data });
     }
 

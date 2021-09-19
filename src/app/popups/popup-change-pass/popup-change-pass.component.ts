@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {AlertController, ModalController} from '@ionic/angular';
 import {ApiUserService} from '../../@core/services/api/api-user.service';
 import {LoadingService} from '../../@core/services/loading.service';
+import {BackButtonService} from '../../@core/services/platform/back-button.service';
 
 @Component({
     selector: 'app-popup-change-pass',
@@ -22,9 +23,11 @@ export class PopupChangePassComponent implements OnInit {
         private apiUserService: ApiUserService,
         private loadingService: LoadingService,
         private alertController: AlertController,
+        private backButtonService: BackButtonService,
     ) {}
 
     public ngOnInit(): void {
+        this.backButtonService.actionOnBack(() => this.back(), false);
     }
 
     public back(): void {

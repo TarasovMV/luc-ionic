@@ -12,9 +12,10 @@ export class MobileShareService {
 
     public async shareApp(): Promise<void> {
         const androidUrl: string = 'https://play.google.com/store/apps/details?id=com.luc.app';
+        const iosUrl: string = 'https://apps.apple.com/ru/app/luc/id1572306608';
         this.shareData(
             'LUC',
-            `Привет! Хочешь найти подходящую тебе одежду и стиль, тогда скачивай скорее приложение LUC: Android - ${androidUrl}, iOS - уже скоро`,
+            `Привет! Хочешь найти подходящую тебе одежду и стиль, тогда скачивай скорее приложение LUC: Android - ${androidUrl}, iOS - ${iosUrl}.`,
         );
     }
 

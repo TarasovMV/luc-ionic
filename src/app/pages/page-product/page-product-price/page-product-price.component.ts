@@ -12,11 +12,9 @@ export class PageProductPriceComponent implements OnInit {
     @Input() data: IProductModel = null;
     @Output() favouriteClick: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-    constructor() {
-    }
+    constructor() {}
 
-    public ngOnInit(): void {
-    }
+    public ngOnInit(): void {}
 
     public favouriteClickButton(): void {
         this.favouriteClick.emit();

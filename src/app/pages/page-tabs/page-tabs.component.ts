@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
+import {NavController, Platform} from '@ionic/angular';
 import {IPageTab, PageTabType} from '../../models/page-tab.model';
 import {BehaviorSubject} from 'rxjs';
 import {UserInfoService} from '../../@core/services/user-info.service';
@@ -11,6 +11,7 @@ import {UserInfoService} from '../../@core/services/user-info.service';
 })
 export class PageTabsComponent implements OnInit {
 
+    public isIos: boolean = false;
     public readonly tabs: PageTabType[] = ['search', 'blocks', 'like', 'user'];
     private readonly tabsRouting: {[key in PageTabType]: string} = {
         search: 'main/tabs/main',
@@ -25,11 +26,13 @@ export class PageTabsComponent implements OnInit {
     constructor(
         private navCtrl: NavController,
         private userInfoService: UserInfoService,
+        private platform: Platform,
     ) {}
 
     async ngOnInit(): Promise<void> {
         await this.userInfoService.init();
         this.isActive$.next(true);
+        this.isIos = this.platform.is('ios');
     }
 
     public selectTab(tab: PageTabType): void {

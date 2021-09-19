@@ -1,7 +1,7 @@
 <div class="container">
   <ng-container *ngIf="isActive$ | async; else loader">
     <ion-router-outlet  (activate)="routing($event)" class="page-wrapper"></ion-router-outlet>
-    <div class="footer">
+    <div class="footer" [class.footer_ios]="isIos">
       <svg-icon *ngFor="let tab of tabs"
                 class="tab-icon"
                 [class.tab-icon__active]="tab === (currentTab$ | async)"

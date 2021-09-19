@@ -4,8 +4,8 @@
 		"classpath": "com.getcapacitor.community.applesignin.SignInWithApple"
 	},
 	{
-		"pkg": "@capacitor-community/camera-preview",
-		"classpath": "com.ahm.capacitor.camera.preview.CameraPreview"
+		"pkg": "@capacitor/app",
+		"classpath": "com.capacitorjs.plugins.app.AppPlugin"
 	},
 	{
 		"pkg": "@capacitor/camera",

@@ -7,13 +7,14 @@ import {BehaviorSubject} from 'rxjs';
 import {IProductPreviewModel} from '../../../models/page-product.model';
 import {UserInfoService} from '../../../@core/services/user-info.service';
 import {IArticle} from '../../../models/article.model';
+import {RxJsUnsubscriber} from '../../../@core/abstractions/RxJsUnsubscriber';
 
 @Component({
     selector: 'app-page-tabs-main',
     templateUrl: './page-tabs-main.component.html',
     styleUrls: ['./page-tabs-main.component.scss'],
 })
-export class PageTabsMainComponent implements IPageTab, OnInit, OnDestroy {
+export class PageTabsMainComponent extends RxJsUnsubscriber implements IPageTab, OnInit, OnDestroy {
     readonly tabName: PageTabType = 'search';
     public readonly recommends$: BehaviorSubject<IProductPreviewModel[]> = this.recognitionInfoService.recommendCards$;
     public readonly articles$: BehaviorSubject<IArticle[]> = new BehaviorSubject<IArticle[]>(new Array(2));
@@ -22,7 +23,9 @@ export class PageTabsMainComponent implements IPageTab, OnInit, OnDestroy {
         private modalController: ModalController,
         private recognitionInfoService: RecognitionInfoService,
         private userInfoService: UserInfoService,
-    ) {}
+    ) {
+        super();
+    }
 
     public ngOnInit(): void {
         this.getRecommendCards().then();
@@ -33,12 +36,11 @@ export class PageTabsMainComponent implements IPageTab, OnInit, OnDestroy {
     }
 
     private async getRecommendCards(): Promise<void> {
-        await this.recognitionInfoService.getMainRecommends();
+        await this.recognitionInfoService.getMainRecommends(true);
     }
 
     private async getArticles(): Promise<void> {
         const res = await this.userInfoService.getAllArticles();
-        console.log(res);
         this.articles$.next(res);
     }
 

@@ -8,7 +8,8 @@ $padding-w: 5.33vw;
   padding: 3.7vh $padding-w 0 $padding-w;
   box-sizing: border-box;
   background: white;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .logo-wrapper {
@@ -77,10 +78,6 @@ $padding-w: 5.33vw;
 
       .card {
         margin-bottom: 2vh;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
       }
     }
   }

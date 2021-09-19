@@ -5,9 +5,9 @@ import { IPageTabsUserLogin, IPageTabsUserReg} from '../../../models/page-tabs-l
 import {LoggerService} from '../logger.service';
 import {IUserInfo, UserInfoGender} from '../../../models/user-info.model';
 import {IFeedback, IFeedbackTheme} from '../../../models/feedback.model';
-import {IFavoritesResponse} from '../../../models/favorites.model';
+import {IFavouriteItem} from '../../../models/favorites.model';
 import {IArticle} from '../../../models/article.model';
-import {IStartScreenReco} from '../../../models/recognition.model';
+import {ITinderSuggestionId} from '../../../models/tinder.model';
 
 @Injectable({
     providedIn: 'root'
@@ -121,21 +121,25 @@ export class ApiUserService {
         }
     }
 
-    public async getFavorites(): Promise<IFavoritesResponse[]> {
+    public async getFavorites(): Promise<IFavouriteItem[]> {
         try {
-            return await this.http.get<IFavoritesResponse[]>(`${this.restUrl}/api/Favourites`).toPromise();
+            return await this.http.get<IFavouriteItem[]>(`${this.restUrl}/api/Favourites`).toPromise();
         } catch (e) {
             console.error('getFavorites', e);
             return null;
         }
     }
 
-    public async addFavorites(feedId: number): Promise<IFavoritesResponse> {
-        return await this.http.post<IFavoritesResponse>(`${this.restUrl}/api/Favourites`, {feedId}).toPromise();
+    public async addFavorites(id: ITinderSuggestionId): Promise<IFavouriteItem> {
+        return await this.http.post<IFavouriteItem>(`${this.restUrl}/api/Favourites`, id).toPromise();
     }
 
-    public async deleteFavorites(feedId: number): Promise<unknown> {
-        return await this.http.delete<unknown>(`${this.restUrl}/api/Favourites/${feedId}`).toPromise();
+    public async deleteFeedFavorites(id: number): Promise<unknown> {
+        return await this.http.delete<unknown>(`${this.restUrl}/api/Favourites/feed/${id}`).toPromise();
+    }
+
+    public async deleteTinderFavorites(id: number): Promise<unknown> {
+        return await this.http.delete<unknown>(`${this.restUrl}/api/Favourites/tinder/${id}`).toPromise();
     }
 
     public async getAllArticles(): Promise<IArticle[]> {
