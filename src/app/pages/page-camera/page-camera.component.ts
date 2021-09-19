@@ -130,6 +130,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
         await this.loadingService.startLoading();
         const recognitionDetected = await this.apiRecognitionService.searchByPhoto(this.imgSrc);
         if (!recognitionDetected) {
+            await this.loadingService.stopLoading();
             return;
         }
         await this.loadingService.stopLoading();
