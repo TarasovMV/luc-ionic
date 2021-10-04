@@ -5,6 +5,7 @@ import {PageProductComponent} from '../../../page-product/page-product.component
 import {RecognitionInfoService} from '../../../../@core/services/recognition-info.service';
 import {ModalController} from '@ionic/angular';
 import {ApiRecognitionService} from '../../../../@core/services/api/api-recognition.service';
+import {AnalyticService} from '../../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-main-recommend-card',
@@ -20,6 +21,7 @@ export class PageTabsMainRecommendCardComponent implements OnInit {
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
         private modalController: ModalController,
+        private analyticService: AnalyticService,
     ) {}
 
     ngOnInit(): void {}
@@ -29,6 +31,7 @@ export class PageTabsMainRecommendCardComponent implements OnInit {
         if (!productId) { return; }
         this.recognitionInfoService.recognitionFeedFunction = () => this.apiRecognitionService.getFullItem(productId);
         await this.presentModalInfo();
+        this.analyticService.log('recommendation', {productId});
     }
 
     private async presentModalInfo() {

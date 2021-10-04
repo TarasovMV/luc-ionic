@@ -3,6 +3,7 @@ import {IonInput, ModalController, NavController} from '@ionic/angular';
 import {RecognitionInfoService} from '../../../../@core/services/recognition-info.service';
 import {ApiRecognitionService} from '../../../../@core/services/api/api-recognition.service';
 import {BackButtonService} from '../../../../@core/services/platform/back-button.service';
+import {AnalyticService} from '../../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-main-search-modal',
@@ -21,6 +22,7 @@ export class PageTabsMainSearchModalComponent implements OnInit, AfterViewInit {
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
         private backButtonService: BackButtonService,
+        private analyticService: AnalyticService,
     ) {}
 
     public ngOnInit(): void {
@@ -39,6 +41,7 @@ export class PageTabsMainSearchModalComponent implements OnInit, AfterViewInit {
         };
         this.navCtrl.navigateRoot(this.nextRouteUrl).then();
         this.close().then();
+        this.analyticService.log('text-search', {search});
     }
 
     public async close(): Promise<void> {

@@ -1,7 +1,7 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AppConfigService} from './services/platform/app-config.service';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {UserAgent} from '@ionic-native/user-agent/ngx';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {AuthenticationInterceptor} from './interceptors/authentication.interceptor';
@@ -10,6 +10,7 @@ import {AuthenticationInterceptor} from './interceptors/authentication.intercept
 // import '@capacitor-community/camera-preview';
 import {AppTokenService} from './services/app-token.service';
 import {AppRate} from '@ionic-native/app-rate/ngx';
+import {HTTP_GLOBAL} from './tokens';
 
 @NgModule({
     declarations: [],
@@ -20,6 +21,7 @@ import {AppRate} from '@ionic-native/app-rate/ngx';
     providers: [
         AppRate,
         UserAgent,
+        { provide: HTTP_GLOBAL, useExisting: HttpClient, deps: [HttpClientModule] },
         { provide: APP_INITIALIZER, useFactory: appInit, deps: [AppConfigService], multi: true },
         { provide: APP_INITIALIZER, useFactory: loadToken, deps: [AppTokenService], multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

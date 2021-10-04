@@ -11,6 +11,7 @@ import {PageProductComponent} from '../../../../page-product/page-product.compon
 import {FavoritesController} from '../../../../../@shared/classes/favorites.class';
 import {ApiUserService} from '../../../../../@core/services/api/api-user.service';
 import {ApiFileService} from '../../../../../@core/services/api/api-file.service';
+import {AnalyticService} from '../../../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-tinder-card',
@@ -56,6 +57,7 @@ export class PageTabsTinderCardComponent implements OnInit {
         private recognitionInfoService: RecognitionInfoService,
         private apiUserService: ApiUserService,
         private apiFileService: ApiFileService,
+        private analyticService: AnalyticService,
     ) {
         this.favoritesController = new FavoritesController(apiUserService);
     }
@@ -70,6 +72,7 @@ export class PageTabsTinderCardComponent implements OnInit {
         if (!this.data$.getValue()) {
             return;
         }
+        this.analyticService.log('lucich-search', {lucichId: this.data$.getValue()?.feedId || this.data$.getValue()?.tinderId});
         await this.loadingService.startLoading();
         const img = await urlToDataUrl(this.data$.value.imageUrl);
         await this.loadingService.stopLoading();
@@ -81,6 +84,7 @@ export class PageTabsTinderCardComponent implements OnInit {
         if (!productId) { return; }
         this.recognitionInfoService.recognitionFeedFunction = () => this.apiRecognitionService.getFullItem(productId);
         await this.presentModalInfo();
+        this.analyticService.log('lucich-feed', {productId});
     }
 
     public async setFavorite(): Promise<void> {

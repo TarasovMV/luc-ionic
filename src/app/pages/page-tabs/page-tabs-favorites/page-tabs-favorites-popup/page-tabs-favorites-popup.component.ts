@@ -10,6 +10,7 @@ import {ApiRecognitionService} from '../../../../@core/services/api/api-recognit
 import {PageProductComponent} from '../../../page-product/page-product.component';
 import {IFavouriteItem} from '../../../../models/favorites.model';
 import {BackButtonService} from '../../../../@core/services/platform/back-button.service';
+import {AnalyticService} from '../../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-favorites-popup',
@@ -53,6 +54,7 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
         private recognitionInfoService: RecognitionInfoService,
         private apiRecognitionService: ApiRecognitionService,
         private backButtonService: BackButtonService,
+        private analyticService: AnalyticService,
     ) {}
 
     ngOnInit(): void {
@@ -88,6 +90,7 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
         this.isSetDefault = false;
         await this.navCtrl.navigateForward(this.nextRouteUrl, {queryParams: { img }});
         await this.closeModal();
+        this.analyticService.log('favorite-search', {favoriteId: this.item.tinderItem?.id || this.item.feed?.id});
     }
 
     public share(event: MouseEvent): void {

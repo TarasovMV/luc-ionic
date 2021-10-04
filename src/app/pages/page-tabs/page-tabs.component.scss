@@ -15,20 +15,29 @@
     background: #F3F7FA;
     display: flex;
     justify-content: space-evenly;
-    padding: 2.35vh 0;
+    padding: 0 5vw;
 
     &_ios {
-      padding-bottom: max(env(safe-area-inset-bottom), 2.35vh);
+      padding-bottom: env(safe-area-inset-bottom);
+      //padding-bottom: max(env(safe-area-inset-bottom), 2.35vh, 2.35vh);
     }
   }
 }
 
+.tab {
+  flex-grow: 1;
+  height: 100%;
+  box-sizing: border-box;
+}
+
 .tab-icon {
-  margin: auto 0;
+  display: flex;
+  overflow: hidden;
+  margin: auto;
   color: #ACB6C3;
   transition: .2s;
   width: 2.28vh;
-  height: 2.28vh;
+  height: 7vh;
 
   &__active {
     color: #2CB172;

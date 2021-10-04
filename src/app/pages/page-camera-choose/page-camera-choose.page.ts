@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {NavController} from '@ionic/angular';
+import {AnalyticService} from '../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-camera-choose',
@@ -10,7 +11,10 @@ import {NavController} from '@ionic/angular';
 export class PageCameraChoosePage implements OnInit {
     private readonly nextRouteUrl = '/main/camera';
 
-    constructor(private navCtrl: NavController) {}
+    constructor(
+        private navCtrl: NavController,
+        private analyticService: AnalyticService,
+    ) {}
 
     public ngOnInit(): void {}
 
@@ -19,6 +23,7 @@ export class PageCameraChoosePage implements OnInit {
     }
 
     public async openGallery(): Promise<void> {
+        this.analyticService.log('take-photo');
         const picture = await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
             source: CameraSource.Photos,
@@ -28,6 +33,7 @@ export class PageCameraChoosePage implements OnInit {
     }
 
     public async takePhoto(): Promise<void> {
+        this.analyticService.log('make-photo');
         const picture = await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
             source: CameraSource.Camera,

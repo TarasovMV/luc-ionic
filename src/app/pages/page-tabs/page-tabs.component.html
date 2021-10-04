@@ -1,13 +1,16 @@
 <div class="container">
   <ng-container *ngIf="isActive$ | async; else loader">
     <ion-router-outlet  (activate)="routing($event)" class="page-wrapper"></ion-router-outlet>
-    <div class="footer" [class.footer_ios]="isIos">
-      <svg-icon *ngFor="let tab of tabs"
-                class="tab-icon"
-                [class.tab-icon__active]="tab === (currentTab$ | async)"
-                (click)="selectTab(tab)"
-                src="assets/icon/svg/tabs/{{tab}}.svg">
-      </svg-icon>
+    <div *ngIf="this.keyboard.isKeyboardOpen$ | async" class="footer" [class.footer_ios]="isIos">
+      <div *ngFor="let tab of tabs"
+           (click)="selectTab(tab)"
+           class="tab"
+      >
+        <svg-icon class="tab-icon"
+                  [class.tab-icon__active]="tab === (currentTab$ | async)"
+                  src="assets/icon/svg/tabs/{{tab}}.svg"
+        ></svg-icon>
+      </div>
     </div>
   </ng-container>
   <ng-template #loader>

@@ -8,6 +8,7 @@ import {UserInfoService} from '../../../../../@core/services/user-info.service';
 import {MobileShareService} from '../../../../../@core/services/platform/mobile-share.service';
 import {RateAppService} from '../../../../../@core/services/platform/rate-app.service';
 import {PopupDropPassComponent} from '../../../../../popups/popup-drop-pass/popup-drop-pass.component';
+import {AnalyticService} from '../../../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-user-screen-login',
@@ -28,6 +29,7 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
         private userService: UserInfoService,
         private shareService: MobileShareService,
         private rateAppService: RateAppService,
+        private analyticService: AnalyticService,
     ) {}
 
     ngOnInit(): void {
@@ -46,6 +48,7 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
             return;
         }
         this.userService.setUser(res);
+        this.analyticService.log('login', {email: this.loginForm.value.email});
     }
 
     public rate(): void {

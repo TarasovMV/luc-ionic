@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, Platform} from '@ionic/angular';
 import {IPageTab, PageTabType} from '../../models/page-tab.model';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {UserInfoService} from '../../@core/services/user-info.service';
+import {KeyboardService} from '../../@core/services/platform/keyboard.service';
 
 @Component({
     selector: 'app-page-tabs',
@@ -24,6 +25,7 @@ export class PageTabsComponent implements OnInit {
     public isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
+        public keyboard: KeyboardService,
         private navCtrl: NavController,
         private userInfoService: UserInfoService,
         private platform: Platform,

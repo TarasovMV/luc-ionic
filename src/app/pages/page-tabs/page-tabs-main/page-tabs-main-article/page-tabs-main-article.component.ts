@@ -5,6 +5,7 @@ import {filter, map} from 'rxjs/operators';
 import {ModalController, NavParams} from '@ionic/angular';
 import {IArticleJson} from '../../../../models/article.model';
 import {BackButtonService} from '../../../../@core/services/platform/back-button.service';
+import {AnalyticService} from '../../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-main-article',
@@ -26,11 +27,13 @@ export class PageTabsMainArticleComponent implements OnInit {
         private modalCtrl: ModalController,
         private params: NavParams,
         private backButtonService: BackButtonService,
+        private analyticService: AnalyticService,
     ) {}
 
     ngOnInit(): void {
         // this.init().then();
         this.backButtonService.actionOnBack(() => this.close(), false);
+        this.analyticService.log('article', {articleId: this.articleData$.getValue()?.id});
     }
 
     public async close(): Promise<void> {

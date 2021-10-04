@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {IPageTab, PageTabType} from '../../../models/page-tab.model';
 import {ITinderSuggestion} from '../../../models/tinder.model';
 import {ApiTinderService} from '../../../@core/services/api/api-tinder.service';
+import {AnalyticService} from '../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-tabs-tinder',
@@ -27,6 +28,7 @@ export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit 
         private apiTinderService: ApiTinderService,
         private gestureCtrl: GestureController,
         private platform: Platform,
+        private analyticService: AnalyticService,
     ) {}
 
     ngOnInit(): void {}
@@ -72,6 +74,7 @@ export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit 
     }
 
     public async slideDetectChange(): Promise<void> {
+        this.analyticService.log('lucich-swipe');
         const cards = this.cards$.getValue();
         const currentIdx = await this.ionSlide.getActiveIndex();
         if (cards.length - (currentIdx + 1) < 1) {

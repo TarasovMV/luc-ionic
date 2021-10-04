@@ -33,6 +33,10 @@ html, body, .ion-app, .ion-content {
   background: transparent !important;
 }
 
+body {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 // for mat ripple effect
 .ripple-parent {
   position: relative;

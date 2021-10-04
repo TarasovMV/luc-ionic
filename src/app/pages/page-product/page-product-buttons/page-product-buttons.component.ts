@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {ModalController, NavController} from '@ionic/angular';
+import {AnalyticService} from '../../../@core/services/analytic.service';
 
 @Component({
     selector: 'app-page-product-buttons',
@@ -14,7 +15,8 @@ export class PageProductButtonsComponent implements OnInit {
     @Input() modalController: ModalController = null;
 
     constructor(
-        private navCtrl: NavController
+        private navCtrl: NavController,
+        private analyticService: AnalyticService,
     ) {
     }
 
@@ -28,6 +30,7 @@ export class PageProductButtonsComponent implements OnInit {
 
     public async openShopUrl(): Promise<void> {
         window.open(this.shopUrl);
+        this.analyticService.log('shop-redirect', {shopUrl: this.shopUrl});
     }
 
 }

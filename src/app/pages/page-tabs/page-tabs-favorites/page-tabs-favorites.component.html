@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header"> Избранное </div>
   <div class="subheader"> Ваша персональная коллекция </div>
-  <ion-content>
+  <ion-content scrollY="false">
     <ion-refresher #refresher slot="fixed" style="z-index: 999" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>

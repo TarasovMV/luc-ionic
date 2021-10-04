@@ -4,10 +4,9 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBarService} from './@core/services/platform/status-bar.service';
 import {KeyboardService} from './@core/services/platform/keyboard.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {UserAgentService} from './@core/services/outsource-auth/user-agent.service';
-import {UserInfoService} from './@core/services/user-info.service';
 import {BackButtonService} from './@core/services/platform/back-button.service';
 import {GoogleAuthService} from './@core/services/outsource-auth/google-auth.service';
+import {AnalyticService} from './@core/services/analytic.service';
 
 @Component({
     selector: 'app-root',
@@ -26,8 +25,7 @@ export class AppComponent implements OnInit {
         private keyboardService: KeyboardService,
         private backButtonService: BackButtonService,
         private googleAuthService: GoogleAuthService,
-        private userAgentService: UserAgentService,
-        private userInfoService: UserInfoService,
+        private analyticService: AnalyticService,
     ) {}
 
     public async ngOnInit(): Promise<void> {

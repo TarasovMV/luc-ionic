@@ -1,20 +1,27 @@
 import {ElementRef, Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Platform} from '@ionic/angular';
 import {KeyboardResize, KeyboardStyle, Keyboard} from '@capacitor/keyboard';
+import {Device} from '@capacitor/device';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class KeyboardService {
 
-    keyboardHeight$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+    public keyboardHeight$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+    public isKeyboardOpen$: Observable<boolean> = this.keyboardHeight$.pipe(map(x => x === 0));
 
     constructor() {
     }
 
     // TODO: add theme
     public async setInitSettings(platform: Platform, appWindow: ElementRef): Promise<void> {
+        const platformType = (await Device.getInfo())?.platform;
+        if (platformType === 'web') {
+            return;
+        }
         try {
             this.actionListeners(platform, appWindow);
             await Keyboard.setStyle({style: KeyboardStyle.Light});
