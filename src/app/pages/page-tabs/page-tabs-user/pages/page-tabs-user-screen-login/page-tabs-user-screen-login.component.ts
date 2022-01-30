@@ -9,6 +9,7 @@ import {MobileShareService} from '../../../../../@core/services/platform/mobile-
 import {RateAppService} from '../../../../../@core/services/platform/rate-app.service';
 import {PopupDropPassComponent} from '../../../../../popups/popup-drop-pass/popup-drop-pass.component';
 import {AnalyticService} from '../../../../../@core/services/analytic.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
     selector: 'app-page-tabs-user-screen-login',
@@ -17,10 +18,11 @@ import {AnalyticService} from '../../../../../@core/services/analytic.service';
 })
 export class PageTabsUserScreenLoginComponent implements OnInit {
 
-    loginForm: FormGroup = new FormGroup({
+    public loginForm: FormGroup = new FormGroup({
         email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(3)]),
         password: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     });
+    public isLoginError: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private modalController: ModalController,
@@ -33,7 +35,7 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.loginForm.valueChanges.subscribe(x => console.log('form', x));
+        this.loginForm.valueChanges.subscribe(x => this.isLoginError.next(false));
     }
 
     public async loginClick(): Promise<void> {
@@ -42,9 +44,11 @@ export class PageTabsUserScreenLoginComponent implements OnInit {
             console.warn('invalid form');
             return;
         }
+        await this.loadingService.startLoading();
         const res = await this.apiUserService.userLogin(this.loginForm.value);
         this.loadingService.stopLoading().then();
         if (!res) {
+            this.isLoginError.next(true);
             return;
         }
         this.userService.setUser(res);

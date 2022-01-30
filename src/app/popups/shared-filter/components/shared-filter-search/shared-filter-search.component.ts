@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-shared-filter-search',
@@ -6,11 +7,9 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./shared-filter-search.component.scss'],
 })
 export class SharedFilterSearchComponent implements OnInit {
+    @Input() control: FormControl = new FormControl('');
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

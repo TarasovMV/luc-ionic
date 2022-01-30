@@ -31,6 +31,7 @@ import {IonicStorageModule} from '@ionic/storage';
     providers: [
         StatusBar,
         SplashScreen,
+        {provide: 'googleTagManagerId',  useValue: 'GTM-P3TV3PS'}
         // VKAuthWeb,
         // {
         //     provide: LocationStrategy,

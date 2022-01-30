@@ -91,7 +91,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     public async ngOnDestroy(): Promise<void> {
-        this.subscriptions.forEach((s) => s.unsubscribe());
+        this.subscriptions.forEach((s) => s?.unsubscribe());
         this.imgSrc = null;
         // CameraPreview.stop();
         await this.statusBarService.setDefault();
@@ -166,7 +166,7 @@ export class PageCameraComponent implements AfterViewInit, OnDestroy, OnInit {
 
     private goToPreviousRoute = (): void => {
         // queueMicrotask for camera stop fix
-        queueMicrotask(() => this.location.back());
+        setTimeout(() => this.navCtrl.back());
     }
 
     private getImgRange(): { rangeX: number[]; rangeY: number[]; } {

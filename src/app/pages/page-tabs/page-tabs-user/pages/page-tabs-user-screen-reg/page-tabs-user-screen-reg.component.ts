@@ -43,8 +43,14 @@ export class PageTabsUserScreenRegComponent implements OnInit {
         return this.regForm.get(fieldName)?.errors && this.regForm.get(fieldName)?.dirty;
     }
 
+    public checkFieldPassError(fieldName: string): boolean {
+        const passFg = this.regForm.get('passwords');
+        return passFg.get(fieldName)?.errors && (passFg.get(fieldName)?.dirty || passFg.get(fieldName)?.touched);
+    }
+
     public async regClick(): Promise<void> {
         Object.values(this.regForm.controls).forEach(x => x.markAsDirty());
+        this.regForm.markAllAsTouched();
         if (!this.regForm.valid) {
             console.warn('invalid form');
             return;

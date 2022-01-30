@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {BackButtonService} from './@core/services/platform/back-button.service';
 import {GoogleAuthService} from './@core/services/outsource-auth/google-auth.service';
 import {AnalyticService} from './@core/services/analytic.service';
+import {ViewportSizeService} from './@core/services/platform/viewport-size.service';
 
 @Component({
     selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
         private keyboardService: KeyboardService,
         private backButtonService: BackButtonService,
         private googleAuthService: GoogleAuthService,
-        private analyticService: AnalyticService,
+        private viewportService: ViewportSizeService,
     ) {}
 
     public async ngOnInit(): Promise<void> {
@@ -35,12 +36,13 @@ export class AppComponent implements OnInit {
 
     private initializeApp(): void {
         this.platform.ready().then(() => {
-            this.splashScreen.hide();
+            setTimeout(() => this.splashScreen.hide(), 300);
             this.statusBarService.init(this.statusBar);
             this.statusBarService.setDefault();
             this.keyboardService.setInitSettings(this.platform, this.appWindow);
             this.backButtonService.init();
             this.googleAuthService.init();
+            this.viewportService.init();
             // this.userAgentService.setUserAgent(); // TODO: not work
         });
     }

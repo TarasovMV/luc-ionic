@@ -30,7 +30,7 @@ export interface IRecognitionDetectedObject {
 
 export interface IRecognitionResult {
     previews: IPageScanProductModel[];
-    scoreId: number;
+    searchId: number;
 }
 
 export interface IRecognitionTextResult {

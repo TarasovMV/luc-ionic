@@ -27,7 +27,7 @@ export class PageCameraChoosePage implements OnInit {
         const picture = await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
             source: CameraSource.Photos,
-            quality: 70,
+            // quality: 70,
         });
         this.search(picture.dataUrl);
     }

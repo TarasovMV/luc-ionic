@@ -2,7 +2,6 @@ import {ElementRef, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Platform} from '@ionic/angular';
 import {KeyboardResize, KeyboardStyle, Keyboard} from '@capacitor/keyboard';
-import {Device} from '@capacitor/device';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -18,10 +17,6 @@ export class KeyboardService {
 
     // TODO: add theme
     public async setInitSettings(platform: Platform, appWindow: ElementRef): Promise<void> {
-        const platformType = (await Device.getInfo())?.platform;
-        if (platformType === 'web') {
-            return;
-        }
         try {
             this.actionListeners(platform, appWindow);
             await Keyboard.setStyle({style: KeyboardStyle.Light});
@@ -33,7 +28,7 @@ export class KeyboardService {
         platform.keyboardDidShow.subscribe((event) => this.keyboardHeight$.next(event.keyboardHeight));
         platform.keyboardDidHide.subscribe(() => this.keyboardHeight$.next(0));
         this.keyboardHeight$.subscribe((height) => {
-            appWindow.nativeElement.style = `height: calc(100vh - ${height}px)`;
+            appWindow.nativeElement.style = `height: calc(100% - ${height}px)`;
         });
     }
 }

@@ -1,6 +1,6 @@
 {
-  "restUrl": "http://194.67.203.143:5678",
-  "userUrl": "http://194.67.203.143:5678",
-  "recognitionUrl": "http://194.67.203.143:5679",
-  "fileUrl": "http://194.67.203.143:5679"
+  "restUrl": "https://m.luc.fashion/usermanagement",
+  "userUrl": "https://m.luc.fashion/usermanagement",
+  "recognitionUrl": "https://m.luc.fashion/recoservice",
+  "fileUrl": "https://m.luc.fashion/recoservice"
 }

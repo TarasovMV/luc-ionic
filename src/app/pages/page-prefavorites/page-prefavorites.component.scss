@@ -59,6 +59,7 @@
       app-shared-button {
         opacity: .5;
         transition: .3s;
+        pointer-events: none;
       }
     }
   }

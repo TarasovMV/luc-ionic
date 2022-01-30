@@ -3,6 +3,9 @@
 <app-shared-form-error *ngIf="!loginForm.valid && loginForm.dirty">
   Не верно заполнен email или пароль
 </app-shared-form-error>
+<app-shared-form-error *ngIf="isLoginError | async">
+  Ошибка: неверный email или пароль!
+</app-shared-form-error>
 
 <a class="forget-password" (click)="refreshPassword()"> Забыли пароль? </a>
 

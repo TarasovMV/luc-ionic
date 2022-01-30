@@ -81,7 +81,7 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
     public async delete(event: MouseEvent): Promise<void> {
         event.stopPropagation();
         await this.deleteFn();
-        await this.closeModal();
+        await this.closeModal({res: true});
     }
 
     public async search(event: MouseEvent): Promise<void> {
@@ -119,7 +119,7 @@ export class PageTabsFavoritesPopupComponent implements OnInit, OnDestroy {
         return await modal.present();
     }
 
-    private async closeModal(): Promise<void> {
-        await this.modalController.dismiss();
+    private async closeModal(res?: any): Promise<void> {
+        await this.modalController.dismiss(res);
     }
 }

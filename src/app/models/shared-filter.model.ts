@@ -30,4 +30,10 @@ export interface ISharedFilterPrice {
     higherPrice?: number;
 }
 
+export interface ISharedFilterPriceDto {
+    min: number;
+    max: number;
+    count: number;
+}
+
 export type SharedFilterUnion = ISharedFilterPrice | ISharedFilterBrand | ISharedFilterColor;

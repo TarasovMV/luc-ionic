@@ -3,6 +3,7 @@
 <app-shared-input [formControl]="regForm.get('email')" label="Электронная почта" type="email"></app-shared-input>
 <app-shared-form-error *ngIf="checkFieldError('email')"> Введите корректный email </app-shared-form-error>
 <app-shared-input [formControl]="regForm.get('passwords').get('password')" label="Пароль" type="password"></app-shared-input>
+<app-shared-form-error *ngIf="checkFieldPassError('password')"> Введите пароль </app-shared-form-error>
 <app-shared-input [formControl]="regForm.get('passwords').get('repeatPassword')" label="Повторите пароль" type="password"></app-shared-input>
 <app-shared-form-error *ngIf="checkFieldError('passwords')"> Пароли не совпадают </app-shared-form-error>
 
@@ -10,10 +11,10 @@
   <app-shared-multiply-checker [isActive]="regForm.get('isPersonalDataAgree').valueChanges | async"></app-shared-multiply-checker>
   <div class="label"> Я подтверждаю свое согласие на <a> обработку персональных данных </a> приложением </div>
 </div>
-<ng-container *ngIf="checkFieldError('isPersonalDataAgree')"> Подтвердите обработку персональных данных </ng-container>
+<app-shared-form-error *ngIf="checkFieldError('isPersonalDataAgree')"> Подтвердите обработку персональных данных </app-shared-form-error>
 
 <div class="flex-free-space"></div>
 
-<app-shared-button (click)="regClick()" class="button" type="main">
+<app-shared-button style="margin-bottom: 1.97vh;" (click)="regClick()" class="button" type="main">
   Создать
 </app-shared-button>

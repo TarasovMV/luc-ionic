@@ -69,3 +69,22 @@
     box-sizing: border-box;
   }
 }
+
+.slider {
+  padding: 0 2.2vh;
+  margin-top: 6vh;
+
+  ::ng-deep {
+    .ngx-slider .ngx-slider-pointer {
+      background-color: #2CB172;
+      outline: none;
+    }
+    .ngx-slider .ngx-slider-selection {
+      background-color: #2CB172;
+    }
+
+    .ngx-slider .ngx-slider-pointer.ngx-slider-active:after {
+      background: white;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>LUC Mobile iframe</title>
+    <script>(function(w,d,s,l,i){
+      w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='§'?'&l='+l:'';
+      j.async=true;
+      j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KWQ7XDC');
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('set', {'checkProtocolTask': function(){/* nothing */}} )
+    </script>
+    <script>
+      window.addEventListener('message', function(event) {
+        console.log('iframe', event?.data?.value);
+        window.dataLayer.push(event?.data?.value);
+      }, false);
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWQ7XDC"/>
+    </noscript>
+  </body>
+
+</html>

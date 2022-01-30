@@ -15,7 +15,7 @@ export class LoadingService {
             await this.stopLoading();
         }
         this.loading = await this.loadingController.create({
-            message: 'Please wait...',
+            message: 'Пожалуйста подождите...',
             duration: 5000
         });
         await this.loading.present();

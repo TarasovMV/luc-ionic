@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IPageScanProductModel} from '../../../models/page-scan.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {AppConfigService} from '../../../@core/services/platform/app-config.service';
 
 @Component({
     selector: 'app-page-scan-product',
@@ -20,10 +21,17 @@ export class PageScanProductComponent implements OnInit {
     public dataSourceShared: Observable<IPageScanProductModel> =
         this.dataSource$.asObservable();
 
+    // public imageUrl$ = this.dataSourceShared.pipe(map(x => `${this.restUrl}/api/Photo/feed/${x.id}`));
+    public imageUrl$ = this.dataSourceShared.pipe(map(x => x.imageUrl));
+
     public isSaleMode: Observable<boolean> =
         this.dataSource$.pipe(map(x => !!x?.oldPrice));
 
-    constructor() {}
+    private readonly restUrl: string;
+
+    constructor(appConfig: AppConfigService) {
+        this.restUrl = appConfig.fileUrl;
+    }
 
     ngOnInit(): void {}
 }

@@ -24,27 +24,36 @@
         </div>
         <div *ngSwitchCase="SharedFilterTypes.Brand" [@enterTrigger]="'fadeIn'">
           <div class="search-container">
-            <app-shared-filter-search></app-shared-filter-search>
+            <app-shared-filter-search [control]="searchControl"></app-shared-filter-search>
           </div>
           <app-shared-filter-brand-item
-            *ngFor="let item of brands$ | async"
+            *ngFor="let item of filteredBrands$ | async"
             [data]="item"
             (click)="selectFilter(item, SharedFilterTypes.Brand)"
           ></app-shared-filter-brand-item>
         </div>
         <div *ngSwitchCase="SharedFilterTypes.Price" [@enterTrigger]="'fadeIn'">
-          <app-shared-filter-price-item
-            *ngFor="let item of prices$ | async"
-            [data]="item"
-            [isActive]="isActiveFilter(item.id, SharedFilterTypes.Price) | async"
-            (click)="selectFilter(item, SharedFilterTypes.Price)"
-          ></app-shared-filter-price-item>
+          <div class="slider">
+            <ngx-slider
+              [value]="minPrice$ | async"
+              [highValue]="maxPrice$ | async"
+              [options]="options$ | async"
+              (valueChange)="changePrice('min', $event)"
+              (highValueChange)="changePrice('max', $event)"
+            ></ngx-slider>
+          </div>
+<!--          <app-shared-filter-price-item-->
+<!--            *ngFor="let item of prices$ | async"-->
+<!--            [data]="item"-->
+<!--            [isActive]="isActiveFilter(item.id, SharedFilterTypes.Price) | async"-->
+<!--            (click)="selectFilter(item, SharedFilterTypes.Price)"-->
+<!--          ></app-shared-filter-price-item>-->
         </div>
       </ng-container>
     </div>
   </div>
   <div class="footer">
-    <app-shared-button type="main" style="width: 100%">
+    <app-shared-button (click)="applyFilters()" type="main" style="width: 100%">
       Готово
     </app-shared-button>
   </div>

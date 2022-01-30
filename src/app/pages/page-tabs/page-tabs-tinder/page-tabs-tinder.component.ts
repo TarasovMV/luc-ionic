@@ -1,10 +1,12 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GestureController, IonSlides, Platform} from '@ionic/angular';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {IPageTab, PageTabType} from '../../../models/page-tab.model';
 import {ITinderSuggestion} from '../../../models/tinder.model';
 import {ApiTinderService} from '../../../@core/services/api/api-tinder.service';
 import {AnalyticService} from '../../../@core/services/analytic.service';
+import {SLIDE_CONFIG_TINDER} from './swipe.config';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
     selector: 'app-page-tabs-tinder',
@@ -14,6 +16,7 @@ import {AnalyticService} from '../../../@core/services/analytic.service';
 })
 export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit {
     readonly tabName: PageTabType = 'blocks';
+    slideOpts = SLIDE_CONFIG_TINDER(() => this.slideDetect$.next(true));
 
     @ViewChild('tinderCard') tinderCard: ElementRef;
     @ViewChild('ionSlides') ionSlide: IonSlides;
@@ -24,17 +27,23 @@ export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit 
         () => this.getNextImage(),
     ]);
 
+    private slideDetect$: Subject<boolean> = new Subject<boolean>();
+
     constructor(
         private apiTinderService: ApiTinderService,
         private gestureCtrl: GestureController,
         private platform: Platform,
         private analyticService: AnalyticService,
+        private cdRef: ChangeDetectorRef,
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        // this.slideDetect$.pipe(debounceTime(100)).subscribe(x => this.slideDetectChange());
+        // this.cards$.subscribe(x => console.log(x));
+    }
 
     public ngAfterViewInit(): void {
-        this.useTinderSwipe(this.tinderCard, this.platform.width());
+        // this.useTinderSwipe(this.tinderCard, this.platform.width());
     }
 
     private useTinderSwipe(card: ElementRef, screenWidth: number): void {
@@ -77,8 +86,10 @@ export class PageTabsTinderComponent implements IPageTab, OnInit, AfterViewInit 
         this.analyticService.log('lucich-swipe');
         const cards = this.cards$.getValue();
         const currentIdx = await this.ionSlide.getActiveIndex();
+        console.log('swipe', currentIdx, cards.length);
         if (cards.length - (currentIdx + 1) < 1) {
             this.cards$.next([...cards, () => this.getNextImage()]);
+            // setTimeout(() => this.cdRef.detectChanges(), 1000);
         }
     }
 

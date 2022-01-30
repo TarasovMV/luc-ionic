@@ -38,6 +38,7 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
     }
 
     private async loadFavorites(): Promise<void> {
+        console.log('load favourites');
         let res = (await this.apiUserService.getFavorites()) ?? [];
         if (JSON.stringify(this.data$.getValue()) === JSON.stringify(res)) {
             return;
@@ -54,7 +55,13 @@ export class PageTabsFavoritesComponent implements OnInit, IPageTab {
             component: PageTabsFavoritesPopupComponent,
             componentProps: { data: {item, delete: () => this.deleteItem(item)} }
         });
-        modal.onDidDismiss().then(() => this.loadFavorites());
+        try {
+            modal.onDidDismiss().then((x) => {
+                if (x?.data?.res) {
+                    this.loadFavorites();
+                }
+            });
+        } catch (e) {}
         return await modal.present();
     }
 

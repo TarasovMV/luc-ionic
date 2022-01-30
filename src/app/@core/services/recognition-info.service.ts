@@ -3,9 +3,11 @@ import {IRecognitionResult, IRecognitionTextResult, IStartScreenReco} from '../.
 import {IProductModel, IProductPreviewModel} from '../../models/page-product.model';
 import {UserInfoService} from './user-info.service';
 import {ApiRecognitionService} from './api/api-recognition.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {TinderSuggestionType} from '../../models/tinder.model';
 import {AppConfigService} from './platform/app-config.service';
+import {ISharedFilterBrand, ISharedFilterColor, ISharedFilterPrice} from '../../models/shared-filter.model';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +18,7 @@ export class RecognitionInfoService {
     public recognitionSaveFunction: () => Promise<IRecognitionResult>;
     public recognitionFeedFunction: () => Promise<IProductModel>;
 
+    private cache: {[key: string]: unknown} = {};
     private readonly restUrl: string;
 
     constructor(
@@ -28,7 +31,7 @@ export class RecognitionInfoService {
 
     public textResultMapper(result: IRecognitionTextResult): IRecognitionResult {
         return {
-            scoreId: result?.id,
+            searchId: result?.id,
             previews: result?.searchResults ?? [],
         };
     }
@@ -57,4 +60,65 @@ export class RecognitionInfoService {
         }
         return `${this.restUrl}/api/Photo/tinder/${id}`;
     }
+
+    public getFilterColors(searchId: number): Observable<ISharedFilterColor[]> {
+        const cacheKey = `filterColor_${searchId}`;
+        if (!!this.cache[cacheKey]) {
+            return of(this.cache[cacheKey] as ISharedFilterColor[]);
+        }
+        return this.apiRecognitionService.getFilterColors(searchId).pipe(
+            map(x => x.map((c, idx) => ({
+                id: idx + 1,
+                color: c,
+                label: c,
+                count: undefined,
+            }))),
+            tap(x => this.cache[cacheKey] = x)
+        );
+    }
+
+    public getFilterVendors(searchId: number, options?: {
+        colors?: string[], priceMin?: number, priceMax?: number
+    }): Observable<ISharedFilterBrand[]> {
+        const cacheKey = this.cacheKey(options, `filterVendors_${searchId}`);
+        if (!!this.cache[cacheKey]) {
+            return of(this.cache[cacheKey] as ISharedFilterBrand[]);
+        }
+        return this.apiRecognitionService.getFilterVendors(searchId, options).pipe(
+            map(x => x.map((v, idx) => ({
+                id: idx + 1,
+                label: v,
+            }))),
+            tap(x => this.cache[cacheKey] = x)
+        );
+    }
+
+    public getFilterPrices(searchId: number, options?: {
+        colors?: string[], vendors: string[],
+    }): Observable<ISharedFilterPrice[]> {
+        const cacheKey = this.cacheKey(options, `filterPrices_${searchId}`);
+        if (!!this.cache[cacheKey]) {
+            return of(this.cache[cacheKey] as ISharedFilterPrice[]);
+        }
+        return this.apiRecognitionService.getFilterPrices(searchId, options).pipe(
+            map(x => ([{
+                id: 1,
+                label: `от ${x.min} до ${x.max}`,
+                higherPrice: x.max,
+                lowerPrice: x.min,
+            }])),
+            tap(x => this.cache[cacheKey] = x)
+        );
+    }
+
+    private releaseCache(): void {
+        this.cache = {};
+    }
+
+    private cacheKey = (options: {[key: string]: number | string | string[]}, init: string) => Object
+        .entries(options ?? {})
+        .reduce((acc, next) =>
+            !!next[1] ? acc += `_${next[0]}:${Array.isArray(next[1]) ? next[1].join('&') : next[1]}` : acc,
+            init
+        )
 }

@@ -9,6 +9,7 @@ import {RecognitionInfoService} from '../../@core/services/recognition-info.serv
 import {ApiRecognitionService} from '../../@core/services/api/api-recognition.service';
 import {BackButtonService} from '../../@core/services/platform/back-button.service';
 
+
 @Component({
     selector: 'app-page-scan',
     templateUrl: './page-scan.component.html',
@@ -25,6 +26,9 @@ export class PageScanComponent implements OnInit {
 
     public isProductEmpty: Observable<boolean> =
         this.productsShared.pipe(map(x => !(x?.length > 0)));
+
+    private searchId: number;
+    private savedFilter: any;
 
     constructor(
         private navCtrl: NavController,
@@ -53,8 +57,6 @@ export class PageScanComponent implements OnInit {
     }
 
     public async openFilter(): Promise<void> {
-        // TODO: add true filters and clear return
-        return;
         await this.presentModalFilter();
     }
 
@@ -62,11 +64,20 @@ export class PageScanComponent implements OnInit {
         const res = await this.recognitionInfoService.recognitionSaveFunction?.();
         res?.previews?.forEach(x => x.category = x?.type?.split('/').reverse()[0]);
         this.products$.next(res?.previews ?? []);
+        this.searchId = res?.searchId;
     }
 
     private async presentModalFilter() {
         const modal = await this.modalController.create({
             component: SharedFilterComponent,
+            componentProps: {searchId: this.searchId, savedValue: this.savedFilter}
+        });
+        modal.onDidDismiss().then((res) => {
+            if (!res?.data) {
+                return;
+            }
+            this.savedFilter = res.data.init;
+            this.searchByFilter(res.data);
         });
         return await modal.present();
     }
@@ -84,5 +95,18 @@ export class PageScanComponent implements OnInit {
 
     private goToPreviousRoute = (): void => {
         this.navCtrl.back();
+    }
+
+    private searchByFilter(filter: any): void {
+        this.products$.next(this.defaultProducts);
+        console.log('filter', filter);
+        this.apiRecognitionService.searchByFilter(this.searchId, filter).subscribe(res => {
+            this.products$.next(this.mapProducts(res));
+        });
+    }
+
+    private mapProducts(data: IPageScanProductModel[]): IPageScanProductModel[] {
+        data?.forEach(x => x.category = x?.type?.split('/').reverse()[0]);
+        return data ?? [];
     }
 }

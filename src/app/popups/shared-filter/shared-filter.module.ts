@@ -7,6 +7,8 @@ import {SharedFilterColorItemComponent} from './components/shared-filter-color-i
 import {SharedFilterBrandItemComponent} from './components/shared-filter-brand-item/shared-filter-brand-item.component';
 import {SharedFilterPriceItemComponent} from './components/shared-filter-price-item/shared-filter-price-item.component';
 import {SharedFilterSearchComponent} from './components/shared-filter-search/shared-filter-search.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgxSliderModule} from '@angular-slider/ngx-slider';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import {SharedFilterSearchComponent} from './components/shared-filter-search/sha
     imports: [
         CommonModule,
         SharedModule,
+        ReactiveFormsModule,
+        NgxSliderModule,
     ]
 })
 export class SharedFilterModule {

@@ -44,3 +44,25 @@ ion-content {
   right: 0;
   overflow: hidden;
 }
+
+
+
+//////////
+
+.wrapper {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+}
+
+.strip {
+  flex-grow: 1;
+  background: lightblue;
+
+  &:nth-child(2n) {
+    background: lightgray;
+  }
+}

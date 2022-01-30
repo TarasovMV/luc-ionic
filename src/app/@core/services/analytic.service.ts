@@ -6,6 +6,7 @@ import {AppConfigService} from './platform/app-config.service';
 import {uuidGenerate} from '../../@shared/functions/uuid-generator.function';
 import { App } from '@capacitor/app';
 import {filter, take} from 'rxjs/operators';
+import {GoogleTagManagerService} from 'angular-google-tag-manager';
 
 export interface ILog<T> {
     severity: 'error'| 'warning'| 'info'| 'debug'| 'trace'| 'greetingsForAwesomeBackend';
@@ -54,6 +55,7 @@ export class AnalyticService {
     constructor(
         private http: HttpClient,
         private userInfo: UserInfoService,
+        private gtmService: GoogleTagManagerService,
         appConfig: AppConfigService,
     ) {
         this.restUrl = appConfig.restUrl;
@@ -61,24 +63,29 @@ export class AnalyticService {
     }
 
     public async log<T = never>(action: AnalyticAction, additional?: T): Promise<void> {
-        console.log('action', action);
-        const analytic = {...this.getBase(action), ...additional};
-        if (action !== 'heartbeat') {
-            window['dataLayer'].push(analytic);
-        }
-        const log = {
-            severity: 'trace',
-            message: 'analytic',
-            data: analytic,
-        };
-        await this.http.post(`${this.restUrl}/api/logs`, log).toPromise();
+        const iframe: any = window.document.getElementById('iframe_gtm');
+        try {
+            console.log('action', action);
+            const analytic = {...this.getBase(action), ...additional};
+            if (action !== 'heartbeat') {
+                console.log(analytic);
+                window['dataLayer']?.push(analytic);
+                iframe?.contentWindow?.postMessage({call: 'message', value: analytic});
+            }
+            const log = {
+                severity: 'trace',
+                message: 'analytic',
+                data: analytic,
+            };
+            await this.http.post(`${this.restUrl}/api/logs`, log).toPromise();
+        } catch (e) {}
     }
 
     private getBase(action: AnalyticAction): IAnalyticBase {
-        const user = this.userInfo.authUser$.getValue();
+        const user = this.userInfo.authUser$?.getValue();
         return {
             deviceId: this.deviceId,
-            userId: user.id || user.anonymousId,
+            userId: user?.id || user?.anonymousId,
             sessionId: this.sessionId,
             timestamp: (new Date()).toISOString(),
             platform: this.platform,
@@ -93,9 +100,11 @@ export class AnalyticService {
         this.sessionId = uuidGenerate();
         this.startTimer();
 
-        this.userInfo.authUser$.pipe(filter(x => !!x), take(1)).subscribe(x => {
-            this.log('enter');
-        });
+        // this.userInfo.authUser$.pipe(filter(x => !!x), take(1)).subscribe(x => {
+        //     this.log('enter');
+        // });
+
+        this.log('enter');
 
         App.addListener('appStateChange', ({isActive}) => {
             if (isActive) {
